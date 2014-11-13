@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Main">
+      <UniqueIdentifier>{8b2f74b3-cd8f-4a12-aabe-c58f46ba6fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{d0e0919f-3e67-43c1-85b3-877ddd6cccdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{deb1f9f8-8ce1-475b-8c8b-ec713982722c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{3c80fc05-12d8-4649-8679-d3644ca1e729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics">
+      <UniqueIdentifier>{fecd5927-5e4d-48e2-94f7-48be2425f9ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Windows">
+      <UniqueIdentifier>{a8518ea9-0439-470a-89f5-c5557083b61c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Messaging">
+      <UniqueIdentifier>{f8fa57c9-aa66-49c2-a282-164321b0e375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\OpenGL">
+      <UniqueIdentifier>{a0380d7d-0c07-4f8a-9963-0d64384637d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{a63bed7e-0ced-4b1d-8c79-595fb5c8869e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\config.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Resources\Shaders\Vertex.txt">
+      <Filter>Resource Files\Shaders</Filter>
+    </Text>
+    <Text Include="Resources\Shaders\Fragment.txt">
+      <Filter>Resource Files\Shaders</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\EventMessage.cpp">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WinMain.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\WinSystem.cpp">
+      <Filter>Source Files\Systems\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MessagingSystem.cpp">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GraphicsSystem.cpp">
+      <Filter>Source Files\Systems\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Matrix.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\OpenGL.cpp">
+      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderManager.cpp">
+      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\EventMessage.h">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WinSystem.h">
+      <Filter>Source Files\Systems\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\System.h">
+      <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessagingSystem.h">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GLHeaders.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GraphicsSystem.h">
+      <Filter>Source Files\Systems\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Math.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Matrix.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Vector.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\OpenGL.h">
+      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShaderManager.h">
+      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

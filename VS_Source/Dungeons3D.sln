@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dungeons3D", "Dungeons3D\Dungeons3D.vcxproj", "{564975CF-1A19-4DF3-B4E0-B897367B3AAE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{564975CF-1A19-4DF3-B4E0-B897367B3AAE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{564975CF-1A19-4DF3-B4E0-B897367B3AAE}.Debug|Win32.Build.0 = Debug|Win32
+		{564975CF-1A19-4DF3-B4E0-B897367B3AAE}.Release|Win32.ActiveCfg = Release|Win32
+		{564975CF-1A19-4DF3-B4E0-B897367B3AAE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
