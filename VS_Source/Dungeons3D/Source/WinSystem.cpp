@@ -20,6 +20,7 @@ namespace Dungeons3D
 	{
 		//	TO DO: Read from config.txt
 
+		//	1680 x 1050
 		_windowWidth = GetSystemMetrics(SM_CXSCREEN);
 		_windowHeight = GetSystemMetrics(SM_CYSCREEN);
 
@@ -52,7 +53,7 @@ namespace Dungeons3D
 		dmScreenSettings.dmPelsHeight	= _windowHeight;		// Selected Screen Height
 		dmScreenSettings.dmBitsPerPel= 24;						// Selected Bits Per Pixel
 		dmScreenSettings.dmFields = DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
-		ChangeDisplaySettings(&dmScreenSettings,CDS_FULLSCREEN);
+		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
 
 		AdjustWindowRectEx(
 			&windowRect,

@@ -10,17 +10,107 @@ Contributors :
 #include <algorithm>
 
 const float vertexData[] = {
-     0.0f,    0.5f, 0.0f, 1.0f,
-     0.5f, -0.366f, 0.0f, 1.0f,
-    -0.5f, -0.366f, 0.0f, 1.0f,
-     1.0f,    0.0f, 0.0f, 1.0f,
-     0.0f,    1.0f, 0.0f, 1.0f,
-     0.0f,    0.0f, 1.0f, 1.0f,
+	 0.25f,  0.25f, -1.25f, 1.0f,
+	 0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+
+	 0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+
+	 0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+	 0.25f, -0.25f, -2.75f, 1.0f,
+
+	 0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+
+	 0.25f,  0.25f, -1.25f, 1.0f,
+	 0.25f, -0.25f, -2.75f, 1.0f,
+	 0.25f, -0.25f, -1.25f, 1.0f,
+
+	 0.25f,  0.25f, -1.25f, 1.0f,
+	 0.25f,  0.25f, -2.75f, 1.0f,
+	 0.25f, -0.25f, -2.75f, 1.0f,
+
+	 0.25f,  0.25f, -2.75f, 1.0f,
+	 0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+
+	 0.25f,  0.25f, -2.75f, 1.0f,
+	-0.25f,  0.25f, -1.25f, 1.0f,
+	-0.25f,  0.25f, -2.75f, 1.0f,
+
+	 0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+	 0.25f, -0.25f, -1.25f, 1.0f,
+
+	 0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -2.75f, 1.0f,
+	-0.25f, -0.25f, -1.25f, 1.0f,
+
+
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f,
+
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f,
+
+	0.8f, 0.8f, 0.8f, 1.0f,
+	0.8f, 0.8f, 0.8f, 1.0f,
+	0.8f, 0.8f, 0.8f, 1.0f,
+
+	0.8f, 0.8f, 0.8f, 1.0f,
+	0.8f, 0.8f, 0.8f, 1.0f,
+	0.8f, 0.8f, 0.8f, 1.0f,
+
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+
+	0.5f, 0.5f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.0f, 1.0f,
+
+	0.5f, 0.5f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.0f, 1.0f,
+	0.5f, 0.5f, 0.0f, 1.0f,
+
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+
+	0.0f, 1.0f, 1.0f, 1.0f,
+	0.0f, 1.0f, 1.0f, 1.0f,
+	0.0f, 1.0f, 1.0f, 1.0f,
+
+	0.0f, 1.0f, 1.0f, 1.0f,
+	0.0f, 1.0f, 1.0f, 1.0f,
+	0.0f, 1.0f, 1.0f, 1.0f,
 };
 
 namespace Dungeons3D
 {
-	OpenGL::OpenGL()
+	OpenGL::OpenGL() : _frustumScale(1.0)
 	{
 		_pShaderManager = NULL;
 	}
@@ -66,30 +156,55 @@ namespace Dungeons3D
 		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_BACK);
+		glFrontFace(GL_CW);
+
 		initShaders();
 		initVertexBuffer();
+
+		_zNear = 0.5f;
+		_zFar = 3.0f;
+
+		_perspectiveMtx.ZeroThis();
+		//	Screen ratio divide
+		_perspectiveMtx.RowCol(0, 0) = _frustumScale / (1680.0f / 1080.0f);
+		_perspectiveMtx.RowCol(1, 1) = _frustumScale;
+		_perspectiveMtx.RowCol(2, 2) = (_zFar + _zNear) / (_zNear - _zFar);
+		_perspectiveMtx.RowCol(2, 3) = (2.0f * _zFar * _zNear)  / (_zNear - _zFar);
+		_perspectiveMtx.RowCol(3, 2) = -1.0f;
+
+		_pShaderManager->SetUniform(SHA_Default, "perspectiveMatrix", _perspectiveMtx.m);
+
+		glGenVertexArrays(1, &_vao);
+		glBindVertexArray(_vao);
+
+		glViewport(0, 0, 1680, 1050);
 	}
 
 	void OpenGL::Display()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		_pShaderManager->Enable(SHA_Default);
+		_pShaderManager->SetUniform(SHA_Default, "offset", 0.5f, 0.5f);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _positionBuffer);
+		_pShaderManager->Enable(SHA_Default);
+		size_t colorData = sizeof(vertexData) / 2;
+
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)48);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)colorData);
 
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 		_pShaderManager->Disable();
 
 		glFlush();
-		
+
 	}
 
 	void OpenGL::initShaders()
@@ -104,9 +219,9 @@ namespace Dungeons3D
 
 	void OpenGL::initVertexBuffer()
 	{
-		glGenBuffers(1, &_positionBuffer);
+		glGenBuffers(1, &_vbo);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _positionBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}

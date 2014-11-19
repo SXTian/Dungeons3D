@@ -30,18 +30,56 @@ namespace Dungeons3D
 		void LoadShader(ShaderID id, const std::string fileName, GLenum shaderType);
 		void LinkProgram(ShaderID id);
 
-		//	Add shader vars
-		void AddAttribute(ShaderID id, const std::string attribute);
-		void AddUniform(ShaderID id, const std::string uniform);
-
-		//	Get shader vars
-		GLuint GetAttribute(ShaderID id, const std::string attribute);
-		GLuint GetUniform(ShaderID id, const std::string uniform);
-
 		GLuint GetProgram(ShaderID id);
 
 		void Enable(ShaderID id);
 		void Disable();
+
+		//	SETTER OVERLOADS
+		//	Make 'em as you use 'em
+		//-----------------------------------------------------------------------------------
+		//	1 float
+		void SetUniform(ShaderID id, const std::string uniform, float value)
+		{
+			if (!_programs[id]->_uniforms.count(uniform))
+				_programs[id]->_uniforms[uniform] = glGetUniformLocation(_programs[id]->_id, uniform.c_str());
+
+			glUseProgram(_programs[id]->_id);
+			glUniform1f(_programs[id]->_uniforms[uniform], value);
+			glUseProgram(0);
+		}
+		//	2 floats
+		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2)
+		{
+			if (!_programs[id]->_uniforms.count(uniform))
+				_programs[id]->_uniforms[uniform] = glGetUniformLocation(_programs[id]->_id, uniform.c_str());
+
+			glUseProgram(_programs[id]->_id);
+			glUniform2f(_programs[id]->_uniforms[uniform], value1, value2);
+			glUseProgram(0);
+		}
+		//	3 floats
+		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3)
+		{
+			if (!_programs[id]->_uniforms.count(uniform))
+				_programs[id]->_uniforms[uniform] = glGetUniformLocation(_programs[id]->_id, uniform.c_str());
+
+			glUseProgram(_programs[id]->_id);
+			glUniform3f(_programs[id]->_uniforms[uniform], value1, value2, value3);
+			glUseProgram(0);
+		}
+
+		//	4x4 Matrix
+		void SetUniform(ShaderID id, const std::string uniform, float * value)
+		{
+			if (!_programs[id]->_uniforms.count(uniform))
+				_programs[id]->_uniforms[uniform] = glGetUniformLocation(_programs[id]->_id, uniform.c_str());
+
+			glUseProgram(_programs[id]->_id);
+			glUniformMatrix4fv(_programs[id]->_uniforms[uniform], 1, GL_TRUE, value);
+			glUseProgram(0);
+		}
+
 
 	private:
 		////////////////////////////////////////
@@ -58,7 +96,6 @@ namespace Dungeons3D
 		private:
 			GLuint _id;
 			std::vector<GLuint> _shaders;
-			std::map<std::string, GLuint> _attributes;
 			std::map<std::string, GLuint> _uniforms;
 		};
 		////////////////////////////////////////

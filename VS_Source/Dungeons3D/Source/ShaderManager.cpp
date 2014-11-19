@@ -120,34 +120,6 @@ namespace Dungeons3D
 		}
 	}
 
-	void ShaderManager::AddAttribute(ShaderID id, const std::string attribute)
-	{
-		if (_programs[id] != NULL)
-			_programs[id]->_attributes[attribute] = glGetAttribLocation(_programs[id]->_id, attribute.c_str());
-	}
-
-	void ShaderManager::AddUniform(ShaderID id, const std::string uniform)
-	{
-		if (_programs[id] != NULL)
-			_programs[id]->_uniforms[uniform] = glGetUniformLocation(_programs[id]->_id, uniform.c_str());
-	}
-
-	GLuint ShaderManager::GetAttribute(ShaderID id, const std::string attribute)
-	{
-		if (_programs[id] != NULL)
-			return _programs[id]->_attributes[attribute];
-
-		return 0;
-	}
-
-	GLuint ShaderManager::GetUniform(ShaderID id, const std::string uniform)
-	{
-		if (_programs[id] != NULL)
-			return _programs[id]->_uniforms[uniform];
-
-		return 0;
-	}
-
 	GLuint ShaderManager::GetProgram(ShaderID id)
 	{
 		if (_programs[id] != NULL)

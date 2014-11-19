@@ -36,6 +36,9 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{a63bed7e-0ced-4b1d-8c79-595fb5c8869e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\Graphics\OpenGL\ShaderManager">
+      <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
@@ -71,7 +74,7 @@
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Source\ShaderManager.cpp">
-      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+      <Filter>Source Files\Systems\Graphics\OpenGL\ShaderManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +109,7 @@
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Source\ShaderManager.h">
-      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+      <Filter>Source Files\Systems\Graphics\OpenGL\ShaderManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

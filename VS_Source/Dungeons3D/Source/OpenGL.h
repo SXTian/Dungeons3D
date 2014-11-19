@@ -7,6 +7,7 @@ Contributors :
 
 #include "System.h"
 #include "GLHeaders.h"
+#include "Matrix.h"
 #include "ShaderManager.h"
 
 namespace Dungeons3D
@@ -26,8 +27,12 @@ namespace Dungeons3D
 
 		ShaderManager* _pShaderManager;
 
-		GLuint _positionBuffer;
+		GLuint _vbo;
 		GLuint _vao;
 
+		float _zNear;
+		float _zFar;
+		const float _frustumScale;
+		Mtx44 _perspectiveMtx;
 	};
 }
