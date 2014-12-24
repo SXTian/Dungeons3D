@@ -9,30 +9,47 @@ Contributors :
 #include "GLHeaders.h"
 #include "Matrix.h"
 #include "ShaderManager.h"
+#include "Camera.h"
 
 namespace Dungeons3D
 {
-	class OpenGL
+	class OpenGL 
 	{
 	public:
 		OpenGL();
 		~OpenGL();
-
-		void Initialize();
 		void Display();
 
 	private:
 		void initShaders();
 		void initVertexBuffer();
+		void initVertexArrays();
 
-		ShaderManager* _pShaderManager;
+		Mtx44 CalculateProjection(float fovDeg, float zNear, float zFar);
 
+		ShaderManager _shaderManager;
+		Camera _camera;
+
+		//	Vertex Buffer Object
 		GLuint _vbo;
+
+		//	Index Buffer Object
+		GLuint _ibo;
+
+		//	Vertex Array Object
 		GLuint _vao;
 
-		float _zNear;
-		float _zFar;
-		const float _frustumScale;
-		Mtx44 _perspectiveMtx;
+		//	Camera Position in Spherical
+		Vec3 cameraPos;
+
+		//	Camera Target
+		Vec3 cameraTarget;
+
+		//	Model to world
+		Mtx44 _mwMtx;
+		//	World to camera
+		Mtx44 _wcMtx;
+		//	Camera to clip
+		Mtx44 _ccMtx;
 	};
 }

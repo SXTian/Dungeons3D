@@ -15,7 +15,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	GraphicsSystem * graphicsSystem = new GraphicsSystem();
 
 	winSystem->ActivateWindow();
-	graphicsSystem->Initialize();
 
 	while (true)
 	{

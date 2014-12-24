@@ -84,13 +84,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt" />
-    <Text Include="Resources\Shaders\Fragment.txt" />
-    <Text Include="Resources\Shaders\Vertex.txt" />
+    <Text Include="Resources\Shaders\PosColorWorldTransform.vert" />
+    <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\EventMessage.cpp" />
     <ClCompile Include="Source\GraphicsSystem.cpp" />
+    <ClCompile Include="Source\Loader.cpp" />
     <ClCompile Include="Source\Matrix.cpp" />
+    <ClCompile Include="Source\MatrixStack.cpp" />
     <ClCompile Include="Source\MessagingSystem.cpp" />
     <ClCompile Include="Source\OpenGL.cpp" />
     <ClCompile Include="Source\ShaderManager.cpp" />
@@ -98,17 +101,36 @@
     <ClCompile Include="Source\WinSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\EventMessage.h" />
     <ClInclude Include="Source\GraphicsSystem.h" />
+    <ClInclude Include="Source\Loader.h" />
     <ClInclude Include="Source\Math.h" />
     <ClInclude Include="Source\Matrix.h" />
+    <ClInclude Include="Source\MatrixStack.h" />
+    <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
     <ClInclude Include="Source\ShaderManager.h" />
+    <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\System.h" />
     <ClInclude Include="Source\Vector.h" />
     <ClInclude Include="Source\WinSystem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dungeons3D.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Meshes\UnitCone.mesh" />
+    <None Include="Resources\Meshes\UnitCube.mesh" />
+    <None Include="Resources\Meshes\UnitCubeColor.mesh" />
+    <None Include="Resources\Meshes\UnitCylinder.mesh" />
+    <None Include="Resources\Meshes\UnitPlane.mesh" />
+    <None Include="Resources\Shaders\ColorMultUniform.frag" />
+    <None Include="Resources\Shaders\ColorPassthrough.frag" />
+    <None Include="Resources\Shaders\ColorUniform.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

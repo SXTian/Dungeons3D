@@ -5,25 +5,30 @@
 ******************************************************************************************/
 #pragma once
 
-#include "System.h"
-#include "EventMessage.h"
-
-#include <string>
+#include "Matrix.h"
 
 namespace Dungeons3D
 {
-	class OpenGL;
-
-	class GraphicsSystem : public ISystem, public IEventMessageModule
+	class Camera
 	{
 	public:
-		GraphicsSystem();
-		~GraphicsSystem();
-
-		void Update(float delta);
+		Camera();
+		Mtx44 Matrix();
 
 	private:
-		//	*pointer to prevent icky OpenGL coupling
-		OpenGL * _openGL;
+		void calculate();
+
+		//	Position in spherical: Vec3(phi, theta, r)
+		Vec3 _pos;
+		//	Camera target
+		Vec3 _target;
+		//	Up vector
+		Vec3 _up;
+
+		//	World to camera transformation
+		Mtx44 _wcMatrix;
+		//	true = must call calculate()
+		bool _update;
+
 	};
 }

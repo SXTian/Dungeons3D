@@ -11,7 +11,6 @@ namespace Dungeons3D
 	{
 	public:
 		virtual ~ISystem(){}
-		virtual void Initialize() = 0;
 		virtual void Update(float delta) = 0;
 	};
 }

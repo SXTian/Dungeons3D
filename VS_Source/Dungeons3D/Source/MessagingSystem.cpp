@@ -24,9 +24,6 @@ namespace Dungeons3D
 		return _instance;
 	}
 
-	void MessagingSystem::Initialize()
-	{
-	}
 	void MessagingSystem::Update(float delta)
 	{
 	}

@@ -6,19 +6,13 @@ Contributors :
 #pragma once
 
 #include "GLHeaders.h"
+#include "Shaders.h"
 #include <string>
 #include <vector>
 #include <map>
 
 namespace Dungeons3D
 {
-	//	List of all shaders
-	enum ShaderID
-	{
-		SHA_Default,
-		SHA_Total
-	};
-
 	class ShaderManager
 	{
 	public:
@@ -37,7 +31,7 @@ namespace Dungeons3D
 
 		//	SETTER OVERLOADS
 		//	Make 'em as you use 'em
-		//-----------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------------------------
 		//	1 float
 		void SetUniform(ShaderID id, const std::string uniform, float value)
 		{
@@ -46,7 +40,6 @@ namespace Dungeons3D
 
 			glUseProgram(_programs[id]->_id);
 			glUniform1f(_programs[id]->_uniforms[uniform], value);
-			glUseProgram(0);
 		}
 		//	2 floats
 		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2)
@@ -56,7 +49,6 @@ namespace Dungeons3D
 
 			glUseProgram(_programs[id]->_id);
 			glUniform2f(_programs[id]->_uniforms[uniform], value1, value2);
-			glUseProgram(0);
 		}
 		//	3 floats
 		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3)
@@ -66,7 +58,6 @@ namespace Dungeons3D
 
 			glUseProgram(_programs[id]->_id);
 			glUniform3f(_programs[id]->_uniforms[uniform], value1, value2, value3);
-			glUseProgram(0);
 		}
 
 		//	4x4 Matrix
@@ -77,7 +68,6 @@ namespace Dungeons3D
 
 			glUseProgram(_programs[id]->_id);
 			glUniformMatrix4fv(_programs[id]->_uniforms[uniform], 1, GL_TRUE, value);
-			glUseProgram(0);
 		}
 
 

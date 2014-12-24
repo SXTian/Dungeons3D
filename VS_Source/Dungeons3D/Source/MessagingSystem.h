@@ -23,7 +23,6 @@ namespace Dungeons3D
 	public:
 		static MessagingSystem* GetInstance();
 
-		void Initialize();
 		void Update(float delta);
 
 		void Register(Events msgID, IEventMessageModule* pObj, Callback pFunc);

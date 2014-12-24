@@ -122,11 +122,6 @@ namespace Dungeons3D
 		UnregisterClass(winName, _hInstance);
 	}
 
-	void WinSystem::Initialize()
-	{
-	
-	}
-
 	void WinSystem::Update(float delta)
 	{
 		MSG msg;

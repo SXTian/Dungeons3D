@@ -3,26 +3,22 @@
   Author       : Sam Tian
   Contributors :
 ******************************************************************************************/
-#include "GraphicsSystem.h"
-#include "OpenGL.h"
-#include "Loader.h"
-#include <iostream>
+#pragma once
+
+#include <string>
 
 namespace Dungeons3D
 {
+	struct MeshData;
 
-	GraphicsSystem::GraphicsSystem()
+	class Loader
 	{
-		_openGL = new OpenGL();
-	}
+	protected:
+		Loader();
+		~Loader();
+		void load(std::string filename);
+		void render();
 
-	GraphicsSystem::~GraphicsSystem()
-	{
-		delete _openGL;
-	}
-
-	void GraphicsSystem::Update(float delta)
-	{
-		_openGL->Display();
-	}
+		MeshData * _data;
+	};
 }

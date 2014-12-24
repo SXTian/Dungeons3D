@@ -34,13 +34,6 @@ Mtx44::Mtx44(float m00, float m01, float m02, float m03,
 }
 
 // ---------------------------------------------------------------------------
-
-Mtx44::Mtx44(const Mtx44& rhs)
-{
-	(*this) = rhs;
-}
-
-// ---------------------------------------------------------------------------
 // operators overload
 
 Mtx44 Mtx44::operator+(const Mtx44& rhs) const

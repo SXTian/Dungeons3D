@@ -36,19 +36,40 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{a63bed7e-0ced-4b1d-8c79-595fb5c8869e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\OpenGL\ShaderManager">
+    <Filter Include="Source Files\Systems\Graphics\Camera">
+      <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Lighting">
+      <UniqueIdentifier>{138c5158-c796-4aef-a528-aa5be300eea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\OpenGL\Shaders">
       <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Vertex">
+      <UniqueIdentifier>{b34da888-885d-4ed3-b52c-bc879a1d8e2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Fragment">
+      <UniqueIdentifier>{154c18e4-bc9a-4d65-b331-caf597b3b949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Mesh">
+      <UniqueIdentifier>{32836f09-a75e-49f3-b739-b108fa947f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Mesh\Serialization Policy">
+      <UniqueIdentifier>{bc52b871-8bf3-42fc-ba0e-f1420568b8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Meshes">
+      <UniqueIdentifier>{f4cceb21-083b-46c0-acc9-44504db18895}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="Resources\Shaders\Vertex.txt">
-      <Filter>Resource Files\Shaders</Filter>
+    <Text Include="Resources\Shaders\PosColorWorldTransform.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
     </Text>
-    <Text Include="Resources\Shaders\Fragment.txt">
-      <Filter>Resource Files\Shaders</Filter>
+    <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -74,7 +95,16 @@
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="Source\ShaderManager.cpp">
-      <Filter>Source Files\Systems\Graphics\OpenGL\ShaderManager</Filter>
+      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MatrixStack.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files\Systems\Graphics\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Loader.cpp">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,7 +139,54 @@
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="Source\ShaderManager.h">
-      <Filter>Source Files\Systems\Graphics\OpenGL\ShaderManager</Filter>
+      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
     </ClInclude>
+    <ClInclude Include="Source\MatrixStack.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shaders.h">
+      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Source Files\Systems\Graphics\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Source Files\Systems\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Loader.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dungeons3D.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\ColorUniform.frag">
+      <Filter>Resource Files\Shaders\Fragment</Filter>
+    </None>
+    <None Include="Resources\Shaders\ColorMultUniform.frag">
+      <Filter>Resource Files\Shaders\Fragment</Filter>
+    </None>
+    <None Include="Resources\Shaders\ColorPassthrough.frag">
+      <Filter>Resource Files\Shaders\Fragment</Filter>
+    </None>
+    <None Include="Resources\Meshes\UnitCone.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\UnitCylinder.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\UnitCube.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\UnitCubeColor.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\UnitPlane.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
   </ItemGroup>
 </Project>

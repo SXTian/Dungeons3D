@@ -5,126 +5,65 @@ Contributors :
 ******************************************************************************************/
 
 #include "OpenGL.h"
+#include "Math.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
 
-const float vertexData[] = {
-	 0.25f,  0.25f, -1.25f, 1.0f,
-	 0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
+#define ARRAY_COUNT( array ) (sizeof( array ) / (sizeof( array[0] ) * (sizeof( array ) != sizeof(void*) || sizeof( array[0] ) <= sizeof(void*))))
 
-	 0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
+#define GREEN_COLOR 0.0f, 1.0f, 0.0f, 1.0f
+#define BLUE_COLOR 	0.0f, 0.0f, 1.0f, 1.0f
+#define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
+#define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
+#define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
 
-	 0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-	 0.25f, -0.25f, -2.75f, 1.0f,
+const float vertexData[] =
+{
+	+1.0f, +1.0f, +1.0f,
+	-1.0f, -1.0f, +1.0f,
+	-1.0f, +1.0f, -1.0f,
+	+1.0f, -1.0f, -1.0f,
 
-	 0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
+	-1.0f, -1.0f, -1.0f,
+	+1.0f, +1.0f, -1.0f,
+	+1.0f, -1.0f, +1.0f,
+	-1.0f, +1.0f, +1.0f,
 
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
+	GREEN_COLOR,
+	BLUE_COLOR,
+	RED_COLOR,
+	BROWN_COLOR,
 
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-
-	 0.25f,  0.25f, -1.25f, 1.0f,
-	 0.25f, -0.25f, -2.75f, 1.0f,
-	 0.25f, -0.25f, -1.25f, 1.0f,
-
-	 0.25f,  0.25f, -1.25f, 1.0f,
-	 0.25f,  0.25f, -2.75f, 1.0f,
-	 0.25f, -0.25f, -2.75f, 1.0f,
-
-	 0.25f,  0.25f, -2.75f, 1.0f,
-	 0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
-
-	 0.25f,  0.25f, -2.75f, 1.0f,
-	-0.25f,  0.25f, -1.25f, 1.0f,
-	-0.25f,  0.25f, -2.75f, 1.0f,
-
-	 0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-	 0.25f, -0.25f, -1.25f, 1.0f,
-
-	 0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -2.75f, 1.0f,
-	-0.25f, -0.25f, -1.25f, 1.0f,
-
-
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-	0.8f, 0.8f, 0.8f, 1.0f,
-
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-	0.5f, 0.5f, 0.0f, 1.0f,
-
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
+	GREEN_COLOR,
+	BLUE_COLOR,
+	RED_COLOR,
+	BROWN_COLOR,
 };
+
+const GLshort indexData[] =
+{
+	0, 1, 2,
+	1, 0, 3,
+	2, 3, 0,
+	3, 2, 1,
+
+	5, 4, 6,
+	4, 5, 7,
+	7, 6, 4,
+	6, 7, 5,
+};
+
+const int numberOfVertices = 8;
+
 
 namespace Dungeons3D
 {
-	OpenGL::OpenGL() : _frustumScale(1.0)
+	OpenGL::OpenGL()
 	{
-		_pShaderManager = NULL;
-	}
+		//	For maths
+		GenerateLookupTable();
 
-	OpenGL::~OpenGL()
-	{
-		if (_pShaderManager != NULL)
-			delete _pShaderManager;
-	}
-
-	void display();
-
-	void OpenGL::Initialize()
-	{
 		glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGB);	
 		glutInitContextVersion (3, 3);
 		glutInitContextFlags (GLUT_CORE_PROFILE | GLUT_DEBUG);
@@ -149,72 +88,78 @@ namespace Dungeons3D
 		std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
 		std::cout << "GLSL: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
-
-		glClearColor(0.0, 0.0, 0.0, 0.0);
-		glShadeModel(GL_SMOOTH);
-		glEnable(GL_DEPTH_TEST);
-		glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		initShaders();
+		initVertexBuffer();
+		initVertexArrays();
 
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glFrontFace(GL_CW);
 
-		initShaders();
-		initVertexBuffer();
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(GL_TRUE);
+		glDepthFunc(GL_LEQUAL);
+		glDepthRange(0.0f, 1.0f);
+		glEnable(GL_DEPTH_CLAMP);
 
-		_zNear = 0.5f;
-		_zFar = 3.0f;
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+		glClearDepth(1.0f);
 
-		_perspectiveMtx.ZeroThis();
-		//	Screen ratio divide
-		_perspectiveMtx.RowCol(0, 0) = _frustumScale / (1680.0f / 1080.0f);
-		_perspectiveMtx.RowCol(1, 1) = _frustumScale;
-		_perspectiveMtx.RowCol(2, 2) = (_zFar + _zNear) / (_zNear - _zFar);
-		_perspectiveMtx.RowCol(2, 3) = (2.0f * _zFar * _zNear)  / (_zNear - _zFar);
-		_perspectiveMtx.RowCol(3, 2) = -1.0f;
+		_ccMtx = CalculateProjection(45.0f, 1.0f, 1000.0f);
+		_shaderManager.SetUniform(SHA_UniformColor, "cameraToClipMatrix", _ccMtx.m);
+		_shaderManager.SetUniform(SHA_ObjectColor, "cameraToClipMatrix", _ccMtx.m);
+		_shaderManager.SetUniform(SHA_UniformColorTint, "cameraToClipMatrix", _ccMtx.m);
 
-		_pShaderManager->SetUniform(SHA_Default, "perspectiveMatrix", _perspectiveMtx.m);
-
-		glGenVertexArrays(1, &_vao);
-		glBindVertexArray(_vao);
+		cameraPos = Vec3(67.5f, -46.0f, 150.0f);
+		cameraTarget = Vec3(0.0f, 0.4f, 0.0f);
 
 		glViewport(0, 0, 1680, 1050);
 	}
+
+	OpenGL::~OpenGL()
+	{
+	}
+
+	void display();
+
 
 	void OpenGL::Display()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		_pShaderManager->SetUniform(SHA_Default, "offset", 0.5f, 0.5f);
+		for (auto i = 0; i < SHA_Total; ++i)
+			_shaderManager.SetUniform((ShaderID)i, "wordToCameraMatrx", _camera.Matrix().m);
 
-		_pShaderManager->Enable(SHA_Default);
-		size_t colorData = sizeof(vertexData) / 2;
+		/*
+		glBindVertexArray(_vao);
+		_shaderManager.SetUniform(SHA_Default, "offset", 0.0f, 0.0f, 0.5f);
+		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, 0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)colorData);
-
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		_pShaderManager->Disable();
-
-		glFlush();
+		_shaderManager.SetUniform(SHA_Default, "offset", 0.0f, 0.0f, -1.0f);
+		glDrawElementsBaseVertex(GL_TRIANGLES, ARRAY_COUNT(indexData), GL_UNSIGNED_SHORT, 0, numberOfVertices / 2);
+		glBindVertexArray(0);
+		_shaderManager.Disable();
+		*/
 
 	}
 
+	//////////////////////////////////PRIVATE HELPERS///////////////////////////////////////
 	void OpenGL::initShaders()
 	{
-		_pShaderManager = new ShaderManager();
+		_shaderManager.CreateProgram(SHA_UniformColor);
+		_shaderManager.LoadShader(SHA_UniformColor, "Resources/Shaders/PosOnlyWorldTransform.vert", GL_VERTEX_SHADER);
+		_shaderManager.LoadShader(SHA_UniformColor, "Resources/Shaders/ColorUniform.frag", GL_FRAGMENT_SHADER);
+		_shaderManager.LinkProgram(SHA_UniformColor);
 
-		_pShaderManager->CreateProgram(SHA_Default);
-		_pShaderManager->LoadShader(SHA_Default, "Resources/Shaders/Vertex.txt", GL_VERTEX_SHADER);
-		_pShaderManager->LoadShader(SHA_Default, "Resources/Shaders/Fragment.txt", GL_FRAGMENT_SHADER);
-		_pShaderManager->LinkProgram(SHA_Default);
+		_shaderManager.CreateProgram(SHA_ObjectColor);
+		_shaderManager.LoadShader(SHA_ObjectColor, "Resources/Shaders/PosColorWorldTransform.vert", GL_VERTEX_SHADER);
+		_shaderManager.LoadShader(SHA_ObjectColor, "Resources/Shaders/ColorPassthrough.frag", GL_FRAGMENT_SHADER);
+		_shaderManager.LinkProgram(SHA_ObjectColor);
+
+		_shaderManager.CreateProgram(SHA_UniformColorTint);
+		_shaderManager.LoadShader(SHA_UniformColorTint, "Resources/Shaders/PoasColorWorldTransform.vert", GL_VERTEX_SHADER);
+		_shaderManager.LoadShader(SHA_UniformColorTint, "Resources/Shaders/ColorMultiUniform.frag", GL_FRAGMENT_SHADER);
+		_shaderManager.LinkProgram(SHA_UniformColorTint);
 	}
 
 	void OpenGL::initVertexBuffer()
@@ -224,5 +169,49 @@ namespace Dungeons3D
 		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glGenBuffers(1, &_ibo);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	void OpenGL::initVertexArrays()
+	{
+		glGenVertexArrays(1, &_vao);
+		glBindVertexArray(_vao);
+
+		size_t colorDataOffset = sizeof(float) * 3 * numberOfVertices;
+
+		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)colorDataOffset);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+
+		glBindVertexArray(0);
+	}
+
+	Mtx44 OpenGL::CalculateProjection(float fovDeg, float zNear, float zFar)
+	{
+		float yMax = zNear * TanLookup(fovDeg);
+		float yMin = -yMax;
+		float xMax = yMax * ((float)1680 / (float)1050);
+		float xMin = -xMax;
+
+		Mtx44 matrix(Mtx44::Identity());
+
+		matrix.RowCol(0, 0) = (2.0f * zNear) / (xMax - xMin);
+		matrix.RowCol(1, 1) = (2.0f * zNear) / (yMax - yMin);
+		matrix.RowCol(0, 2) = (xMax + xMin)  / (xMax - xMin);
+		matrix.RowCol(1, 2) = (yMax + yMin)  / (yMax - yMin);
+		matrix.RowCol(2, 2) = (-zFar - zNear) / (zFar - zNear);
+		matrix.RowCol(3, 2) = -1.0f;
+		matrix.RowCol(2, 3) = (-2.0f * zNear * zFar) / (zFar - zNear);
+		matrix.RowCol(3, 3) = 0.0f;
+
+		return matrix;
 	}
 }

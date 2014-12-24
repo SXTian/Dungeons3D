@@ -41,6 +41,14 @@ inline T CosLookup(T degree)
 	int index = (int)(degree * 10.0);
 	return cos_table[index];
 }
+
+template <typename T>
+inline T TanLookup(T degree)
+{
+	int index = (int)(degree * 10.0);
+	return sin_table[index] / cos_table[index];
+}
+
 // --------------------------------------------------------------------------------
 template <typename T>
 inline T RandomRange(T x, T y)
