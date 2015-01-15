@@ -1,11 +1,11 @@
-vertex_positions
+position
 0.5 0 -0.5
 0.5 0 0.5
 -0.5 0 0.5
 -0.5 0 -0.5
-/f
 
-primitive_tri
+primitive
+tri
 0 1 2
 0 2 1
 2 3 0

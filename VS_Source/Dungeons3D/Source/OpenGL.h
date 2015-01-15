@@ -10,6 +10,8 @@ Contributors :
 #include "Matrix.h"
 #include "ShaderManager.h"
 #include "Camera.h"
+#include "Mesh.h"
+#include "Loader.h"
 
 namespace Dungeons3D
 {
@@ -27,29 +29,15 @@ namespace Dungeons3D
 
 		Mtx44 CalculateProjection(float fovDeg, float zNear, float zFar);
 
-		ShaderManager _shaderManager;
-		Camera _camera;
-
-		//	Vertex Buffer Object
-		GLuint _vbo;
-
-		//	Index Buffer Object
-		GLuint _ibo;
-
-		//	Vertex Array Object
-		GLuint _vao;
-
-		//	Camera Position in Spherical
-		Vec3 cameraPos;
-
-		//	Camera Target
-		Vec3 cameraTarget;
+		ShaderManager m_shaderManager;
+		Camera m_camera;
 
 		//	Model to world
-		Mtx44 _mwMtx;
-		//	World to camera
-		Mtx44 _wcMtx;
+		Mtx44 m_mwMtx;
+
 		//	Camera to clip
-		Mtx44 _ccMtx;
+		Mtx44 m_ccMtx;
+
+		Mesh<Loader> test;
 	};
 }

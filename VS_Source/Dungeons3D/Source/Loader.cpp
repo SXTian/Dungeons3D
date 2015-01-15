@@ -15,8 +15,6 @@ namespace Dungeons3D
 {
 	struct Renderer
 	{
-		Renderer(GLenum primitiveType) : type(primitiveType) {}
-
 		GLenum type;				//	primitive type
 		GLuint start;				
 		GLuint count;				//	element count
@@ -24,63 +22,129 @@ namespace Dungeons3D
 		void Render()
 		{
 			//	Indexed drawing
-			glDrawElements(type, count, GL_FLOAT, (void*)start);;
+			glDrawElements(type, count, GL_FLOAT, (void*)start);
 		}
 	};
 
 	struct MeshData
 	{
-		MeshData() : iAttribArrayBuffer(0), iIndexBuffer(0), iVAO(0) {}
+		MeshData() : vertexBuffer(0), indexBuffer(0), vao(0) {}
 		~MeshData()
 		{
-			glDeleteBuffers(1, &iAttribArrayBuffer);
-			glDeleteBuffers(1, &iIndexBuffer);
-			glDeleteVertexArrays(1, &iVAO);
-
-			for (auto it = mapVAO.begin(); it != mapVAO.end(); ++it)
-				glDeleteVertexArrays(1, &it->second);
+			glDeleteBuffers(1, &vertexBuffer);
+			glDeleteBuffers(1, &indexBuffer);
+			glDeleteVertexArrays(1, &vao);
 		}
 
-		GLuint iAttribArrayBuffer;
-		GLuint iIndexBuffer;
-		GLuint iVAO;
+		GLuint vertexBuffer;
+		GLuint indexBuffer;
+		GLuint vao;
 
-		std::map<std::string, GLuint> mapVAO;
 		std::vector<Renderer> primatives;
 	};
 
-	Loader::Loader() : _data(new MeshData)
+	Loader::Loader() : m_data(new MeshData)
 	{
 	}
 
 	Loader::~Loader()
 	{
-		delete _data;
+
 	}
 
 	void Loader::load(std::string filename)
 	{
+		//	Temp buffers to store vertex and index data
+		std::vector<float> vertexData;
+		std::vector<float> indexData;
+
+		//	Counters for passing offsets into openGL buffers
+		GLuint vertexOffset = 0;
+		GLuint primitiveOffset = 0;
+		GLuint indexCount;
+
+		//	File reading starts here
 		std::ifstream file(filename.c_str(), std::ifstream::in);
 		std::string keyword;
-		
+		float nextValue;;
+
 		while (!file.eof())
 		{
+			if (!file)
+				file.clear();
+
 			file >> keyword;
-			if (keyword.compare("vertex_positions") == 0)
+			if (keyword.compare("position") == 0)
 			{
+				while (file >> nextValue)
+				{
+					vertexData.push_back(nextValue);
+					++vertexOffset;
+				}
 			}
-			else if (keyword.compare("vertex_colors") == 0)
+			else if (keyword.compare("color") == 0)
 			{
+				while (file >> nextValue)
+					vertexData.push_back(nextValue);
 			}
-			else if (keyword.compare("primitive_trifan") == 0)
+			else if (keyword.compare("primitive") == 0)
 			{
-				_data->primatives.push_back(Renderer(GL_TRIANGLE_FAN));
-			}
-			else if (keyword.compare("primitive_tri") == 0)
-			{
-				_data->primatives.push_back(Renderer(GL_TRIANGLES));
+				Renderer primitive;
+				file >> keyword;
+				if (keyword.compare("trifan") == 0)
+					primitive.type = GL_TRIANGLE_FAN;
+				else if (keyword.compare("tri") == 0)
+					primitive.type = GL_TRIANGLES;
+
+				primitive.start = primitiveOffset;
+				indexCount = 0;
+				while (file >> nextValue)
+				{
+					indexData.push_back(nextValue);
+					++indexCount;
+				}
+				primitive.count = indexCount;
+				primitiveOffset += indexCount;
+				m_data->primatives.push_back(primitive);
 			}
 		}
 
+		//	OpenGL buffer filling starts here
+		glGenBuffers(1, &m_data->vertexBuffer);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_data->vertexBuffer);
+		glBufferData(GL_ARRAY_BUFFER, vertexData.size(), vertexData.data(), GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		glGenBuffers(1, &m_data->indexBuffer);
+
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_data->indexBuffer);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexData.size(), indexData.data(), GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+		glGenVertexArrays(1, &m_data->vao);
+		glBindVertexArray(m_data->vao);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_data->vertexBuffer);
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * vertexOffset));
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_data->indexBuffer);
+
+		glBindVertexArray(0);
+	}
+
+	void Loader::render()
+	{
+		if (!m_data->vao)
+			return;
+
+		glBindVertexArray(m_data->vao);
+
+		for (auto &i : m_data->primatives)
+			i.Render();
+		
+		glBindVertexArray(0);
 	}
 }

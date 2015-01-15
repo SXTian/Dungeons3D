@@ -9,8 +9,8 @@
 
 namespace Dungeons3D
 {
-	template <typename SerializationPolicy>
-	class Mesh : private SerializationPolicy
+	template <typename SerializePolicy>
+	class Mesh : private SerializePolicy
 	{
 	public:
 		Mesh() {}

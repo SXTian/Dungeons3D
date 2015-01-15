@@ -6,6 +6,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 namespace Dungeons3D
 {
@@ -19,6 +20,6 @@ namespace Dungeons3D
 		void load(std::string filename);
 		void render();
 
-		MeshData * _data;
+		std::unique_ptr<MeshData> m_data;
 	};
 }

@@ -151,11 +151,11 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>Source Files\Systems\Graphics\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Mesh.h">
-      <Filter>Source Files\Systems\Graphics\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Loader.h">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh.h">
+      <Filter>Source Files\Systems\Graphics\Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +187,12 @@
     </None>
     <None Include="Resources\Meshes\UnitPlane.mesh">
       <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Shaders\Default.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resources\Shaders\Default.frag">
+      <Filter>Resource Files\Shaders\Fragment</Filter>
     </None>
   </ItemGroup>
 </Project>

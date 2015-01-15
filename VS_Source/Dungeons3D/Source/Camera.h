@@ -19,16 +19,16 @@ namespace Dungeons3D
 		void calculate();
 
 		//	Position in spherical: Vec3(phi, theta, r)
-		Vec3 _pos;
+		Vec3 m_pos;
 		//	Camera target
-		Vec3 _target;
+		Vec3 m_target;
 		//	Up vector
-		Vec3 _up;
+		Vec3 m_up;
 
 		//	World to camera transformation
-		Mtx44 _wcMatrix;
+		Mtx44 m_wcMatrix;
 		//	true = must call calculate()
-		bool _update;
+		bool m_update;
 
 	};
 }
