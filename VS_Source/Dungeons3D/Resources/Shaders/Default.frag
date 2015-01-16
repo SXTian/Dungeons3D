@@ -1,10 +1,10 @@
 #version 330
 
-uniform vec4 baseColor;
+smooth in vec4 interpColor;
 
 out vec4 outputColor;
 
 void main()
 {
-	outputColor = baseColor;
+	outputColor = interpColor;
 }

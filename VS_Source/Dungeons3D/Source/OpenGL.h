@@ -39,5 +39,9 @@ namespace Dungeons3D
 		Mtx44 m_ccMtx;
 
 		Mesh<Loader> test;
+
+		GLuint m_vbo;
+		GLuint m_ibo;
+		GLuint m_vao;
 	};
 }

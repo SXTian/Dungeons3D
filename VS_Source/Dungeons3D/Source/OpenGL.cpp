@@ -18,43 +18,76 @@ Contributors :
 #define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
 #define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
 
-const float vertexData[] =
+const float vertexDataTest[] =
 {
-	+1.0f, +1.0f, +1.0f,
-	-1.0f, -1.0f, +1.0f,
-	-1.0f, +1.0f, -1.0f,
-	+1.0f, -1.0f, -1.0f,
+	0.5, 0.5, 0.5,
+	0.5, -0.5, 0.5,
+	-0.5, -0.5, 0.5,
+	-0.5, 0.5, 0.5,
+	0.5, 0.5, 0.5,
+	-0.5, 0.5, 0.5,
+	-0.5, 0.5, -0.5,
+	0.5, 0.5, -0.5,
+	0.5, 0.5, 0.5,
+	0.5, 0.5, -0.5,
+	0.5, -0.5, -0.5,
+	0.5, -0.5, 0.5,
+	0.5, 0.5, -0.5,
+	-0.5, 0.5, -0.5,
+	-0.5, -0.5, -0.5,
+	0.5, -0.5, -0.5,
+	0.5, -0.5, 0.5,
+	0.5, -0.5, -0.5,
+	-0.5, -0.5, -0.5,
+	-0.5, -0.5, 0.5,
+	-0.5, 0.5, 0.5,
+	-0.5, -0.5, 0.5,
+	-0.5, -0.5, -0.5,
+	-0.5, 0.5, -0.5,
 
-	-1.0f, -1.0f, -1.0f,
-	+1.0f, +1.0f, -1.0f,
-	+1.0f, -1.0f, +1.0f,
-	-1.0f, +1.0f, +1.0f,
-
-	GREEN_COLOR,
-	BLUE_COLOR,
-	RED_COLOR,
-	BROWN_COLOR,
-
-	GREEN_COLOR,
-	BLUE_COLOR,
-	RED_COLOR,
-	BROWN_COLOR,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	1, 1, 1, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.75, 0.75, 0.75, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1,
+	0.5, 0.5, 0.5, 1
 };
 
-const GLshort indexData[] =
+const GLshort indexDataTest[] =
 {
 	0, 1, 2,
-	1, 0, 3,
 	2, 3, 0,
-	3, 2, 1,
-
-	5, 4, 6,
-	4, 5, 7,
-	7, 6, 4,
-	6, 7, 5,
+	4, 5, 6,
+	6, 7, 4,
+	8, 9, 10,
+	10, 11, 8,
+	12, 13, 14,
+	14, 15, 12,
+	16, 17, 18,
+	18, 19, 16,
+	20, 21, 22,
+	22, 23, 20
 };
 
-const int numberOfVertices = 8;
+const int numberOfVertices = 24;
 
 
 namespace Dungeons3D
@@ -92,28 +125,38 @@ namespace Dungeons3D
 		initVertexBuffer();
 		initVertexArrays();
 
+
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 		glFrontFace(GL_CW);
 
+		
 		glEnable(GL_DEPTH_TEST);
 		glDepthMask(GL_TRUE);
 		glDepthFunc(GL_LEQUAL);
 		glDepthRange(0.0f, 1.0f);
 		glEnable(GL_DEPTH_CLAMP);
 
-		glClearColor(0.0, 0.0, 0.0, 0.0);
 		glClearDepth(1.0f);
+		
+
+
+		glClearColor(0.0, 0.0, 0.0, 0.0);
+
 
 		m_ccMtx = CalculateProjection(45.0f, 1.0f, 1000.0f);
 
+		/*
 		m_shaderManager.SetUniform(SHA_UniformColor, "cameraToClipMatrix", m_ccMtx.m);
 		m_shaderManager.SetUniform(SHA_ObjectColor, "cameraToClipMatrix", m_ccMtx.m);
 		m_shaderManager.SetUniform(SHA_UniformColorTint, "cameraToClipMatrix", m_ccMtx.m);
+		*/
 
-		glViewport(0, 0, 1680, 1050);
+		m_shaderManager.SetUniform(SHA_Default, "perspectiveMatrix", m_ccMtx.m);
 
-		test.Load("Resources/Meshes/UnitCubeColor.mesh");
+		//glViewport(0, 0, 1680, 1050);
+
+		//test.Load("Resources/Meshes/UnitCubeColor.mesh");
 	}
 
 	OpenGL::~OpenGL()
@@ -127,12 +170,19 @@ namespace Dungeons3D
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		/*
 		for (auto i = 0; i < SHA_Total; ++i)
-			m_shaderManager.SetUniform((ShaderID)i, "wordToCameraMatrx", m_camera.Matrix().m);
+		m_shaderManager.SetUniform((ShaderID)i, "wordToCameraMatrx", m_camera.Matrix().m);
+		*/
+
 
 		m_shaderManager.Enable(SHA_Default);
+		glBindVertexArray(m_vao);
+		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexDataTest), GL_UNSIGNED_SHORT, 0);
+		glBindVertexArray(0);
+		//test.Render();
+		m_shaderManager.Disable();
 
-		test.Render();
 
 		/*
 		glBindVertexArray(_vao);
@@ -150,6 +200,7 @@ namespace Dungeons3D
 	//////////////////////////////////PRIVATE HELPERS///////////////////////////////////////
 	void OpenGL::initShaders()
 	{
+		/*
 		m_shaderManager.CreateProgram(SHA_UniformColor);
 		m_shaderManager.LoadShader(SHA_UniformColor, "Resources/Shaders/PosOnlyWorldTransform.vert", GL_VERTEX_SHADER);
 		m_shaderManager.LoadShader(SHA_UniformColor, "Resources/Shaders/ColorUniform.frag", GL_FRAGMENT_SHADER);
@@ -164,6 +215,7 @@ namespace Dungeons3D
 		m_shaderManager.LoadShader(SHA_UniformColorTint, "Resources/Shaders/PoasColorWorldTransform.vert", GL_VERTEX_SHADER);
 		m_shaderManager.LoadShader(SHA_UniformColorTint, "Resources/Shaders/ColorMultiUniform.frag", GL_FRAGMENT_SHADER);
 		m_shaderManager.LinkProgram(SHA_UniformColorTint);
+		*/
 
 		m_shaderManager.CreateProgram(SHA_Default);
 		m_shaderManager.LoadShader(SHA_Default, "Resources/Shaders/Default.vert", GL_VERTEX_SHADER);
@@ -173,38 +225,36 @@ namespace Dungeons3D
 
 	void OpenGL::initVertexBuffer()
 	{
-		/*
-		glGenBuffers(1, &_vbo);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
+		glGenBuffers(1, &m_vbo);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexDataTest), vertexDataTest, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-		glGenBuffers(1, &_ibo);
+		glGenBuffers(1, &m_ibo);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData), indexData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexDataTest), indexDataTest, GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		*/
+
 	}
 
 	void OpenGL::initVertexArrays()
 	{
-		/*
-		glGenVertexArrays(1, &_vao);
-		glBindVertexArray(_vao);
+		glGenVertexArrays(1, &m_vao);
+		glBindVertexArray(m_vao);
 
 		size_t colorDataOffset = sizeof(float) * 3 * numberOfVertices;
 
-		glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)colorDataOffset);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
 
 		glBindVertexArray(0);
-		*/
 	}
 
 	Mtx44 OpenGL::CalculateProjection(float fovDeg, float zNear, float zFar)
