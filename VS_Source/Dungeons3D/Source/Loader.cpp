@@ -56,7 +56,7 @@ namespace Dungeons3D
 	{
 		//	Temp buffers to store vertex and index data
 		std::vector<float> vertexData;
-		std::vector<GLshort> indexData;
+		std::vector<GLushort> indexData;
 
 		//	Counters for passing offsets into openGL buffers
 		GLuint vertexOffset = 0;
@@ -113,13 +113,13 @@ namespace Dungeons3D
 		glGenBuffers(1, &m_data->vertexBuffer);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_data->vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData.data()), vertexData.data(), GL_STATIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexData.size(), vertexData.data(), GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 
 		glGenBuffers(1, &m_data->indexBuffer);
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_data->indexBuffer);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexData.data()), indexData.data(), GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLushort) * indexData.size(), indexData.data(), GL_STATIC_DRAW);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 		glGenVertexArrays(1, &m_data->vao);

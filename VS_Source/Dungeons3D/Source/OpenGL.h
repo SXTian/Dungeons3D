@@ -24,8 +24,6 @@ namespace Dungeons3D
 
 	private:
 		void initShaders();
-		void initVertexBuffer();
-		void initVertexArrays();
 
 		Mtx44 CalculateProjection(float fovDeg, float zNear, float zFar);
 
@@ -39,9 +37,5 @@ namespace Dungeons3D
 		Mtx44 m_ccMtx;
 
 		Mesh<Loader> test;
-
-		GLuint m_vbo;
-		GLuint m_ibo;
-		GLuint m_vao;
 	};
 }

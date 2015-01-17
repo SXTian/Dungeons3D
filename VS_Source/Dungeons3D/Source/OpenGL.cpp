@@ -10,86 +10,6 @@ Contributors :
 #include <vector>
 #include <algorithm>
 
-#define ARRAY_COUNT( array ) (sizeof( array ) / (sizeof( array[0] ) * (sizeof( array ) != sizeof(void*) || sizeof( array[0] ) <= sizeof(void*))))
-
-#define GREEN_COLOR 0.0f, 1.0f, 0.0f, 1.0f
-#define BLUE_COLOR 	0.0f, 0.0f, 1.0f, 1.0f
-#define RED_COLOR 1.0f, 0.0f, 0.0f, 1.0f
-#define GREY_COLOR 0.8f, 0.8f, 0.8f, 1.0f
-#define BROWN_COLOR 0.5f, 0.5f, 0.0f, 1.0f
-
-const float vertexDataTest[] =
-{
-	0.5, 0.5, 0.5,
-	0.5, -0.5, 0.5,
-	-0.5, -0.5, 0.5,
-	-0.5, 0.5, 0.5,
-	0.5, 0.5, 0.5,
-	-0.5, 0.5, 0.5,
-	-0.5, 0.5, -0.5,
-	0.5, 0.5, -0.5,
-	0.5, 0.5, 0.5,
-	0.5, 0.5, -0.5,
-	0.5, -0.5, -0.5,
-	0.5, -0.5, 0.5,
-	0.5, 0.5, -0.5,
-	-0.5, 0.5, -0.5,
-	-0.5, -0.5, -0.5,
-	0.5, -0.5, -0.5,
-	0.5, -0.5, 0.5,
-	0.5, -0.5, -0.5,
-	-0.5, -0.5, -0.5,
-	-0.5, -0.5, 0.5,
-	-0.5, 0.5, 0.5,
-	-0.5, -0.5, 0.5,
-	-0.5, -0.5, -0.5,
-	-0.5, 0.5, -0.5,
-
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	1, 1, 1, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.75, 0.75, 0.75, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1,
-	0.5, 0.5, 0.5, 1
-};
-
-const GLshort indexDataTest[] =
-{
-	0, 1, 2,
-	2, 3, 0,
-	4, 5, 6,
-	6, 7, 4,
-	8, 9, 10,
-	10, 11, 8,
-	12, 13, 14,
-	14, 15, 12,
-	16, 17, 18,
-	18, 19, 16,
-	20, 21, 22,
-	22, 23, 20
-};
-
-const int numberOfVertices = 24;
-
-
 namespace Dungeons3D
 {
 	OpenGL::OpenGL()
@@ -122,8 +42,6 @@ namespace Dungeons3D
 		std::cout << "GLSL: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 
 		initShaders();
-		initVertexBuffer();
-		initVertexArrays();
 
 
 		glEnable(GL_CULL_FACE);
@@ -138,11 +56,8 @@ namespace Dungeons3D
 		glEnable(GL_DEPTH_CLAMP);
 
 		glClearDepth(1.0f);
-		
-
 
 		glClearColor(0.0, 0.0, 0.0, 0.0);
-
 
 		m_ccMtx = CalculateProjection(45.0f, 1.0f, 1000.0f);
 
@@ -156,7 +71,11 @@ namespace Dungeons3D
 
 		//glViewport(0, 0, 1680, 1050);
 
+		//test.Load("Resources/Meshes/UnitCube.mesh");
 		//test.Load("Resources/Meshes/UnitCubeColor.mesh");
+		test.Load("Resources/Meshes/UnitCone.mesh");
+		//test.Load("Resources/Meshes/UnitCylinder.mesh");
+		//test.Load("Resources/Meshes/UnitPlane.mesh");
 	}
 
 	OpenGL::~OpenGL()
@@ -177,10 +96,7 @@ namespace Dungeons3D
 
 
 		m_shaderManager.Enable(SHA_Default);
-		glBindVertexArray(m_vao);
-		glDrawElements(GL_TRIANGLES, ARRAY_COUNT(indexDataTest), GL_UNSIGNED_SHORT, 0);
-		glBindVertexArray(0);
-		//test.Render();
+		test.Render();
 		m_shaderManager.Disable();
 
 
@@ -221,40 +137,6 @@ namespace Dungeons3D
 		m_shaderManager.LoadShader(SHA_Default, "Resources/Shaders/Default.vert", GL_VERTEX_SHADER);
 		m_shaderManager.LoadShader(SHA_Default, "Resources/Shaders/Default.frag", GL_FRAGMENT_SHADER);
 		m_shaderManager.LinkProgram(SHA_Default);
-	}
-
-	void OpenGL::initVertexBuffer()
-	{
-
-		glGenBuffers(1, &m_vbo);
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexDataTest), vertexDataTest, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-		glGenBuffers(1, &m_ibo);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexDataTest), indexDataTest, GL_STATIC_DRAW);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	}
-
-	void OpenGL::initVertexArrays()
-	{
-		glGenVertexArrays(1, &m_vao);
-		glBindVertexArray(m_vao);
-
-		size_t colorDataOffset = sizeof(float) * 3 * numberOfVertices;
-
-		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)colorDataOffset);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_ibo);
-
-		glBindVertexArray(0);
 	}
 
 	Mtx44 OpenGL::CalculateProjection(float fovDeg, float zNear, float zFar)
