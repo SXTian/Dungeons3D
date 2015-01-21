@@ -10,6 +10,6 @@ smooth out vec4 interpColor;
 
 void main()
 {
-	gl_Position = perspectiveMatrix * (position + vec4(0.0, 1.0, -3.0, 0.0));
+	gl_Position = perspectiveMatrix * (position + vec4(0.0, -1.0, -3.0, 0.0));
 	interpColor = color;
 }

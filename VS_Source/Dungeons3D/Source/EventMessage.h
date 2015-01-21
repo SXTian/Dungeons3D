@@ -5,15 +5,16 @@
 ******************************************************************************************/
 #pragma once
 
+#include <functional>
+
 namespace Dungeons3D
 {
 	//	This is the boilerplate code for the event messaging system
-
 	enum Events
 	{
 		MSG_Startup,
 		MSG_Shutdown,
-
+		MSG_KeyPress,
 		MSG_Total
 	};
 
@@ -25,7 +26,9 @@ namespace Dungeons3D
 	class IEventMessageModule;
 
 	//	Function pointer that takes a message
-	typedef void (IEventMessageModule::*Callback)(IEventMessage * pMessage);
+	//typedef void (IEventMessageModule::*Callback)(IEventMessage * pMessage);
+
+	typedef std::function<void(IEventMessage*)> Callback;
 
 	class IEventMessageModule
 	{
@@ -36,6 +39,6 @@ namespace Dungeons3D
 		void Register(Events msgID, IEventMessageModule* pObj, Callback pFunc);
 		void Unregister(Events msgID, IEventMessageModule* pObj, Callback pFunc);
 
-		void PostMessage(IEventMessage * pMsg);
+		void PostMsg(IEventMessage * pMsg);
 	};
 }

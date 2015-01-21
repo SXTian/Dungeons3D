@@ -7,7 +7,6 @@ Contributors :
 
 #include "System.h"
 #include "GLHeaders.h"
-#include "Matrix.h"
 #include "ShaderManager.h"
 #include "Camera.h"
 #include "Mesh.h"
@@ -17,16 +16,27 @@ namespace Dungeons3D
 {
 	class OpenGL 
 	{
+	friend class GraphicsSystem;
+
 	public:
 		OpenGL();
 		~OpenGL();
 		void Display();
 
 	private:
+		//	Methods
+		void initGL();
+		void configGL();
 		void initShaders();
 
-		Mtx44 CalculateProjection(float fovDeg, float zNear, float zFar);
+		Mtx44 calcProjection(float fovDeg, float zNear, float zFar);
 
+		void drawGround();
+		void drawForest();
+		void drawParthenon();
+		void drawColumn(Mtx44 matrix, float height = 5.0f);
+
+		//	Members
 		ShaderManager m_shaderManager;
 		Camera m_camera;
 
@@ -36,6 +46,11 @@ namespace Dungeons3D
 		//	Camera to clip
 		Mtx44 m_ccMtx;
 
-		Mesh<Loader> test;
+		Mesh<Loader> m_meshCube;
+		Mesh<Loader> m_meshCubeColor;
+		Mesh<Loader> m_meshPlane;
+		Mesh<Loader> m_meshCone;
+		Mesh<Loader> m_meshCylinder;
+
 	};
 }

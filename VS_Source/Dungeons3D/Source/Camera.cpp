@@ -10,8 +10,10 @@ Contributors :
 
 namespace Dungeons3D
 {
-	Camera::Camera() : m_pos(67.5f, -46.0f, 150.0f), m_target(0.0f, 0.4f, 0.0f), m_up(0.0f, 1.0f, 0.0f), m_update(true)
+	Camera::Camera() : m_pos(67.5f, -46.0f, 100.0f), m_target(0.0f, 0.4f, 0.0f), m_up(0.0f, 1.0f, 0.0f), m_update(true)
 	{
+		//	For maths
+		GenerateLookupTable();
 	}
 
 	Mtx44 Camera::Matrix()
@@ -20,6 +22,18 @@ namespace Dungeons3D
 			calculate();
 
 		return m_wcMatrix;
+	}
+
+	void Camera::MoveTarget(float x, float y, float z)
+	{
+		m_target = m_target + Vec3(x, y, z);
+		m_update = true;
+	}
+
+	void Camera::MovePosition(float x, float y, float z)
+	{
+		m_pos = m_pos + Vec3(x, y, z);
+		m_update = true;
 	}
 
 	void Camera::calculate()

@@ -93,6 +93,8 @@ namespace Dungeons3D
 				file >> keyword;
 				if (keyword.compare("trifan") == 0)
 					primitive.type = GL_TRIANGLE_FAN;
+				else if (keyword.compare("tristrip") == 0)
+					primitive.type = GL_TRIANGLE_STRIP;
 				else if (keyword.compare("tri") == 0)
 					primitive.type = GL_TRIANGLES;
 
@@ -100,7 +102,7 @@ namespace Dungeons3D
 				indexCount = 0;
 				while (file >> nextValue)
 				{
-					indexData.push_back(nextValue);
+					indexData.push_back((GLushort)nextValue);
 					++indexCount;
 				}
 				primitive.count = indexCount;

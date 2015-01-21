@@ -24,6 +24,6 @@ namespace Dungeons3D
 
 	private:
 		//	*pointer to prevent icky OpenGL coupling
-		OpenGL * _openGL;
+		OpenGL * m_openGL;
 	};
 }

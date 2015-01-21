@@ -8,7 +8,5 @@ uniform mat4 modelToWorldMatrix;
 
 void main()
 {
-	vec4 temp = modelToWorldMatrix * position;
-	temp = worldToCameraMatrix * temp;
-	gl_Position = cameraToClipMatrix * temp;
+	gl_Position = cameraToClipMatrix * worldToCameraMatrix * modelToWorldMatrix * position;
 }

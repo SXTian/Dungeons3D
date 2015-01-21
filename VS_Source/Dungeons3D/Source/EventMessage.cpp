@@ -26,8 +26,8 @@ namespace Dungeons3D
 		MessagingSystem::GetInstance()->Unregister(msgID, pOjb, pFunc);
 	}
 
-	void IEventMessageModule::PostMessage(IEventMessage * pMsg)
+	void IEventMessageModule::PostMsg(IEventMessage * pMsg)
 	{
-		MessagingSystem::GetInstance()->PostMessage(pMsg);
+		MessagingSystem::GetInstance()->PostMsg(pMsg);
 	}
 }

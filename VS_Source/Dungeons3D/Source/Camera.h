@@ -15,6 +15,9 @@ namespace Dungeons3D
 		Camera();
 		Mtx44 Matrix();
 
+		void MoveTarget(float x, float y, float z);
+		void MovePosition(float x, float y, float z);
+
 	private:
 		void calculate();
 
@@ -29,6 +32,5 @@ namespace Dungeons3D
 		Mtx44 m_wcMatrix;
 		//	true = must call calculate()
 		bool m_update;
-
 	};
 }

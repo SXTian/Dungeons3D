@@ -110,12 +110,15 @@
     <ClInclude Include="Source\Matrix.h" />
     <ClInclude Include="Source\MatrixStack.h" />
     <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\MessageKeyboard.h" />
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
+    <ClInclude Include="Source\Parthenon.h" />
     <ClInclude Include="Source\ShaderManager.h" />
     <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\System.h" />
+    <ClInclude Include="Source\Trees.h" />
     <ClInclude Include="Source\Vector.h" />
     <ClInclude Include="Source\WinSystem.h" />
   </ItemGroup>

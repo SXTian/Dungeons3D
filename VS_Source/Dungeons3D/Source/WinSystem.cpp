@@ -4,20 +4,33 @@ Author       : Sam Tian
 Contributors :
 ******************************************************************************************/
 #include "WinSystem.h"
+#include "MessageKeyboard.h"
 #include "GLHeaders.h"
 #include <tchar.h>
 
 namespace Dungeons3D
 {
 	static TCHAR winName[] = _T("3D Engine");
+	WinSystem* pWinSystem = NULL;
 
 	LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
+		switch(msg)
+		{
+		case WM_KEYDOWN:
+			{
+				MessageKeyboard msg(MSG_KeyPress);
+				msg.key = wParam;
+				pWinSystem->PostMsg(&msg);
+			}
+			break;
+		}
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
 
 	WinSystem::WinSystem(const char* config)
 	{
+		pWinSystem = this;
 		//	TO DO: Read from config.txt
 
 		//	1680 x 1050
@@ -49,8 +62,8 @@ namespace Dungeons3D
 		DEVMODE dmScreenSettings;								// Device Mode
 		memset(&dmScreenSettings,0,sizeof(dmScreenSettings));	// Makes Sure Memory's Cleared
 		dmScreenSettings.dmSize=sizeof(dmScreenSettings);		// Size Of The Devmode Structure
-		dmScreenSettings.dmPelsWidth	= _windowWidth;			// Selected Screen Width
-		dmScreenSettings.dmPelsHeight	= _windowHeight;		// Selected Screen Height
+		dmScreenSettings.dmPelsWidth = _windowWidth;			// Selected Screen Width
+		dmScreenSettings.dmPelsHeight = _windowHeight;		// Selected Screen Height
 		dmScreenSettings.dmBitsPerPel= 24;						// Selected Bits Per Pixel
 		dmScreenSettings.dmFields = DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
@@ -111,7 +124,6 @@ namespace Dungeons3D
 		ShowCursor(false);
 		SetCursorPos(1024/2, 786/2);
 	}
-
 
 	WinSystem::~WinSystem()
 	{

@@ -7,7 +7,7 @@
 
 namespace Dungeons3D
 {
-	MessagingSystem* MessagingSystem::_instance = 0;
+	MessagingSystem* MessagingSystem::m_instance = 0;
 
 	MessagingSystem::MessagingSystem()
 	{
@@ -19,9 +19,9 @@ namespace Dungeons3D
 
 	MessagingSystem* MessagingSystem::GetInstance()
 	{
-		if (!_instance)
-			_instance = new MessagingSystem();
-		return _instance;
+		if (!m_instance)
+			m_instance = new MessagingSystem();
+		return m_instance;
 	}
 
 	void MessagingSystem::Update(float delta)
@@ -30,26 +30,22 @@ namespace Dungeons3D
 
 	void MessagingSystem::Register(Events msgID, IEventMessageModule* pObj, Callback pFunc)
 	{
-		for (auto &c : _registry[msgID])
-		{
-			if (c.pObj == pObj && c.pFunc == pFunc)
-				return;
-		}
-
 		CallbackObj callback = {pObj, pFunc};
-		_registry[msgID].push_back(callback);
+		m_registry[msgID].push_back(callback);
 	}
 
 	void MessagingSystem::Unregister(Events msgID, IEventMessageModule* pObj, Callback pFunc)
 	{
-		for (std::vector<CallbackObj>::iterator it = _registry[msgID].begin(); it < _registry[msgID].end(); ++it)
+		for (std::vector<CallbackObj>::iterator it = m_registry[msgID].begin(); it < m_registry[msgID].end(); ++it)
 		{
-			if (it->pObj == pObj && it->pFunc == pFunc)
-				_registry[msgID].erase(it);
+			if (it->pObj == pObj)
+				m_registry[msgID].erase(it);
 		}
 	}
 
-	void MessagingSystem::PostMessage(IEventMessage * pMsg)
+	void MessagingSystem::PostMsg(IEventMessage * pMsg)
 	{
+		for (auto &c : m_registry[pMsg->msgID])
+			c.pFunc(pMsg);
 	}
 }

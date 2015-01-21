@@ -35,6 +35,7 @@ namespace Dungeons3D
 		//	In pixels
 		int _windowWidth;
 		int _windowHeight;
-
 	};
+
+	extern WinSystem* pWinSystem;
 }

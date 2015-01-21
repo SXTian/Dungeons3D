@@ -60,6 +60,12 @@
     <Filter Include="Resource Files\Meshes">
       <UniqueIdentifier>{f4cceb21-083b-46c0-acc9-44504db18895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Ad Hoc">
+      <UniqueIdentifier>{21c880ab-7232-4b91-9918-d6b7a7fb3fe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Messaging\Event Messages">
+      <UniqueIdentifier>{d838acd9-f608-4b12-9144-ace006f4ef94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
@@ -147,7 +153,6 @@
     <ClInclude Include="Source\Shaders.h">
       <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Camera.h">
       <Filter>Source Files\Systems\Graphics\Camera</Filter>
     </ClInclude>
@@ -156,6 +161,18 @@
     </ClInclude>
     <ClInclude Include="Source\Mesh.h">
       <Filter>Source Files\Systems\Graphics\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Trees.h">
+      <Filter>Source Files\Systems\Graphics\Ad Hoc</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Parthenon.h">
+      <Filter>Source Files\Systems\Graphics\Ad Hoc</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageKeyboard.h">
+      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
