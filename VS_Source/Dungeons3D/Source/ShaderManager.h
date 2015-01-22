@@ -12,10 +12,6 @@ Contributors :
 #include <map>
 #include <memory>
 
-#define GetLocationUseProgram(id, uniform)	if (!m_programs[id]->m_uniforms.count(uniform))\
-	m_programs[id]->m_uniforms[uniform] = glGetUniformLocation(m_programs[id]->m_id, uniform.c_str());\
-	glUseProgram(m_programs[id]->m_id);
-
 namespace Dungeons3D
 {
 	class ShaderManager

@@ -9,6 +9,10 @@ Contributors :
 
 #define MATRIX_SIZE sizeof(float)*16
 
+#define GetLocationUseProgram(id, uniform)	if (!m_programs[id]->m_uniforms.count(uniform))\
+	m_programs[id]->m_uniforms[uniform] = glGetUniformLocation(m_programs[id]->m_id, uniform.c_str());\
+	glUseProgram(m_programs[id]->m_id);
+
 namespace Dungeons3D
 {
 	ShaderManager::ShaderManager()

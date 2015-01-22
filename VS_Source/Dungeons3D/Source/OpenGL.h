@@ -51,6 +51,9 @@ namespace Dungeons3D
 		Mesh<Loader> m_meshPlane;
 		Mesh<Loader> m_meshCone;
 		Mesh<Loader> m_meshCylinder;
+		Mesh<Loader> m_meshSmallGimbal;
+		Mesh<Loader> m_meshMediumGimbal;
+		Mesh<Loader> m_meshLargeGimbal;
 
 	};
 }
