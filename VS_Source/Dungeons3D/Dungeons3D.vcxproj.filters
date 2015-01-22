@@ -77,6 +77,9 @@
     <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert">
       <Filter>Resource Files\Shaders\Vertex</Filter>
     </Text>
+    <Text Include="Resources\Meshes\MediumGimbal.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\EventMessage.cpp">
@@ -162,9 +165,6 @@
     <ClInclude Include="Source\Mesh.h">
       <Filter>Source Files\Systems\Graphics\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Trees.h">
-      <Filter>Source Files\Systems\Graphics\Ad Hoc</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
@@ -210,6 +210,12 @@
     </None>
     <None Include="Resources\Shaders\Default.frag">
       <Filter>Resource Files\Shaders\Fragment</Filter>
+    </None>
+    <None Include="Resources\Meshes\SmallGimbal.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\LargeGimbal.mesh">
+      <Filter>Resource Files\Meshes</Filter>
     </None>
   </ItemGroup>
 </Project>

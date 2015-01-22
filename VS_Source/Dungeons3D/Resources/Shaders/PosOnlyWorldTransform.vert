@@ -2,8 +2,12 @@
 
 layout(location = 0) in vec4 position;
 
-uniform mat4 cameraToClipMatrix;
-uniform mat4 worldToCameraMatrix;
+layout(std140) uniform GlobalMatrices
+{
+	mat4 cameraToClipMatrix;
+	mat4 worldToCameraMatrix;
+};
+
 uniform mat4 modelToWorldMatrix;
 
 void main()

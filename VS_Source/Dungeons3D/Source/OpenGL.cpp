@@ -7,7 +7,6 @@ Contributors :
 #include "OpenGL.h"
 #include "Math.h"
 #include "MatrixStack.h"
-#include "Trees.h"
 #include "Parthenon.h"
 #include <iostream>
 #include <vector>
@@ -41,8 +40,8 @@ namespace Dungeons3D
 		glClearDepth(1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		for (auto i = SHA_Default + 1; i < SHA_Total; ++i)
-			m_shaderManager.SetUniform((ShaderID)i, "worldToCameraMatrix", m_camera.Matrix().m);
+		//	Transpose to column-wise
+		m_shaderManager.SetUniformBlock(m_camera.Matrix().Transpose().m, 1);
 
 		drawGround();
 		drawForest();
@@ -116,9 +115,13 @@ namespace Dungeons3D
 		m_shaderManager.LoadShader(SHA_UniformColorTint, "Resources/Shaders/ColorMultUniform.frag", GL_FRAGMENT_SHADER);
 		m_shaderManager.LinkProgram(SHA_UniformColorTint);
 
-		m_shaderManager.SetUniform(SHA_UniformColor, "cameraToClipMatrix", m_ccMtx.m);
-		m_shaderManager.SetUniform(SHA_ObjectColor, "cameraToClipMatrix", m_ccMtx.m);
-		m_shaderManager.SetUniform(SHA_UniformColorTint, "cameraToClipMatrix", m_ccMtx.m);
+		m_shaderManager.BindUniformBlock(SHA_UniformColor, "GlobalMatrices");
+		m_shaderManager.BindUniformBlock(SHA_ObjectColor, "GlobalMatrices");
+		m_shaderManager.BindUniformBlock(SHA_UniformColorTint, "GlobalMatrices");
+		m_shaderManager.InitUBO();
+
+		//	Transpose to column-wise
+		m_shaderManager.SetUniformBlock(m_ccMtx.Transpose().m, 0);
 
 		/*
 		m_shaderManager.CreateProgram(SHA_Default);

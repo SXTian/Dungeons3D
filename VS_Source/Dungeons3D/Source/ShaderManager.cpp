@@ -7,44 +7,36 @@ Contributors :
 #include <iostream>
 #include <fstream>
 
+#define MATRIX_SIZE sizeof(float)*16
+
 namespace Dungeons3D
 {
-
 	ShaderManager::ShaderManager()
 	{
-		for (unsigned i = 0; i < SHA_Total; ++i)
-			_programs[i] = NULL;
 	}
 
 	ShaderManager::~ShaderManager()
 	{
-		for (Program* i : _programs)
-		{
-			if (i != NULL)
-				delete i;
-		}
 	}
+
 	ShaderManager::Program::Program()
 	{
 	}
 
 	ShaderManager::Program::~Program()
 	{
-		glDeleteProgram(_id);
+		glDeleteProgram(m_id);
 	}
 
 	void ShaderManager::CreateProgram(ShaderID id)
 	{
-		if (_programs[id] != NULL)
-			delete _programs[id];
-
-		_programs[id] = new Program();
-		_programs[id]->_id = glCreateProgram();
+		m_programs[id].reset(new Program());
+		m_programs[id]->m_id = glCreateProgram();
 	}
 
 	void ShaderManager::LoadShader(ShaderID id, const std::string fileName, GLenum shaderType)
 	{
-		if (_programs[id] == NULL)
+		if (!m_programs[id])
 			return;
 
 		std::ifstream file;
@@ -84,28 +76,28 @@ namespace Dungeons3D
 			std::cout << "Succesfully compiled " << fileName.c_str() << std::endl;
 		}
 
-		_programs[id]->_shaders.push_back(shader);
+		m_programs[id]->m_shaders.push_back(shader);
 	}
 
 	void ShaderManager::LinkProgram(ShaderID id)
 	{
-		if (_programs[id] == NULL)
+		if (!m_programs[id])
 			return;
 
-		for (GLuint i : _programs[id]->_shaders)
-			glAttachShader(_programs[id]->_id, i);
+		for (GLuint i : m_programs[id]->m_shaders)
+			glAttachShader(m_programs[id]->m_id, i);
 
 		//Check link status
 		GLint status;
-		glLinkProgram (_programs[id]->_id);
-		glGetProgramiv(_programs[id]->_id, GL_LINK_STATUS, &status);
+		glLinkProgram (m_programs[id]->m_id);
+		glGetProgramiv(m_programs[id]->m_id, GL_LINK_STATUS, &status);
 
 		if (status == GL_FALSE)
 		{
 			GLint infoLogLength;
-			glGetProgramiv(_programs[id]->_id, GL_INFO_LOG_LENGTH, &infoLogLength);
+			glGetProgramiv(m_programs[id]->m_id, GL_INFO_LOG_LENGTH, &infoLogLength);
 			GLchar *infoLog = new GLchar[infoLogLength];
-			glGetProgramInfoLog(_programs[id]->_id, infoLogLength, NULL, infoLog);
+			glGetProgramInfoLog(m_programs[id]->m_id, infoLogLength, NULL, infoLog);
 			std::cout << "Failed to link program " << id << std::endl << "Linker Log:" << std::endl << infoLog << std::endl;
 			delete [] infoLog;
 		}
@@ -114,7 +106,7 @@ namespace Dungeons3D
 			std::cout << "Succesfully Linked Program " << id << std::endl;
 		}
 
-		for (GLuint i : _programs[id]->_shaders)
+		for (GLuint i : m_programs[id]->m_shaders)
 		{
 			glDeleteShader(i);
 		}
@@ -122,20 +114,82 @@ namespace Dungeons3D
 
 	GLuint ShaderManager::GetProgram(ShaderID id)
 	{
-		if (_programs[id] != NULL)
-			return _programs[id]->_id;
+		if (m_programs[id])
+			return m_programs[id]->m_id;
 
 		return 0;
 	}
 
 	void ShaderManager::Enable(ShaderID id)
 	{
-		if (_programs[id] != NULL)
-			glUseProgram(_programs[id]->_id);
+		if (m_programs[id])
+			glUseProgram(m_programs[id]->m_id);
 	}
 
 	void ShaderManager::Disable()
 	{
 		glUseProgram(0);
+	}
+
+	void ShaderManager::InitUBO()
+	{
+		glGenBuffers(1, &m_globalUBO);
+		glBindBuffer(GL_UNIFORM_BUFFER, m_globalUBO);
+		glBufferData(GL_UNIFORM_BUFFER, MATRIX_SIZE * 2, NULL, GL_STREAM_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+		glBindBufferRange(GL_UNIFORM_BUFFER, 0, m_globalUBO, 0, MATRIX_SIZE * 2);
+	}
+
+	void ShaderManager::BindUniformBlock(ShaderID id, const std::string uniform)
+	{
+		if (!m_programs[id]->m_uniforms.count(uniform))
+		{
+			m_programs[id]->m_uniforms[uniform] = glGetUniformBlockIndex(m_programs[id]->m_id, uniform.c_str());
+			glUniformBlockBinding(m_programs[id]->m_id, m_programs[id]->m_uniforms[uniform], 0);
+		}
+	}
+
+	//	SETTER OVERLOADS
+	//----------------------------------------------------------------------------------------------------------
+	//	1 float
+	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value)
+	{
+		GetLocationUseProgram(id, uniform);
+		glUniform1f(m_programs[id]->m_uniforms[uniform], value);
+	}
+	//	2 floats
+	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2)
+	{
+		GetLocationUseProgram(id, uniform);
+		glUniform2f(m_programs[id]->m_uniforms[uniform], value1, value2);
+	}
+	//	3 floats
+	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3)
+	{
+		GetLocationUseProgram(id, uniform);
+		glUniform3f(m_programs[id]->m_uniforms[uniform], value1, value2, value3);
+	}
+
+	//	4 floats
+	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4)
+	{
+		GetLocationUseProgram(id, uniform);
+		glUniform4f(m_programs[id]->m_uniforms[uniform], value1, value2, value3, value4);
+	}
+
+	//	4x4 Matrix
+	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float * value)
+	{
+		GetLocationUseProgram(id, uniform);
+		glUniformMatrix4fv(m_programs[id]->m_uniforms[uniform], 1, GL_TRUE, value);
+	}
+
+	//	4x4 Matrix Block
+	void ShaderManager::SetUniformBlock(float * value, unsigned index)
+	{
+		glBindBuffer(GL_UNIFORM_BUFFER, m_globalUBO);
+		glBufferSubData(GL_UNIFORM_BUFFER, index * MATRIX_SIZE, MATRIX_SIZE, value);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	}
 }

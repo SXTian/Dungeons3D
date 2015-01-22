@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt" />
+    <Text Include="Resources\Meshes\MediumGimbal.mesh" />
     <Text Include="Resources\Shaders\PosColorWorldTransform.vert" />
     <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert" />
   </ItemGroup>
@@ -118,7 +119,6 @@
     <ClInclude Include="Source\ShaderManager.h" />
     <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\System.h" />
-    <ClInclude Include="Source\Trees.h" />
     <ClInclude Include="Source\Vector.h" />
     <ClInclude Include="Source\WinSystem.h" />
   </ItemGroup>
@@ -126,6 +126,8 @@
     <ResourceCompile Include="Dungeons3D.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Meshes\LargeGimbal.mesh" />
+    <None Include="Resources\Meshes\SmallGimbal.mesh" />
     <None Include="Resources\Meshes\UnitCone.mesh" />
     <None Include="Resources\Meshes\UnitCube.mesh" />
     <None Include="Resources\Meshes\UnitCubeColor.mesh" />
