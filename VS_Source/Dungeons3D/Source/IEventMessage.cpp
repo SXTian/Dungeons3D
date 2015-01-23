@@ -3,7 +3,7 @@
   Author       : Sam Tian
   Contributors :
 ******************************************************************************************/
-#include "EventMessage.h"
+#include "IEventMessage.h"
 #include "MessagingSystem.h"
 
 namespace Dungeons3D

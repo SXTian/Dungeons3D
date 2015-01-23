@@ -10,13 +10,13 @@ Contributors :
 
 namespace Dungeons3D
 {
-	ICamera::ICamera() : m_pos(67.5f, -46.0f, 100.0f), m_target(0.0f, 0.4f, 0.0f), m_up(0.0f, 1.0f, 0.0f), m_update(true)
+	Camera::Camera() : m_pos(67.5f, -46.0f, 100.0f), m_target(0.0f, 0.4f, 0.0f), m_up(0.0f, 1.0f, 0.0f), m_update(true)
 	{
 		//	For maths
 		GenerateLookupTable();
 	}
 
-	Mtx44 ICamera::CamMatrix()
+	Mtx44 Camera::CamMatrix()
 	{
 		if (m_update)
 			calculate();
@@ -24,19 +24,19 @@ namespace Dungeons3D
 		return m_wcMatrix;
 	}
 
-	void ICamera::MoveCamTarget(float x, float y, float z)
+	void Camera::MoveCamTarget(float x, float y, float z)
 	{
 		m_target = m_target + Vec3(x, y, z);
 		m_update = true;
 	}
 
-	void ICamera::MoveCamPosition(float x, float y, float z)
+	void Camera::MoveCamPosition(float x, float y, float z)
 	{
 		m_pos = m_pos + Vec3(x, y, z);
 		m_update = true;
 	}
 
-	void ICamera::calculate()
+	void Camera::calculate()
 	{
 		//	Get camera position in world coordinates
 		float phi = m_pos.x;

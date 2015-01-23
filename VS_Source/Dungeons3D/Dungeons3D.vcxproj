@@ -90,14 +90,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Camera.cpp" />
-    <ClCompile Include="Source\EventMessage.cpp" />
+    <ClCompile Include="Source\GimbalView.cpp" />
+    <ClCompile Include="Source\IEventMessage.cpp" />
     <ClCompile Include="Source\GraphicsSystem.cpp" />
+    <ClCompile Include="Source\IView.cpp" />
     <ClCompile Include="Source\Loader.cpp" />
     <ClCompile Include="Source\Matrix.cpp" />
     <ClCompile Include="Source\MatrixStack.cpp" />
     <ClCompile Include="Source\MessagingSystem.cpp" />
     <ClCompile Include="Source\OpenGL.cpp" />
     <ClCompile Include="Source\PantheonView.cpp" />
+    <ClCompile Include="Source\IShaderManager.cpp" />
     <ClCompile Include="Source\ShaderManager.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
     <ClCompile Include="Source\WinSystem.cpp" />
@@ -105,7 +108,8 @@
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Camera.h" />
-    <ClInclude Include="Source\EventMessage.h" />
+    <ClInclude Include="Source\GimbalView.h" />
+    <ClInclude Include="Source\IEventMessage.h" />
     <ClInclude Include="Source\GraphicsSystem.h" />
     <ClInclude Include="Source\Loader.h" />
     <ClInclude Include="Source\Math.h" />
@@ -117,11 +121,12 @@
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
     <ClInclude Include="Source\PantheonView.h" />
+    <ClInclude Include="Source\IShaderManager.h" />
     <ClInclude Include="Source\ShaderManager.h" />
     <ClInclude Include="Source\Shaders.h" />
-    <ClInclude Include="Source\System.h" />
+    <ClInclude Include="Source\ISystem.h" />
     <ClInclude Include="Source\Vector.h" />
-    <ClInclude Include="Source\View.h" />
+    <ClInclude Include="Source\IView.h" />
     <ClInclude Include="Source\WinSystem.h" />
   </ItemGroup>
   <ItemGroup>
@@ -138,8 +143,7 @@
     <None Include="Resources\Shaders\ColorMultUniform.frag" />
     <None Include="Resources\Shaders\ColorPassthrough.frag" />
     <None Include="Resources\Shaders\ColorUniform.frag" />
-    <None Include="Resources\Shaders\Default.frag" />
-    <None Include="Resources\Shaders\Default.vert" />
+    <None Include="Resources\Shaders\PosColorLocalTransform.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

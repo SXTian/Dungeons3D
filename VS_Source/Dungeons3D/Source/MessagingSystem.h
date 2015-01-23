@@ -5,8 +5,8 @@
 ******************************************************************************************/
 #pragma once
 
-#include "System.h"
-#include "EventMessage.h"
+#include "ISystem.h"
+#include "IEventMessage.h"
 
 #include <vector>
 

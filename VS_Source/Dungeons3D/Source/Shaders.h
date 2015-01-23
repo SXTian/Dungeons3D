@@ -10,7 +10,7 @@ namespace Dungeons3D
 	//	List of all shaders
 	enum ShaderID
 	{
-		SHA_Default,
+		SHA_UniformColorLocal,
 		SHA_UniformColor,
 		SHA_ObjectColor,
 		SHA_UniformColorTint,

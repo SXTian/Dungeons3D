@@ -5,7 +5,7 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "EventMessage.h"
+#include "IEventMessage.h"
 
 namespace Dungeons3D
 {

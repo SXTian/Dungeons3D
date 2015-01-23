@@ -15,7 +15,9 @@ const float TWO_PI = PI * 2.0f;
 const float HALF_PI = PI * 0.5f;
 
 // -----------------------------------------------------------------------------
-static float sin_table[3600], cos_table[3600]; // Look up tables
+ // Look up tables
+static float sin_table[3600];
+static float cos_table[3600]; 
 
 static inline void GenerateLookupTable(void)
 {

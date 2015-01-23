@@ -9,10 +9,10 @@
 
 namespace Dungeons3D
 {
-	class ICamera
+	class Camera
 	{
 	public:
-		ICamera();
+		Camera();
 		Mtx44 CamMatrix();
 
 		void MoveCamTarget(float x, float y, float z);
@@ -30,6 +30,7 @@ namespace Dungeons3D
 
 		//	World to camera transformation
 		Mtx44 m_wcMatrix;
+
 		//	true = must call calculate()
 		bool m_update;
 	};

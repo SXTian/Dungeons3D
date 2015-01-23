@@ -5,10 +5,12 @@
 ******************************************************************************************/
 #pragma once
 
-#include "System.h"
-#include "EventMessage.h"
+#include "ISystem.h"
+#include "IEventMessage.h"
 
 #include <string>
+#include <map>
+#include <memory>
 
 namespace Dungeons3D
 {
@@ -23,7 +25,7 @@ namespace Dungeons3D
 		void Update(float delta);
 
 	private:
-		OpenGL * m_opengl;
-		IView * m_pantheonView;
+		std::shared_ptr<OpenGL> m_opengl;
+		std::map<std::string, IView*> m_views;
 	};
 }

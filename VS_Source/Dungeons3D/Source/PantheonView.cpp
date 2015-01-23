@@ -9,6 +9,8 @@ Contributors :
 
 namespace Dungeons3D
 {
+	using namespace std;
+
 	static const TreeData forest[] =
 	{
 		{-45.0f, -40.0f, 2.0f, 3.0f},
@@ -122,7 +124,7 @@ namespace Dungeons3D
 
 	const float columnBaseHeight = 0.25f;
 
-	PantheonView::PantheonView()
+	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager)
 	{
 	}
 
@@ -137,31 +139,34 @@ namespace Dungeons3D
 		m_meshPlane.Load("Resources/Meshes/UnitPlane.mesh");
 		m_meshCone.Load("Resources/Meshes/UnitCone.mesh");
 		m_meshCylinder.Load("Resources/Meshes/UnitCylinder.mesh");
+
+		//	Transpose to column-wise, 0 is for the index in the uniform block
+		SetShaderUniformBlock(ViewMatrix().Transpose().m, 0);
 	}
 
-	void PantheonView::Display(OpenGL * opengl)
+	void PantheonView::Display()
 	{
 		//	Transpose to column-wise
-		opengl->SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
+		SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
 
-		drawGround(opengl);
-		drawForest(opengl);
-		drawParthenon(opengl);
+		drawGround();
+		drawForest();
+		drawParthenon();
 	}
 
-	void PantheonView::drawGround(OpenGL * opengl)
+	void PantheonView::drawGround()
 	{
 		MatrixStack mStack;
 
 		mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColor, "baseColor", 0.302f, 0.416f, 0.0589f, 1.0f);
+		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColor, "baseColor", 0.302f, 0.416f, 0.0589f, 1.0f);
 		m_meshPlane.Render();
 
 	}
 
-	void PantheonView::drawForest(OpenGL * opengl)
+	void PantheonView::drawForest()
 	{
 		MatrixStack mStack;
 		for (auto i : forest)
@@ -174,8 +179,8 @@ namespace Dungeons3D
 			mStack.matrix.ScaleThis(1.0f, i.heightTrunk, 1.0f);
 			mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-			opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-			opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.694f, 0.4f, 0.106f, 1.0f);
+			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+			SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.694f, 0.4f, 0.106f, 1.0f);
 			m_meshCylinder.Render();
 
 			mStack.Pop();
@@ -186,8 +191,8 @@ namespace Dungeons3D
 			mStack.matrix.TranslateThis(0.0f, i.heightTrunk, 0.0f);
 			mStack.matrix.ScaleThis(3.0f, i.heightCone, 3.0f);
 
-			opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-			opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.0f, 1.0f, 0.0f, 1.0f);
+			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+			SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.0f, 1.0f, 0.0f, 1.0f);
 			m_meshCone.Render();
 
 			mStack.Pop();
@@ -195,7 +200,7 @@ namespace Dungeons3D
 		}
 	}
 
-	void PantheonView::drawParthenon(OpenGL * opengl)
+	void PantheonView::drawParthenon()
 	{
 		MatrixStack mStack;
 
@@ -207,8 +212,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonBaseHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -220,8 +225,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonTopHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -232,13 +237,13 @@ namespace Dungeons3D
 			//	Front
 			mStack.Push();
 			mStack.matrix.TranslateThis((2.0f * iColumn) - (parthenonWidth / 2.0f) + 1.0f, parthenonBaseHeight, frontZ);
-			drawColumn(opengl, mStack.matrix, parthenonColumnHeight);
+			drawColumn(mStack.matrix, parthenonColumnHeight);
 			mStack.Pop();
 
 			//	Back
 			mStack.Push();
 			mStack.matrix.TranslateThis((2.0f * iColumn) - (parthenonWidth / 2.0f) + 1.0f, parthenonBaseHeight, -frontZ);
-			drawColumn(opengl, mStack.matrix, parthenonColumnHeight);
+			drawColumn(mStack.matrix, parthenonColumnHeight);
 			mStack.Pop();
 		}
 
@@ -248,13 +253,13 @@ namespace Dungeons3D
 			//	Left
 			mStack.Push();
 			mStack.matrix.TranslateThis(rightX, parthenonBaseHeight, (2.0f * iColumn) - (parthenonLength / 2.0f) + 1.0f);
-			drawColumn(opengl, mStack.matrix, parthenonColumnHeight);
+			drawColumn(mStack.matrix, parthenonColumnHeight);
 			mStack.Pop();
 
 			//	Right
 			mStack.Push();
 			mStack.matrix.TranslateThis(-rightX, parthenonBaseHeight, (2.0f * iColumn) - (parthenonLength / 2.0f) + 1.0f);
-			drawColumn(opengl, mStack.matrix, parthenonColumnHeight);
+			drawColumn(mStack.matrix, parthenonColumnHeight);
 			mStack.Pop();
 		}
 
@@ -285,7 +290,7 @@ namespace Dungeons3D
 		*/
 	}
 
-	void PantheonView::drawColumn(OpenGL * opengl, Mtx44 matrix, float height)
+	void PantheonView::drawColumn(Mtx44 matrix, float height)
 	{
 		MatrixStack mStack;
 		mStack.matrix = matrix;
@@ -296,8 +301,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -309,8 +314,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -322,8 +327,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(0.8f, height - (columnBaseHeight * 2.0f), 0.8f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		opengl->SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
-		opengl->SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCylinder.Render();
 	}
 }

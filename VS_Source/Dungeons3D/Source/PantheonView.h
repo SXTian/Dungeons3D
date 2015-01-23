@@ -5,27 +5,27 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "View.h"
+#include "IView.h"
+#include "IShaderManager.h"
 #include "Mesh.h"
 #include "Loader.h"
 
 namespace Dungeons3D
 {
-	class PantheonView : public IView
+	class ShaderManager;
+	class PantheonView : public IView, public IShaderManager
 	{
 	public: 
-		PantheonView();
+		PantheonView(std::shared_ptr<ShaderManager> pManager);
 		~PantheonView();
 
 		void LoadMeshes();
-		void Display(OpenGL * opengl);
-
 	private:
-
-		void drawGround(OpenGL * opengl);
-		void drawForest(OpenGL * opengl);
-		void drawParthenon(OpenGL * opengl);
-		void drawColumn(OpenGL * opengl, Mtx44 matrix, float height = 5.0f);
+		void Display();
+		void drawGround();
+		void drawForest();
+		void drawParthenon();
+		void drawColumn(Mtx44 matrix, float height = 5.0f);
 
 		Mesh<Loader> m_meshCube;
 		Mesh<Loader> m_meshCubeColor;

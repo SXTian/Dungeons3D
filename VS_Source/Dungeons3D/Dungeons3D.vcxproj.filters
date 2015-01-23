@@ -33,9 +33,6 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{a63bed7e-0ced-4b1d-8c79-595fb5c8869e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Camera">
-      <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Graphics\Lighting">
       <UniqueIdentifier>{138c5158-c796-4aef-a528-aa5be300eea7}</UniqueIdentifier>
     </Filter>
@@ -57,13 +54,19 @@
     <Filter Include="Source Files\Systems\Messaging\Event Messages">
       <UniqueIdentifier>{d838acd9-f608-4b12-9144-ace006f4ef94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Views">
-      <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Graphics\OpenGL">
       <UniqueIdentifier>{a0380d7d-0c07-4f8a-9963-0d64384637d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\OpenGL\Shaders">
+    <Filter Include="Source Files\Systems\Graphics\View">
+      <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\View\Camera">
+      <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\View\Views">
+      <UniqueIdentifier>{65044b68-c102-40ca-91b4-5d3cc8bc6103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Shaders">
       <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -82,9 +85,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\EventMessage.cpp">
-      <Filter>Source Files\Systems\Messaging</Filter>
-    </ClCompile>
     <ClCompile Include="Source\WinMain.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
@@ -103,31 +103,37 @@
     <ClCompile Include="Source\OpenGL.cpp">
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ShaderManager.cpp">
-      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MatrixStack.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files\Systems\Graphics\Camera</Filter>
+      <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Source\Loader.cpp">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\IEventMessage.cpp">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GimbalView.cpp">
+      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+    </ClCompile>
     <ClCompile Include="Source\PantheonView.cpp">
-      <Filter>Source Files\Systems\Graphics\Views</Filter>
+      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IView.cpp">
+      <Filter>Source Files\Systems\Graphics\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IShaderManager.cpp">
+      <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderManager.cpp">
+      <Filter>Source Files\Systems\Graphics\Shaders</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\EventMessage.h">
-      <Filter>Source Files\Systems\Messaging</Filter>
-    </ClInclude>
     <ClInclude Include="Source\WinSystem.h">
       <Filter>Source Files\Systems\Windows</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\System.h">
-      <Filter>Source Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\MessagingSystem.h">
       <Filter>Source Files\Systems\Messaging</Filter>
@@ -150,14 +156,11 @@
     <ClInclude Include="Source\OpenGL.h">
       <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ShaderManager.h">
-      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MatrixStack.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Source\Camera.h">
-      <Filter>Source Files\Systems\Graphics\Camera</Filter>
+      <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Source\Loader.h">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
@@ -171,14 +174,29 @@
     <ClInclude Include="Source\MessageKeyboard.h">
       <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
     </ClInclude>
-    <ClInclude Include="Source\View.h">
-      <Filter>Source Files\Systems\Graphics\Views</Filter>
+    <ClInclude Include="Source\IEventMessage.h">
+      <Filter>Source Files\Systems\Messaging</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IView.h">
+      <Filter>Source Files\Systems\Graphics\View</Filter>
     </ClInclude>
     <ClInclude Include="Source\Shaders.h">
-      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ISystem.h">
+      <Filter>Source Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\PantheonView.h">
-      <Filter>Source Files\Systems\Graphics\Views</Filter>
+      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GimbalView.h">
+      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IShaderManager.h">
+      <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShaderManager.h">
+      <Filter>Source Files\Systems\Graphics\Shaders</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,17 +229,14 @@
     <None Include="Resources\Meshes\UnitPlane.mesh">
       <Filter>Resource Files\Meshes</Filter>
     </None>
-    <None Include="Resources\Shaders\Default.vert">
-      <Filter>Resource Files\Shaders\Vertex</Filter>
-    </None>
-    <None Include="Resources\Shaders\Default.frag">
-      <Filter>Resource Files\Shaders\Fragment</Filter>
-    </None>
     <None Include="Resources\Meshes\SmallGimbal.mesh">
       <Filter>Resource Files\Meshes</Filter>
     </None>
     <None Include="Resources\Meshes\LargeGimbal.mesh">
       <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Shaders\PosColorLocalTransform.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
     </None>
   </ItemGroup>
 </Project>
