@@ -9,14 +9,14 @@
 
 namespace Dungeons3D
 {
-	class Camera
+	class ICamera
 	{
 	public:
-		Camera();
-		Mtx44 Matrix();
+		ICamera();
+		Mtx44 CamMatrix();
 
-		void MoveTarget(float x, float y, float z);
-		void MovePosition(float x, float y, float z);
+		void MoveCamTarget(float x, float y, float z);
+		void MoveCamPosition(float x, float y, float z);
 
 	private:
 		void calculate();

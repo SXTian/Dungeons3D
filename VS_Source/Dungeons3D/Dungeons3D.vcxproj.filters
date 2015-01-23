@@ -30,9 +30,6 @@
     <Filter Include="Source Files\Systems\Messaging">
       <UniqueIdentifier>{f8fa57c9-aa66-49c2-a282-164321b0e375}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\OpenGL">
-      <UniqueIdentifier>{a0380d7d-0c07-4f8a-9963-0d64384637d9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{a63bed7e-0ced-4b1d-8c79-595fb5c8869e}</UniqueIdentifier>
     </Filter>
@@ -41,9 +38,6 @@
     </Filter>
     <Filter Include="Source Files\Systems\Graphics\Lighting">
       <UniqueIdentifier>{138c5158-c796-4aef-a528-aa5be300eea7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Systems\Graphics\OpenGL\Shaders">
-      <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Shaders\Vertex">
       <UniqueIdentifier>{b34da888-885d-4ed3-b52c-bc879a1d8e2d}</UniqueIdentifier>
@@ -60,11 +54,17 @@
     <Filter Include="Resource Files\Meshes">
       <UniqueIdentifier>{f4cceb21-083b-46c0-acc9-44504db18895}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Ad Hoc">
-      <UniqueIdentifier>{21c880ab-7232-4b91-9918-d6b7a7fb3fe7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Messaging\Event Messages">
       <UniqueIdentifier>{d838acd9-f608-4b12-9144-ace006f4ef94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views">
+      <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\OpenGL">
+      <UniqueIdentifier>{a0380d7d-0c07-4f8a-9963-0d64384637d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\OpenGL\Shaders">
+      <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +115,9 @@
     <ClCompile Include="Source\Loader.cpp">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
     </ClCompile>
+    <ClCompile Include="Source\PantheonView.cpp">
+      <Filter>Source Files\Systems\Graphics\Views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\EventMessage.h">
@@ -153,9 +156,6 @@
     <ClInclude Include="Source\MatrixStack.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Shaders.h">
-      <Filter>Source Files\Systems\Graphics\OpenGL\Shaders</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Camera.h">
       <Filter>Source Files\Systems\Graphics\Camera</Filter>
     </ClInclude>
@@ -168,11 +168,17 @@
     <ClInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Parthenon.h">
-      <Filter>Source Files\Systems\Graphics\Ad Hoc</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MessageKeyboard.h">
       <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\View.h">
+      <Filter>Source Files\Systems\Graphics\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Shaders.h">
+      <Filter>Source Files\Systems\Graphics\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PantheonView.h">
+      <Filter>Source Files\Systems\Graphics\Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

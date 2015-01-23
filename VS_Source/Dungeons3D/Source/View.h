@@ -5,25 +5,17 @@
 ******************************************************************************************/
 #pragma once
 
-#include "System.h"
-#include "EventMessage.h"
-
-#include <string>
+#include "Camera.h"
 
 namespace Dungeons3D
 {
-	class OpenGL; class IView;
-
-	class GraphicsSystem : public ISystem, public IEventMessageModule
+	class OpenGL;
+	 
+	class IView : public ICamera
 	{
-	public:
-		GraphicsSystem();
-		~GraphicsSystem();
-
-		void Update(float delta);
-
-	private:
-		OpenGL * m_opengl;
-		IView * m_pantheonView;
+		public:
+			virtual ~IView(){}
+			virtual void LoadMeshes() = 0;
+			virtual void Display(OpenGL * opengl) = 0;
 	};
 }

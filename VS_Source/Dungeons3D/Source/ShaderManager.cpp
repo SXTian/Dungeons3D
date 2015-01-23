@@ -15,30 +15,22 @@ Contributors :
 
 namespace Dungeons3D
 {
-	ShaderManager::ShaderManager()
+	IShaderManager::Program::Program()
 	{
 	}
 
-	ShaderManager::~ShaderManager()
-	{
-	}
-
-	ShaderManager::Program::Program()
-	{
-	}
-
-	ShaderManager::Program::~Program()
+	IShaderManager::Program::~Program()
 	{
 		glDeleteProgram(m_id);
 	}
 
-	void ShaderManager::CreateProgram(ShaderID id)
+	void IShaderManager::CreateProgram(ShaderID id)
 	{
 		m_programs[id].reset(new Program());
 		m_programs[id]->m_id = glCreateProgram();
 	}
 
-	void ShaderManager::LoadShader(ShaderID id, const std::string fileName, GLenum shaderType)
+	void IShaderManager::LoadShader(ShaderID id, const std::string fileName, GLenum shaderType)
 	{
 		if (!m_programs[id])
 			return;
@@ -83,7 +75,7 @@ namespace Dungeons3D
 		m_programs[id]->m_shaders.push_back(shader);
 	}
 
-	void ShaderManager::LinkProgram(ShaderID id)
+	void IShaderManager::LinkProgram(ShaderID id)
 	{
 		if (!m_programs[id])
 			return;
@@ -116,7 +108,7 @@ namespace Dungeons3D
 		}
 	}
 
-	GLuint ShaderManager::GetProgram(ShaderID id)
+	GLuint IShaderManager::GetProgram(ShaderID id)
 	{
 		if (m_programs[id])
 			return m_programs[id]->m_id;
@@ -124,18 +116,18 @@ namespace Dungeons3D
 		return 0;
 	}
 
-	void ShaderManager::Enable(ShaderID id)
+	void IShaderManager::EnableProgram(ShaderID id)
 	{
 		if (m_programs[id])
 			glUseProgram(m_programs[id]->m_id);
 	}
 
-	void ShaderManager::Disable()
+	void IShaderManager::DisableProgram()
 	{
 		glUseProgram(0);
 	}
 
-	void ShaderManager::InitUBO()
+	void IShaderManager::InitUBO()
 	{
 		glGenBuffers(1, &m_globalUBO);
 		glBindBuffer(GL_UNIFORM_BUFFER, m_globalUBO);
@@ -145,7 +137,7 @@ namespace Dungeons3D
 		glBindBufferRange(GL_UNIFORM_BUFFER, 0, m_globalUBO, 0, MATRIX_SIZE * 2);
 	}
 
-	void ShaderManager::BindUniformBlock(ShaderID id, const std::string uniform)
+	void IShaderManager::BindUniformBlock(ShaderID id, const std::string uniform)
 	{
 		if (!m_programs[id]->m_uniforms.count(uniform))
 		{
@@ -157,40 +149,40 @@ namespace Dungeons3D
 	//	SETTER OVERLOADS
 	//----------------------------------------------------------------------------------------------------------
 	//	1 float
-	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float value)
 	{
 		GetLocationUseProgram(id, uniform);
 		glUniform1f(m_programs[id]->m_uniforms[uniform], value);
 	}
 	//	2 floats
-	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2)
 	{
 		GetLocationUseProgram(id, uniform);
 		glUniform2f(m_programs[id]->m_uniforms[uniform], value1, value2);
 	}
 	//	3 floats
-	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3)
 	{
 		GetLocationUseProgram(id, uniform);
 		glUniform3f(m_programs[id]->m_uniforms[uniform], value1, value2, value3);
 	}
 
 	//	4 floats
-	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4)
 	{
 		GetLocationUseProgram(id, uniform);
 		glUniform4f(m_programs[id]->m_uniforms[uniform], value1, value2, value3, value4);
 	}
 
 	//	4x4 Matrix
-	void ShaderManager::SetUniform(ShaderID id, const std::string uniform, float * value)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float * value)
 	{
 		GetLocationUseProgram(id, uniform);
 		glUniformMatrix4fv(m_programs[id]->m_uniforms[uniform], 1, GL_TRUE, value);
 	}
 
 	//	4x4 Matrix Block
-	void ShaderManager::SetUniformBlock(float * value, unsigned index)
+	void IShaderManager::SetShaderUniformBlock(float * value, unsigned index)
 	{
 		glBindBuffer(GL_UNIFORM_BUFFER, m_globalUBO);
 		glBufferSubData(GL_UNIFORM_BUFFER, index * MATRIX_SIZE, MATRIX_SIZE, value);

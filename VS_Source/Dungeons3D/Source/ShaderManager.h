@@ -14,13 +14,9 @@ Contributors :
 
 namespace Dungeons3D
 {
-	class ShaderManager
+	class IShaderManager
 	{
 	public:
-
-		ShaderManager();
-		~ShaderManager();
-
 		//	Create->Load->Link to setup a shader from a text file
 		void CreateProgram(ShaderID id);
 		void LoadShader(ShaderID id, const std::string fileName, GLenum shaderType);
@@ -28,8 +24,8 @@ namespace Dungeons3D
 
 		GLuint GetProgram(ShaderID id);
 
-		void Enable(ShaderID id);
-		void Disable();
+		void EnableProgram(ShaderID id);
+		void DisableProgram();
 
 		void InitUBO();
 		void BindUniformBlock(ShaderID id, const std::string uniform);
@@ -38,17 +34,17 @@ namespace Dungeons3D
 		//	Make 'em as you use 'em
 		//----------------------------------------------------------------------------------------------------------
 		//	1 float
-		void SetUniform(ShaderID id, const std::string uniform, float value);
+		void SetShaderUniform(ShaderID id, const std::string uniform, float value);
 		//	2 floats
-		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2);
+		void SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2);
 		//	3 floats
-		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3);
+		void SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3);
 		//	4 floats
-		void SetUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4);
+		void SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4);
 		//	4x4 Matrix
-		void SetUniform(ShaderID id, const std::string uniform, float * value);
+		void SetShaderUniform(ShaderID id, const std::string uniform, float * value);
 		//	Uniform Block
-		void SetUniformBlock(float * value, unsigned index);
+		void SetShaderUniformBlock(float * value, unsigned index);
 
 
 	private:
@@ -58,7 +54,7 @@ namespace Dungeons3D
 		class Program
 		{
 		public:
-			friend class ShaderManager;
+			friend class IShaderManager;
 
 			Program();
 			~Program();

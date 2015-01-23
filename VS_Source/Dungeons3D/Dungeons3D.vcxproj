@@ -97,6 +97,7 @@
     <ClCompile Include="Source\MatrixStack.cpp" />
     <ClCompile Include="Source\MessagingSystem.cpp" />
     <ClCompile Include="Source\OpenGL.cpp" />
+    <ClCompile Include="Source\PantheonView.cpp" />
     <ClCompile Include="Source\ShaderManager.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
     <ClCompile Include="Source\WinSystem.cpp" />
@@ -115,11 +116,12 @@
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
-    <ClInclude Include="Source\Parthenon.h" />
+    <ClInclude Include="Source\PantheonView.h" />
     <ClInclude Include="Source\ShaderManager.h" />
     <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\System.h" />
     <ClInclude Include="Source\Vector.h" />
+    <ClInclude Include="Source\View.h" />
     <ClInclude Include="Source\WinSystem.h" />
   </ItemGroup>
   <ItemGroup>
