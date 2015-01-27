@@ -10,7 +10,10 @@ Contributors :
 #include <iostream>
 #include <fstream>
 
+//	This + Uniform block binding stuff needs to get refactored
 #define MATRIX_SIZE sizeof(float)*16
+
+//	Also this class needs a logging system...
 
 namespace Dungeons3D
 {

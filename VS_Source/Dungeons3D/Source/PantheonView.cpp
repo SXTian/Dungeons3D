@@ -139,6 +139,7 @@ namespace Dungeons3D
 		m_meshPlane.Load("Resources/Meshes/UnitPlane.mesh");
 		m_meshCone.Load("Resources/Meshes/UnitCone.mesh");
 		m_meshCylinder.Load("Resources/Meshes/UnitCylinder.mesh");
+		m_wizard.Load("Resources/Meshes/wizard.3DS");
 
 		//	Transpose to column-wise, 0 is for the index in the uniform block
 		SetShaderUniformBlock(ViewMatrix().Transpose().m, 0);
@@ -330,5 +331,16 @@ namespace Dungeons3D
 		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCylinder.Render();
+	}
+
+	void PantheonView::drawWizard()
+	{
+		MatrixStack mStack;
+
+		mStack.matrix.TranslateThis(20.0f, 0.0f, -10.0f);	
+		mStack.matrix.RotateThis(1.0f, 0.0f, 0.f, 20);
+		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColor, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
+		m_wizard.Render();
 	}
 }

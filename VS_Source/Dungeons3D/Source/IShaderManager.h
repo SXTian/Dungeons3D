@@ -15,7 +15,7 @@ namespace Dungeons3D
 {
 	class ShaderManager;
 
-	//	This is used as an interface to manipulate shader variables held in the ProgramManager class.
+	//	This is used as an interface to manipulate shader variables held in the ShaderManager class.
 	class IShaderManager
 	{
 	public:

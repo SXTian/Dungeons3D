@@ -4,7 +4,7 @@ Author       : Sam Tian
 Contributors :
 ******************************************************************************************/
 #include "Loader.h"
-#include "GLHeaders.h"
+#include "MeshData.h"
 
 #include <string>
 #include <map>
@@ -13,36 +13,6 @@ Contributors :
 
 namespace Dungeons3D
 {
-	struct Renderer
-	{
-		GLenum type;				//	primitive type
-		GLuint start;				
-		GLuint count;				//	element count
-
-		void Render()
-		{
-			//	Indexed drawing
-			glDrawElements(type, count, GL_UNSIGNED_SHORT, (void*)start);
-		}
-	};
-
-	struct MeshData
-	{
-		MeshData() : vertexBuffer(0), indexBuffer(0), vao(0) {}
-		~MeshData()
-		{
-			glDeleteBuffers(1, &vertexBuffer);
-			glDeleteBuffers(1, &indexBuffer);
-			glDeleteVertexArrays(1, &vao);
-		}
-
-		GLuint vertexBuffer;
-		GLuint indexBuffer;
-		GLuint vao;
-
-		std::vector<Renderer> primatives;
-	};
-
 	Loader::Loader() : m_data(new MeshData)
 	{
 	}

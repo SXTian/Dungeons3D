@@ -69,6 +69,12 @@
     <Filter Include="Source Files\Systems\Graphics\Shaders">
       <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Mesh\Serialization Policy\Simple Loader">
+      <UniqueIdentifier>{d12496f3-7b50-41fd-8014-47f2944429bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader">
+      <UniqueIdentifier>{f0c95796-c617-45b5-b277-2a55690df341}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
@@ -109,9 +115,6 @@
     <ClCompile Include="Source\Camera.cpp">
       <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Loader.cpp">
-      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IEventMessage.cpp">
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClCompile>
@@ -129,6 +132,15 @@
     </ClCompile>
     <ClCompile Include="Source\ShaderManager.cpp">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Loader.cpp">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\Simple Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Loader3DS.cpp">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Parser3DS.cpp">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,9 +174,6 @@
     <ClInclude Include="Source\Camera.h">
       <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Loader.h">
-      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Mesh.h">
       <Filter>Source Files\Systems\Graphics\Mesh</Filter>
     </ClInclude>
@@ -197,6 +206,21 @@
     </ClInclude>
     <ClInclude Include="Source\ShaderManager.h">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Loader.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\Simple Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Loader3DS.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshData.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Parser3DS.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ChunkNames3DS.h">
+      <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

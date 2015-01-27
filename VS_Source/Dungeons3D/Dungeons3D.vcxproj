@@ -89,6 +89,7 @@
     <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Loader3DS.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\GimbalView.cpp" />
     <ClCompile Include="Source\IEventMessage.cpp" />
@@ -101,12 +102,15 @@
     <ClCompile Include="Source\OpenGL.cpp" />
     <ClCompile Include="Source\PantheonView.cpp" />
     <ClCompile Include="Source\IShaderManager.cpp" />
+    <ClCompile Include="Source\Parser3DS.cpp" />
     <ClCompile Include="Source\ShaderManager.cpp" />
     <ClCompile Include="Source\WinMain.cpp" />
     <ClCompile Include="Source\WinSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\ChunkNames3DS.h" />
+    <ClInclude Include="Source\Loader3DS.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\GimbalView.h" />
     <ClInclude Include="Source\IEventMessage.h" />
@@ -116,12 +120,14 @@
     <ClInclude Include="Source\Matrix.h" />
     <ClInclude Include="Source\MatrixStack.h" />
     <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\MeshData.h" />
     <ClInclude Include="Source\MessageKeyboard.h" />
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
     <ClInclude Include="Source\PantheonView.h" />
     <ClInclude Include="Source\IShaderManager.h" />
+    <ClInclude Include="Source\Parser3DS.h" />
     <ClInclude Include="Source\ShaderManager.h" />
     <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\ISystem.h" />

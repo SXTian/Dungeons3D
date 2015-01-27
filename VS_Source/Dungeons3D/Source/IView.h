@@ -24,6 +24,7 @@ namespace Dungeons3D
 		Mtx44 ViewMatrix();
 
 		void Resize(float fovDeg, float zNear, float zFar);
+		virtual void ChangeAngle(float x, float y, float z, float deg);
 	private:
 		void calculate();
 

@@ -26,13 +26,13 @@ namespace Dungeons3D
 
 	void Camera::MoveCamTarget(float x, float y, float z)
 	{
-		m_target = m_target + Vec3(x, y, z);
+		m_target = m_target + Vec4(x, y, z);
 		m_update = true;
 	}
 
 	void Camera::MoveCamPosition(float x, float y, float z)
 	{
-		m_pos = m_pos + Vec3(x, y, z);
+		m_pos = m_pos + Vec4(x, y, z);
 		m_update = true;
 	}
 
@@ -41,15 +41,15 @@ namespace Dungeons3D
 		//	Get camera position in world coordinates
 		float phi = m_pos.x;
 		float theta = m_pos.y + 90.0f;
-		Vec3 dirToCamera(SinLookup(theta) * CosLookup(phi), CosLookup(theta), SinLookup(theta) * SinLookup(phi));
-		Vec3 cameraPos = (dirToCamera * m_pos.z) + m_target;
+		Vec4 dirToCamera(SinLookup(theta) * CosLookup(phi), CosLookup(theta), SinLookup(theta) * SinLookup(phi));
+		Vec4 cameraPos = (dirToCamera * m_pos.z) + m_target;
 
 		//	Construct matrix
-		Vec3 lookDir = (m_target - cameraPos).Normalize();
-		Vec3 upDir = m_up.Normalize();
+		Vec4 lookDir = (m_target - cameraPos).Normalize();
+		Vec4 upDir = m_up.Normalize();
 
-		Vec3 rightDir = lookDir.Cross(upDir);
-		Vec3 perpUpDir = rightDir.Cross(lookDir);
+		Vec4 rightDir = lookDir.Cross(upDir);
+		Vec4 perpUpDir = rightDir.Cross(lookDir);
 
 		m_wcMatrix.IdentityThis();
 

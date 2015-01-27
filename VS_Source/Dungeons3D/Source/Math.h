@@ -21,7 +21,7 @@ static float cos_table[3600];
 
 static inline void GenerateLookupTable(void)
 {
-   for(int i=0; i < 3600; i++)
+   for (int i=0; i < 3600; i++)
    {
       sin_table[i]=(float)sin(i * PI / 1800);
       cos_table[i]=(float)cos(i * PI / 1800); 

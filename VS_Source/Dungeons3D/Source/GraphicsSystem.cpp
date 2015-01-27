@@ -8,6 +8,7 @@ Contributors :
 #include "OpenGL.h"
 #include "PantheonView.h"
 #include "GimbalView.h"
+
 #include <iostream>
 
 namespace Dungeons3D
@@ -26,12 +27,12 @@ namespace Dungeons3D
 		{
 			switch (((MessageKeyboard*)pMsg)->key)
 			{
-			case 'W': for (auto &i : m_views) i.second->MoveCamTarget(0.0f, 0.0f, -4.0f); break;
-			case 'S': for (auto &i : m_views) i.second->MoveCamTarget(0.0f, 0.0f, 4.0f); break;
-			case 'D': for (auto &i : m_views) i.second->MoveCamTarget(4.0f, 0.0f, 0.0f); break;
-			case 'A': for (auto &i : m_views) i.second->MoveCamTarget(-4.0f, 0.0f, 0.0f); break;
-			case 'E': for (auto &i : m_views) i.second->MoveCamTarget(0.0f, -4.0f, 0.0f); break;
-			case 'Q': for (auto &i : m_views) i.second->MoveCamTarget(0.0f, 4.0f, 0.0f); break;
+			case 'W': for (auto &i : m_views) i.second->ChangeAngle(1.0f, 0.0f, 0.0f, 9.0f); break;
+			case 'S': for (auto &i : m_views) i.second->ChangeAngle(-1.0f, 0.0f, 0.0f, 9.0f); break;
+			case 'D': for (auto &i : m_views) i.second->ChangeAngle(0.0f, -1.0f, 0.0f, 9.0f); break;
+			case 'A': for (auto &i : m_views) i.second->ChangeAngle(0.0f, 1.0f, 0.0f, 9.0f); break;
+			case 'E': for (auto &i : m_views) i.second->ChangeAngle(0.0f, 0.0f, -1.0f, 9.0f); break;
+			case 'Q': for (auto &i : m_views) i.second->ChangeAngle(0.0f, 0.0f, 1.0f, 9.0f); break;
 
 			case 'I': for (auto &i : m_views) i.second->MoveCamPosition(0.0f, -1.125f, 0.0f); break;
 			case 'K': for (auto &i : m_views) i.second->MoveCamPosition(0.0f, 1.125f, 0.0f); break;
@@ -51,6 +52,6 @@ namespace Dungeons3D
 
 	void GraphicsSystem::Update(float delta)
 	{
-		m_opengl->Display(m_views["Pantheon"]);
+		m_opengl->Display(m_views["Gimbal"]);
 	}
 }

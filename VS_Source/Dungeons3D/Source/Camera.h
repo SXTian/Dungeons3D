@@ -22,11 +22,11 @@ namespace Dungeons3D
 		void calculate();
 
 		//	Position in spherical: Vec3(phi, theta, r)
-		Vec3 m_pos;
+		Vec4 m_pos;
 		//	Camera target
-		Vec3 m_target;
+		Vec4 m_target;
 		//	Up vector
-		Vec3 m_up;
+		Vec4 m_up;
 
 		//	World to camera transformation
 		Mtx44 m_wcMatrix;

@@ -55,4 +55,8 @@ namespace Dungeons3D
 
 		m_update = false;
 	}
+
+	void IView::ChangeAngle(float x, float y, float z, float deg)
+	{
+	}
 }

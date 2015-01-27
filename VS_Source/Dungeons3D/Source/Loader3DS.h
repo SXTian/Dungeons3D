@@ -3,23 +3,26 @@
   Author       : Sam Tian
   Contributors :
 ******************************************************************************************/
+#pragma once
 
-#include "Mesh.h"
+#include "Parser3DS.h"
+
+#include <string>
+#include <memory>
+#include <vector>
 
 namespace Dungeons3D
 {
+	struct MeshData;
 
-	Mesh::Mesh()
+	class Loader3DS : Parser3DS
 	{
-		_loader = new 
-	}
+	protected:
+		Loader3DS();
+		~Loader3DS();
+		void load(std::string filename);
+		void render();
 
-	void GraphicsSystem::Initialize()
-	{
-		_openGL.Initialize();
-	}
-	void GraphicsSystem::Update(float delta)
-	{
-		_openGL.Display();
-	}
+		MeshData * m_data[5];
+	};
 }

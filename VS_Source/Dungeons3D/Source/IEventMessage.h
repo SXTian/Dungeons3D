@@ -1,7 +1,7 @@
 /*****************************************************************************************
-  Project      : 3D Game Engine
-  Author       : Sam Tian
-  Contributors :
+Project      : 3D Game Engine
+Author       : Sam Tian
+Contributors :
 ******************************************************************************************/
 #pragma once
 
@@ -9,7 +9,6 @@
 
 namespace Dungeons3D
 {
-	//	This is the boilerplate code for the event messaging system
 	enum Events
 	{
 		MSG_Startup,
@@ -22,8 +21,6 @@ namespace Dungeons3D
 	{
 		Events msgID;
 	};
-
-	class IEventMessageModule;
 
 	//	Function pointer that takes a message
 	//typedef void (IEventMessageModule::*Callback)(IEventMessage * pMessage);

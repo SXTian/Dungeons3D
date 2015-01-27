@@ -8,8 +8,6 @@ smooth out vec4 interpColor;
 uniform mat4 cameraToClipMatrix;
 uniform mat4 modelToCameraMatrix;
 
-};
-
 void main()
 {
 	gl_Position = cameraToClipMatrix * modelToCameraMatrix * position;

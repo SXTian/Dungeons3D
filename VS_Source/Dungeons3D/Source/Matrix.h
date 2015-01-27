@@ -42,7 +42,7 @@ struct Mtx44
 
 	Mtx44 operator/(float s) const;
 
-	Vec3 operator*(const Vec3& v) const;
+	Vec4 operator*(const Vec4& v) const;
 
 	// ---------------------------------------------------------------------------
 	// member functions
@@ -54,7 +54,10 @@ struct Mtx44
 	Mtx44 Mult(const Mtx44& rhs) const;
 	const Mtx44& MultThis (const Mtx44& rhs);
 
-	Vec3 MultVec(const Vec3& v) const;
+	Vec4 MultVec(const Vec4& v) const;
+
+	Mtx44 MultQuat(const Vec4& v) const;
+	const Mtx44& MultQuatThis(const Vec4& v);
 
 	Mtx44 Transpose() const;
 	const Mtx44& TransposeThis();

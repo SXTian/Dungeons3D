@@ -56,7 +56,7 @@ Mtx44 Mtx44::operator-(const Mtx44& rhs) const
 
 // ---------------------------------------------------------------------------
 
-Vec3 Mtx44::operator*(const Vec3& v) const
+Vec4 Mtx44::operator*(const Vec4& v) const
 {	
 	return MultVec(v);
 }
@@ -139,12 +139,46 @@ const Mtx44& Mtx44::MultThis(const Mtx44& rhs)
 
 // ---------------------------------------------------------------------------
 
-Vec3 Mtx44::MultVec(const Vec3& v) const
+Vec4 Mtx44::MultVec(const Vec4& v) const
 {
-	return Vec3(
-		RowCol(0, 0) * v.x + RowCol(0, 1) * v.y + RowCol(0, 2) * v.z + RowCol(0, 3) * 1.0f, 
-		RowCol(1, 0) * v.x + RowCol(1, 1) * v.y + RowCol(1, 2) * v.z + RowCol(1, 3) * 1.0f, 
-		RowCol(2, 0) * v.x + RowCol(2, 1) * v.y + RowCol(2, 2) * v.z + RowCol(2, 3) * 1.0f);
+	return Vec4(
+		RowCol(0, 0) * v.x + RowCol(0, 1) * v.y + RowCol(0, 2) * v.z + RowCol(0, 3) * v.w, 
+		RowCol(1, 0) * v.x + RowCol(1, 1) * v.y + RowCol(1, 2) * v.z + RowCol(1, 3) * v.w, 
+		RowCol(2, 0) * v.x + RowCol(2, 1) * v.y + RowCol(2, 2) * v.z + RowCol(2, 3) * v.w);
+}
+
+// ---------------------------------------------------------------------------
+
+Mtx44 Mtx44::MultQuat(const Vec4& v) const
+{
+	Mtx44 quat(1.0f - 2.0f * v.y * v.y - 2.0f * v.z * v.z,
+			   2.0f * v.x * v.y - 2.0f * v.w * v.z,
+			   2.0f * v.x * v.z + 2.0f * v.w * v.y,
+			   0.0f,
+
+			   2.0f * v.x * v.y + 2.0f * v.w * v.z,
+			   1.0f - 2.0f * v.x * v.x - 2.0f * v.z * v.z,
+			   2.0f * v.y * v.z - 2.0f * v.w * v.x,
+			   0.0f,
+
+			   2.0f * v.x * v.z - 2.0f * v.w * v.y,
+			   2.0f * v.y * v.z + 2.0f * v.w * v.x,
+			   1.0f - 2.0f * v.x * v.x - 2.0f * v.y * v.y,
+			   0.0f,
+
+			   0.0f,
+			   0.0f,
+			   0.0f,
+			   1.0f);
+
+	return this->Mult(quat);
+}
+
+// ---------------------------------------------------------------------------
+
+const Mtx44& Mtx44::MultQuatThis(const Vec4& v)
+{
+	return (*this) = this->MultQuat(v);
 }
 
 // ---------------------------------------------------------------------------
