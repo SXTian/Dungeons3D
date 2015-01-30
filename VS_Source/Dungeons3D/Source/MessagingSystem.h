@@ -5,7 +5,7 @@
 ******************************************************************************************/
 #pragma once
 
-#include "ISystem.h"
+#include "BaseSystem.h"
 #include "IEventMessage.h"
 
 #include <vector>
@@ -18,7 +18,7 @@ namespace Dungeons3D
 		Callback pFunc;
 	};
 
-	class MessagingSystem : public ISystem
+	class MessagingSystem : public BaseSystem
 	{
 	public:
 		static MessagingSystem* GetInstance();

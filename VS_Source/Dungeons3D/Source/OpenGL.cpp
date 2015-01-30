@@ -7,7 +7,7 @@ Contributors :
 #include "OpenGL.h"
 #include "Math.h"
 #include "MatrixStack.h"
-#include "IView.h"
+#include "BaseView.h"
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -28,7 +28,7 @@ namespace Dungeons3D
 	{
 	}
 
-	void OpenGL::Display(IView * view)
+	void OpenGL::Display(BaseView * view)
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearDepth(1.0f);

@@ -13,6 +13,8 @@ namespace Dungeons3D
 	{
 	public:
 		Camera();
+		Camera(Vec4 position, Vec4 target, Vec4 up);
+
 		Mtx44 CamMatrix();
 
 		void MoveCamTarget(float x, float y, float z);

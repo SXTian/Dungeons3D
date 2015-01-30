@@ -5,20 +5,20 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "IView.h"
+#include "BaseView.h"
 #include "Math.h"
 #include "OpenGL.h"
 
 
 namespace Dungeons3D
 {
-	IView::IView() : m_fovDeg(45.0f), m_zNear(1.0f), m_zFar(1000.0f), m_update(true)
+	BaseView::BaseView() : m_fovDeg(45.0f), m_zNear(1.0f), m_zFar(1000.0f), m_update(true)
 	{
 		//	For maths
 		GenerateLookupTable();
 	}
 
-	void IView::Resize(float fovDeg, float zNear, float zFar)
+	void BaseView::Resize(float fovDeg, float zNear, float zFar)
 	{
 		m_fovDeg = fovDeg;
 		m_zNear = zNear;
@@ -27,7 +27,7 @@ namespace Dungeons3D
 		m_update = true;
 	}
 
-	Mtx44 IView::ViewMatrix()
+	Mtx44 BaseView::ViewMatrix()
 	{
 		if (m_update)
 			calculate();
@@ -35,7 +35,7 @@ namespace Dungeons3D
 		return m_ccMtx;
 	}
 
-	void IView::calculate()
+	void BaseView::calculate()
 	{
 		float yMax = m_zNear * TanLookup(m_fovDeg);
 		float yMin = -yMax;
@@ -54,9 +54,5 @@ namespace Dungeons3D
 		m_ccMtx.RowCol(3, 3) = 0.0f;
 
 		m_update = false;
-	}
-
-	void IView::ChangeAngle(float x, float y, float z, float deg)
-	{
 	}
 }

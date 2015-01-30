@@ -124,7 +124,7 @@ namespace Dungeons3D
 
 	const float columnBaseHeight = 0.25f;
 
-	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager)
+	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager), Camera(Vec4(67.5f, -46.0f, 100.0f), Vec4(0.0f, 0.4f, 0.0f), Vec4(0.0f, 1.0f, 0.0f))
 	{
 	}
 

@@ -5,17 +5,29 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "IView.h"
+#include "BaseView.h"
+#include "Camera.h"
 #include "IShaderManager.h"
+#include "MessageKeyboard.h"
 #include "Mesh.h"
 #include "Loader.h"
 #include "Loader3DS.h"
 
 namespace Dungeons3D
 {
+	enum OrientationType
+	{
+		ORI_MODEL,
+		ORI_WORLD,
+		ORI_CAMERA,
+		ORI_TOTAL
+	};
+
+
+
 	class ShaderManager;
 
-	class GimbalView : public IView, public IShaderManager
+	class GimbalView : public BaseView, public Camera, public IShaderManager, public IEventMessageModule
 	{
 	public: 
 		GimbalView(std::shared_ptr<ShaderManager> pManager);
@@ -36,7 +48,10 @@ namespace Dungeons3D
 		Mesh<Loader> m_largeGimbal;
 
 		Mesh<Loader3DS> m_katana;
+		Mesh<Loader> m_plane;
 
 		Vec4 m_quat;
+		OrientationType m_currOrientation;
 	};
+
 }

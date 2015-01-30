@@ -124,9 +124,6 @@
     <ClCompile Include="Source\PantheonView.cpp">
       <Filter>Source Files\Systems\Graphics\View\Views</Filter>
     </ClCompile>
-    <ClCompile Include="Source\IView.cpp">
-      <Filter>Source Files\Systems\Graphics\View</Filter>
-    </ClCompile>
     <ClCompile Include="Source\IShaderManager.cpp">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
     </ClCompile>
@@ -141,6 +138,12 @@
     </ClCompile>
     <ClCompile Include="Source\Parser3DS.cpp">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BaseView.cpp">
+      <Filter>Source Files\Systems\Graphics\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameEngine.cpp">
+      <Filter>Source Files\Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -186,14 +189,8 @@
     <ClInclude Include="Source\IEventMessage.h">
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Source\IView.h">
-      <Filter>Source Files\Systems\Graphics\View</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Shaders.h">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ISystem.h">
-      <Filter>Source Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Source\PantheonView.h">
       <Filter>Source Files\Systems\Graphics\View\Views</Filter>
@@ -221,6 +218,18 @@
     </ClInclude>
     <ClInclude Include="Source\ChunkNames3DS.h">
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BaseView.h">
+      <Filter>Source Files\Systems\Graphics\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\BaseSystem.h">
+      <Filter>Source Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Orientation.h">
+      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameEngine.h">
+      <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

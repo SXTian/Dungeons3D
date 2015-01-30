@@ -3,21 +3,14 @@
   Author       : Sam Tian
   Contributors :
 ******************************************************************************************/
-#include "WinSystem.h"
-#include "GraphicsSystem.h"
+#include "GameEngine.h"
 
 using namespace Dungeons3D;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	WinSystem * winSystem = new WinSystem("./Resources/config.txt");
-	GraphicsSystem * graphicsSystem = new GraphicsSystem();
-
-	winSystem->ActivateWindow();
-
-	while (true)
-	{
-		winSystem->Update(0);
-		graphicsSystem->Update(0);
-	}
+	GameEngine game;
+	game.AddSystem(SYS_WINDOWS);
+	game.AddSystem(SYS_GRAPHICS);
+	game.GameLoop();
 }

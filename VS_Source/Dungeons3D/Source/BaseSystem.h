@@ -7,10 +7,10 @@
 
 namespace Dungeons3D
 {
-	class ISystem
+	class BaseSystem
 	{
 	public:
-		virtual ~ISystem(){}
+		virtual ~BaseSystem(){}
 		virtual void Update(float delta) = 0;
 	};
 }

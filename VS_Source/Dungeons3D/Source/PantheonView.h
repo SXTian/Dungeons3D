@@ -5,7 +5,8 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "IView.h"
+#include "BaseView.h"
+#include "Camera.h"
 #include "IShaderManager.h"
 #include "Mesh.h"
 #include "Loader.h"
@@ -14,7 +15,7 @@ Contributors :
 namespace Dungeons3D
 {
 	class ShaderManager;
-	class PantheonView : public IView, public IShaderManager
+	class PantheonView : public BaseView, public Camera, public IShaderManager
 	{
 	public: 
 		PantheonView(std::shared_ptr<ShaderManager> pManager);

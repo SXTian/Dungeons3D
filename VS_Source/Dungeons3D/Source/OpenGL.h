@@ -10,14 +10,14 @@ Contributors :
 
 namespace Dungeons3D
 {
-	class IView;
+	class BaseView;
 
 	class OpenGL : public ShaderManager
 	{
 	public:
 		OpenGL();
 		~OpenGL();
-		void Display(IView * view);
+		void Display(BaseView * view);
 
 	private:
 		void initGL();

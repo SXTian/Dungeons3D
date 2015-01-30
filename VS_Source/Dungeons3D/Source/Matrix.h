@@ -59,6 +59,8 @@ struct Mtx44
 	Mtx44 MultQuat(const Vec4& v) const;
 	const Mtx44& MultQuatThis(const Vec4& v);
 
+	Vec4 Quaternize() const;
+
 	Mtx44 Transpose() const;
 	const Mtx44& TransposeThis();
 

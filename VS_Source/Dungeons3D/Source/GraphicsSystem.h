@@ -5,7 +5,7 @@
 ******************************************************************************************/
 #pragma once
 
-#include "ISystem.h"
+#include "BaseSystem.h"
 #include "IEventMessage.h"
 
 #include <string>
@@ -14,9 +14,9 @@
 
 namespace Dungeons3D
 {
-	class OpenGL; class IView;
+	class OpenGL; class BaseView;
 
-	class GraphicsSystem : public ISystem, public IEventMessageModule
+	class GraphicsSystem : public BaseSystem, public IEventMessageModule
 	{
 	public:
 		GraphicsSystem();
@@ -26,6 +26,6 @@ namespace Dungeons3D
 
 	private:
 		std::shared_ptr<OpenGL> m_opengl;
-		std::map<std::string, IView*> m_views;
+		std::map<std::string, BaseView*> m_views;
 	};
 }

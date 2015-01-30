@@ -25,7 +25,7 @@ struct Vec4
 	Vec4 operator/(float s) const {	return Vec4(x / s, y / s, z / s, w); }
 
 	// get vector length
-	float Length() const { return sqrtf((*this) * (*this)); }
+	float Length() const { return QSqrt((*this) * (*this)); }
 
 	// dot product
 	float operator*(const Vec4& rhs) const { return x * rhs.x + y * rhs.y + z * rhs.z; }
@@ -37,10 +37,17 @@ struct Vec4
 	Vec4 Normalize() const { return (*this) / Length(); }
 	const Vec4&	NormalizeThis() { return (*this) = (*this) / Length(); }
 
+	// calculate normalized quaternion
+	Vec4 NormalizeQuaternion() const { 	float length = QSqrt(x * x + y * y + z * z + w * w); return Vec4(x / length, y / length, z / length, w / length); }
+	const Vec4&	NormalizeQuaternionThis() { return (*this) = this->NormalizeQuaternion(); }
+
 	//	Construct a quaternion with (x component, y component, z component, degrees) as (x, y, z, w)
 	Vec4 Quaternize() const { return Vec4(x * SinLookup(w / 2.0f), y * SinLookup(w / 2.0f), z * SinLookup(w / 2.0f), CosLookup(w / 2.0f)); }
-
 	const Vec4& QuaternizeThis() { return (*this) = (*this).Quaternize(); }
+
+	//	Construct an inverse quaternion, must be quaternized beforehand.
+	Vec4 Conjugate() const { return Vec4(-x, -y, -z, w); }
+	const Vec4& ConjugateThis() { return (*this) = (*this).Conjugate(); }
 
 	//	Multiply with another quaternion, both must be Quaternized!! (or you get garbage result)
 	Vec4 MultQuat(const Vec4& rhs) const { return Vec4(w * rhs.x + x * rhs.w + y * rhs.z - z * rhs.y,

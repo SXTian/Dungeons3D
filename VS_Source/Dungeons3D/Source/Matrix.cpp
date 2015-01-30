@@ -1,7 +1,7 @@
 /*****************************************************************************************
-  Project      : 3D Game Engine
-  Author       : Sam Tian
-  Contributors :
+Project      : 3D Game Engine
+Author       : Sam Tian
+Contributors :
 ******************************************************************************************/
 #include "Matrix.h"
 #include "Math.h"
@@ -39,9 +39,9 @@ Mtx44::Mtx44(float m00, float m01, float m02, float m03,
 Mtx44 Mtx44::operator+(const Mtx44& rhs) const
 {
 	return Mtx44(RowCol(0, 0) + rhs.RowCol(0, 0), RowCol(0, 1) + rhs.RowCol(0, 1), RowCol(0, 2) + rhs.RowCol(0, 2), RowCol(0, 3) + rhs.RowCol(0, 3), 
-				 RowCol(1, 0) + rhs.RowCol(1, 0), RowCol(1, 1) + rhs.RowCol(1, 1), RowCol(1, 2) + rhs.RowCol(1, 2), RowCol(1, 3) + rhs.RowCol(1, 3), 
-				 RowCol(2, 0) + rhs.RowCol(2, 0), RowCol(2, 1) + rhs.RowCol(2, 1), RowCol(2, 2) + rhs.RowCol(2, 2), RowCol(2, 3) + rhs.RowCol(2, 3), 
-				 RowCol(3, 0) + rhs.RowCol(3, 0), RowCol(3, 1) + rhs.RowCol(3, 1), RowCol(3, 2) + rhs.RowCol(3, 2), RowCol(3, 3) + rhs.RowCol(3, 3));
+		RowCol(1, 0) + rhs.RowCol(1, 0), RowCol(1, 1) + rhs.RowCol(1, 1), RowCol(1, 2) + rhs.RowCol(1, 2), RowCol(1, 3) + rhs.RowCol(1, 3), 
+		RowCol(2, 0) + rhs.RowCol(2, 0), RowCol(2, 1) + rhs.RowCol(2, 1), RowCol(2, 2) + rhs.RowCol(2, 2), RowCol(2, 3) + rhs.RowCol(2, 3), 
+		RowCol(3, 0) + rhs.RowCol(3, 0), RowCol(3, 1) + rhs.RowCol(3, 1), RowCol(3, 2) + rhs.RowCol(3, 2), RowCol(3, 3) + rhs.RowCol(3, 3));
 }
 
 // ---------------------------------------------------------------------------
@@ -49,9 +49,9 @@ Mtx44 Mtx44::operator+(const Mtx44& rhs) const
 Mtx44 Mtx44::operator-(const Mtx44& rhs) const
 {
 	return Mtx44(RowCol(0, 0) - rhs.RowCol(0, 0), RowCol(0, 1) - rhs.RowCol(0, 1), RowCol(0, 2) - rhs.RowCol(0, 2), RowCol(0, 3) - rhs.RowCol(0, 3), 
-				 RowCol(1, 0) - rhs.RowCol(1, 0), RowCol(1, 1) - rhs.RowCol(1, 1), RowCol(1, 2) - rhs.RowCol(1, 2), RowCol(1, 3) - rhs.RowCol(1, 3), 
-				 RowCol(2, 0) - rhs.RowCol(2, 0), RowCol(2, 1) - rhs.RowCol(2, 1), RowCol(2, 2) - rhs.RowCol(2, 2), RowCol(2, 3) - rhs.RowCol(2, 3), 
-				 RowCol(3, 0) - rhs.RowCol(3, 0), RowCol(3, 1) - rhs.RowCol(3, 1), RowCol(3, 2) - rhs.RowCol(3, 2), RowCol(3, 3) - rhs.RowCol(3, 3));
+		RowCol(1, 0) - rhs.RowCol(1, 0), RowCol(1, 1) - rhs.RowCol(1, 1), RowCol(1, 2) - rhs.RowCol(1, 2), RowCol(1, 3) - rhs.RowCol(1, 3), 
+		RowCol(2, 0) - rhs.RowCol(2, 0), RowCol(2, 1) - rhs.RowCol(2, 1), RowCol(2, 2) - rhs.RowCol(2, 2), RowCol(2, 3) - rhs.RowCol(2, 3), 
+		RowCol(3, 0) - rhs.RowCol(3, 0), RowCol(3, 1) - rhs.RowCol(3, 1), RowCol(3, 2) - rhs.RowCol(3, 2), RowCol(3, 3) - rhs.RowCol(3, 3));
 }
 
 // ---------------------------------------------------------------------------
@@ -87,9 +87,9 @@ Mtx44 Mtx44::operator/(float s) const
 Mtx44 Mtx44::Mult(float s) const
 {
 	return Mtx44(s * RowCol(0, 0), s * RowCol(0, 1), s * RowCol(0, 2), s * RowCol(0, 3), 
-				 s * RowCol(1, 0), s * RowCol(1, 1), s * RowCol(1, 2), s * RowCol(1, 3), 
-				 s * RowCol(2, 0), s * RowCol(2, 1), s * RowCol(2, 2), s * RowCol(2, 3), 
-				 s * RowCol(3, 0), s * RowCol(3, 1), s * RowCol(3, 2), s * RowCol(3, 3));
+		s * RowCol(1, 0), s * RowCol(1, 1), s * RowCol(1, 2), s * RowCol(1, 3), 
+		s * RowCol(2, 0), s * RowCol(2, 1), s * RowCol(2, 2), s * RowCol(2, 3), 
+		s * RowCol(3, 0), s * RowCol(3, 1), s * RowCol(3, 2), s * RowCol(3, 3));
 }
 
 // ---------------------------------------------------------------------------
@@ -100,7 +100,7 @@ const Mtx44& Mtx44::MultThis(float s)
 	RowCol(1, 0) *= s; RowCol(1, 1) *= s; RowCol(1, 2) *= s; RowCol(1, 3) *= s;
 	RowCol(2, 0) *= s; RowCol(2, 1) *= s; RowCol(2, 2) *= s; RowCol(2, 3) *= s;
 	RowCol(3, 0) *= s; RowCol(3, 1) *= s; RowCol(3, 2) *= s; RowCol(3, 3) *= s;
-	
+
 	return (*this);
 }
 
@@ -152,24 +152,21 @@ Vec4 Mtx44::MultVec(const Vec4& v) const
 Mtx44 Mtx44::MultQuat(const Vec4& v) const
 {
 	Mtx44 quat(1.0f - 2.0f * v.y * v.y - 2.0f * v.z * v.z,
-			   2.0f * v.x * v.y - 2.0f * v.w * v.z,
-			   2.0f * v.x * v.z + 2.0f * v.w * v.y,
-			   0.0f,
+		2.0f * v.x * v.y - 2.0f * v.w * v.z,
+		2.0f * v.x * v.z + 2.0f * v.w * v.y,
+		0.0f,
 
-			   2.0f * v.x * v.y + 2.0f * v.w * v.z,
-			   1.0f - 2.0f * v.x * v.x - 2.0f * v.z * v.z,
-			   2.0f * v.y * v.z - 2.0f * v.w * v.x,
-			   0.0f,
+		2.0f * v.x * v.y + 2.0f * v.w * v.z,
+		1.0f - 2.0f * v.x * v.x - 2.0f * v.z * v.z,
+		2.0f * v.y * v.z - 2.0f * v.w * v.x,
+		0.0f,
 
-			   2.0f * v.x * v.z - 2.0f * v.w * v.y,
-			   2.0f * v.y * v.z + 2.0f * v.w * v.x,
-			   1.0f - 2.0f * v.x * v.x - 2.0f * v.y * v.y,
-			   0.0f,
+		2.0f * v.x * v.z - 2.0f * v.w * v.y,
+		2.0f * v.y * v.z + 2.0f * v.w * v.x,
+		1.0f - 2.0f * v.x * v.x - 2.0f * v.y * v.y,
+		0.0f,
 
-			   0.0f,
-			   0.0f,
-			   0.0f,
-			   1.0f);
+		0.0f, 0.0f, 0.0f, 1.0f);
 
 	return this->Mult(quat);
 }
@@ -183,6 +180,49 @@ const Mtx44& Mtx44::MultQuatThis(const Vec4& v)
 
 // ---------------------------------------------------------------------------
 
+Vec4 Mtx44::Quaternize() const
+{
+	Vec4 result;
+	float trace = RowCol(0, 0) + RowCol(1, 1) + RowCol(2, 2);
+	if (trace > 0)
+	{
+		float s = 0.5f / QSqrt(trace + 1.0f);
+		result.w = 0.25f / s;
+		result.x = (RowCol(2, 1) - RowCol(1, 2)) * s;
+		result.y = (RowCol(0, 2) - RowCol(2, 0)) * s;
+		result.z = (RowCol(1, 0) - RowCol(0, 1)) * s;
+	} 
+	else 
+	{
+		if ( RowCol(0, 0) > RowCol(1, 1) && RowCol(0, 0) > RowCol(2, 2)) 
+		{
+			float s = 2.0f * QSqrt( 1.0f + RowCol(0, 0) - RowCol(1, 1) - RowCol(2, 2));
+			result.w = (RowCol(2, 1) - RowCol(1, 2) ) / s;
+			result.x = 0.25f * s;
+			result.y = (RowCol(0, 1) + RowCol(1, 0)) / s;
+			result.z = (RowCol(0, 2) + RowCol(2, 0)) / s;
+		} 
+		else if (RowCol(1, 1) > RowCol(2, 2)) 
+		{
+			float s = 2.0f * QSqrt(1.0f + RowCol(1, 1) - RowCol(0, 0) - RowCol(2, 2));
+			result.w = (RowCol(0, 2) - RowCol(2, 0)) / s;
+			result.x = (RowCol(0, 1) + RowCol(1, 0)) / s;
+			result.y = 0.25f * s;
+			result.z = (RowCol(1, 2) + RowCol(2, 1) ) / s;
+		} 
+		else 
+		{
+			float s = 2.0f * QSqrt( 1.0f + RowCol(2, 2) - RowCol(0, 0) - RowCol(1, 1));
+			result.w = (RowCol(1, 0) - RowCol(0, 1)) / s;
+			result.x = (RowCol(0, 2) + RowCol(2, 0) ) / s;
+			result.y = (RowCol(1, 2) + RowCol(2, 1) ) / s;
+			result.z = 0.25f * s;
+		}
+	}
+	return result;
+}
+
+// ---------------------------------------------------------------------------
 Mtx44 Mtx44::Transpose() const
 {
 	Mtx44 res;
@@ -212,7 +252,7 @@ const Mtx44& Mtx44::TransposeThis()
 
 	// swap the 3rd row
 	f   = RowCol(2, 3); RowCol(2, 3) = RowCol(3, 2); RowCol(3, 2) = f;
-	
+
 	return (*this);
 }
 
@@ -238,9 +278,9 @@ Mtx44 Mtx44::Inverse() const
 const Mtx44& Mtx44::ZeroThis()
 {
 	RowCol(0, 0) = RowCol(0, 1) = RowCol(0, 2) = RowCol(0, 3) = 
-	RowCol(1, 0) = RowCol(1, 1) = RowCol(1, 2) = RowCol(1, 3) = 
-	RowCol(2, 0) = RowCol(2, 1) = RowCol(2, 2) = RowCol(2, 3) = 
-	RowCol(3, 0) = RowCol(3, 1) = RowCol(3, 2) = RowCol(3, 3) = 0.0f;
+		RowCol(1, 0) = RowCol(1, 1) = RowCol(1, 2) = RowCol(1, 3) = 
+		RowCol(2, 0) = RowCol(2, 1) = RowCol(2, 2) = RowCol(2, 3) = 
+		RowCol(3, 0) = RowCol(3, 1) = RowCol(3, 2) = RowCol(3, 3) = 0.0f;
 
 	return (*this);
 }
@@ -250,9 +290,9 @@ const Mtx44& Mtx44::ZeroThis()
 const Mtx44& Mtx44::IdentityThis()
 {
 	RowCol(0, 1) = RowCol(0, 2) = RowCol(0, 3) = 
-	RowCol(1, 0) = RowCol(1, 2) = RowCol(1, 3) = 
-	RowCol(2, 0) = RowCol(2, 1) = RowCol(2, 3) = 
-	RowCol(3, 0) = RowCol(3, 1) = RowCol(3, 2) = 0.0f;
+		RowCol(1, 0) = RowCol(1, 2) = RowCol(1, 3) = 
+		RowCol(2, 0) = RowCol(2, 1) = RowCol(2, 3) = 
+		RowCol(3, 0) = RowCol(3, 1) = RowCol(3, 2) = 0.0f;
 
 	RowCol(0, 0) = RowCol(1, 1) = RowCol(2, 2) = RowCol(3, 3) = 1.0f;
 
@@ -303,7 +343,7 @@ Mtx44 Mtx44::Identity()
 		0.0f, 1.0f, 0.0f, 0.0f, 
 		0.0f, 0.0f, 1.0f, 0.0f, 
 		0.0f, 0.0f, 0.0f, 1.0f);
-	
+
 	return res;
 }
 
@@ -345,8 +385,8 @@ Mtx44 Mtx44::Rotate(float x, float y, float z, float angle)
 		0.0f, 0.0f, 0.0f, 0.0f);
 	Mtx44 C(
 		0.0f,   -z,    y, 0.0f, 
-		   z, 0.0f,   -x, 0.0f, 
-		  -y,    x, 0.0f, 0.0f, 
+		z, 0.0f,   -x, 0.0f, 
+		-y,    x, 0.0f, 0.0f, 
 		0.0f, 0.0f, 0.0f, 0.0f);
 
 	return A + omc * B + s * C;

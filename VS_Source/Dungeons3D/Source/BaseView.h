@@ -5,18 +5,18 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "Camera.h"
 #include "IShaderManager.h"
+#include "Matrix.h"
 
 namespace Dungeons3D
 {
 	class OpenGL;
 
-	class IView : public Camera
+	class BaseView
 	{
 	public:
-		IView();
-		virtual ~IView(){}
+		BaseView();
+		virtual ~BaseView(){}
 
 		virtual void LoadMeshes() = 0;
 		virtual void Display() = 0;
@@ -24,7 +24,6 @@ namespace Dungeons3D
 		Mtx44 ViewMatrix();
 
 		void Resize(float fovDeg, float zNear, float zFar);
-		virtual void ChangeAngle(float x, float y, float z, float deg);
 	private:
 		void calculate();
 

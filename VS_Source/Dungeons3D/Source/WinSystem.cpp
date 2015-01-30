@@ -63,7 +63,7 @@ namespace Dungeons3D
 		memset(&dmScreenSettings,0,sizeof(dmScreenSettings));	// Makes Sure Memory's Cleared
 		dmScreenSettings.dmSize=sizeof(dmScreenSettings);		// Size Of The Devmode Structure
 		dmScreenSettings.dmPelsWidth = _windowWidth;			// Selected Screen Width
-		dmScreenSettings.dmPelsHeight = _windowHeight;		// Selected Screen Height
+		dmScreenSettings.dmPelsHeight = _windowHeight;			// Selected Screen Height
 		dmScreenSettings.dmBitsPerPel= 24;						// Selected Bits Per Pixel
 		dmScreenSettings.dmFields = DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
@@ -116,13 +116,15 @@ namespace Dungeons3D
 		_iFormat = ChoosePixelFormat(_hDC, &_pfd);
 		SetPixelFormat(_hDC, _iFormat, &_pfd);
 
-
 		_hGLRC = wglCreateContext(_hDC);
 		wglMakeCurrent(_hDC, _hGLRC);
 
 		ClipCursor(&windowRect);
 		ShowCursor(false);
 		SetCursorPos(1024/2, 786/2);
+
+		ShowWindow(_hWnd, SW_SHOWDEFAULT);
+		UpdateWindow(_hWnd);
 	}
 
 	WinSystem::~WinSystem()
@@ -149,9 +151,4 @@ namespace Dungeons3D
 		SwapBuffers(_hDC);
 	}
 
-	void WinSystem::ActivateWindow()
-	{
-		ShowWindow(_hWnd, SW_SHOWDEFAULT);
-		UpdateWindow(_hWnd);
-	}
 }

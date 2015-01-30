@@ -10,9 +10,14 @@ Contributors :
 
 namespace Dungeons3D
 {
-	Camera::Camera() : m_pos(67.5f, -46.0f, 100.0f), m_target(0.0f, 0.4f, 0.0f), m_up(0.0f, 1.0f, 0.0f), m_update(true)
+	Camera::Camera() : m_update(true)
 	{
 		//	For maths
+		GenerateLookupTable();
+	}
+
+	Camera::Camera(Vec4 position, Vec4 target, Vec4 up) : m_pos(position), m_target(target), m_up(up), m_update(true)
+	{
 		GenerateLookupTable();
 	}
 

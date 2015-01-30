@@ -5,7 +5,7 @@
 ******************************************************************************************/
 #pragma once
 
-#include "ISystem.h"
+#include "BaseSystem.h"
 #include "IEventMessage.h"
 
 #include <windows.h>
@@ -13,7 +13,7 @@
 
 namespace Dungeons3D
 {
-	class WinSystem : public ISystem, public IEventMessageModule
+	class WinSystem : public BaseSystem, public IEventMessageModule
 	{
 	public:
 		WinSystem(const char* config);
