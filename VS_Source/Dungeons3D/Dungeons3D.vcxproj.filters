@@ -57,15 +57,6 @@
     <Filter Include="Source Files\Systems\Graphics\OpenGL">
       <UniqueIdentifier>{a0380d7d-0c07-4f8a-9963-0d64384637d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\View">
-      <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Systems\Graphics\View\Camera">
-      <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Systems\Graphics\View\Views">
-      <UniqueIdentifier>{65044b68-c102-40ca-91b4-5d3cc8bc6103}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Graphics\Shaders">
       <UniqueIdentifier>{9a7b4e76-3e8e-4535-ad2a-e1bbb47b0469}</UniqueIdentifier>
     </Filter>
@@ -74,6 +65,21 @@
     </Filter>
     <Filter Include="Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader">
       <UniqueIdentifier>{f0c95796-c617-45b5-b277-2a55690df341}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views">
+      <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Pantheon">
+      <UniqueIdentifier>{65044b68-c102-40ca-91b4-5d3cc8bc6103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Camera">
+      <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Grimbal">
+      <UniqueIdentifier>{29457c46-c89c-4fa6-aff5-9d0f6ccfdc25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Lights">
+      <UniqueIdentifier>{e85aefb6-593d-4de4-8e9d-2fbc0b09394d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -113,16 +119,13 @@
       <Filter>Source Files\Math</Filter>
     </ClCompile>
     <ClCompile Include="Source\Camera.cpp">
-      <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
+      <Filter>Source Files\Systems\Graphics\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Source\IEventMessage.cpp">
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GimbalView.cpp">
-      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
-    </ClCompile>
     <ClCompile Include="Source\PantheonView.cpp">
-      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Pantheon</Filter>
     </ClCompile>
     <ClCompile Include="Source\IShaderManager.cpp">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
@@ -140,10 +143,19 @@
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
     </ClCompile>
     <ClCompile Include="Source\BaseView.cpp">
-      <Filter>Source Files\Systems\Graphics\View</Filter>
+      <Filter>Source Files\Systems\Graphics\Views</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameEngine.cpp">
       <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GimbalView.cpp">
+      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Orientation.cpp">
+      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LightsView.cpp">
+      <Filter>Source Files\Systems\Graphics\Views\Lights</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +187,7 @@
       <Filter>Source Files\Math</Filter>
     </ClInclude>
     <ClInclude Include="Source\Camera.h">
-      <Filter>Source Files\Systems\Graphics\View\Camera</Filter>
+      <Filter>Source Files\Systems\Graphics\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Source\Mesh.h">
       <Filter>Source Files\Systems\Graphics\Mesh</Filter>
@@ -193,10 +205,7 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Source\PantheonView.h">
-      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\GimbalView.h">
-      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Pantheon</Filter>
     </ClInclude>
     <ClInclude Include="Source\IShaderManager.h">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
@@ -220,16 +229,25 @@
       <Filter>Source Files\Systems\Graphics\Mesh\Serialization Policy\3DS Loader</Filter>
     </ClInclude>
     <ClInclude Include="Source\BaseView.h">
-      <Filter>Source Files\Systems\Graphics\View</Filter>
+      <Filter>Source Files\Systems\Graphics\Views</Filter>
     </ClInclude>
     <ClInclude Include="Source\BaseSystem.h">
       <Filter>Source Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Orientation.h">
-      <Filter>Source Files\Systems\Graphics\View\Views</Filter>
-    </ClInclude>
     <ClInclude Include="Source\GameEngine.h">
       <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GimbalView.h">
+      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Orientation.h">
+      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LightsView.h">
+      <Filter>Source Files\Systems\Graphics\Views\Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageMouse.h">
+      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

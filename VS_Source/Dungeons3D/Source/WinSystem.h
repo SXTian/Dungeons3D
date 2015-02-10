@@ -22,20 +22,19 @@ namespace Dungeons3D
 		void Initialize();
 		void Update(float delta);
 
-		void ActivateWindow();
-
 	private:
-		HWND _hWnd;
-		HINSTANCE _hInstance;
-		HDC _hDC;
-		PIXELFORMATDESCRIPTOR _pfd;
-		HGLRC _hGLRC;
-		int _iFormat;
+		HWND m_hWnd;
+		HINSTANCE m_hInstance;
+		HDC m_hDC;
+		PIXELFORMATDESCRIPTOR m_pfd;
+		HGLRC m_hGLRC;
+		int m_iFormat;
 
 		//	In pixels
-		int _windowWidth;
-		int _windowHeight;
+		int m_windowWidth;
+		int m_windowHeight;
 	};
 
+	//	For WndProc()...
 	extern WinSystem* pWinSystem;
 }

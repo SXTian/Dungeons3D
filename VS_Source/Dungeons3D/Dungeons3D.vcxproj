@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\GameEngine.cpp" />
+    <ClCompile Include="Source\LightsView.cpp" />
     <ClCompile Include="Source\Loader3DS.cpp" />
     <ClCompile Include="Source\Camera.cpp" />
     <ClCompile Include="Source\GimbalView.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="Source\MatrixStack.cpp" />
     <ClCompile Include="Source\MessagingSystem.cpp" />
     <ClCompile Include="Source\OpenGL.cpp" />
+    <ClCompile Include="Source\Orientation.cpp" />
     <ClCompile Include="Source\PantheonView.cpp" />
     <ClCompile Include="Source\IShaderManager.cpp" />
     <ClCompile Include="Source\Parser3DS.cpp" />
@@ -112,6 +114,7 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\ChunkNames3DS.h" />
     <ClInclude Include="Source\GameEngine.h" />
+    <ClInclude Include="Source\LightsView.h" />
     <ClInclude Include="Source\Loader3DS.h" />
     <ClInclude Include="Source\Camera.h" />
     <ClInclude Include="Source\GimbalView.h" />
@@ -124,6 +127,7 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshData.h" />
     <ClInclude Include="Source\MessageKeyboard.h" />
+    <ClInclude Include="Source\MessageMouse.h" />
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />

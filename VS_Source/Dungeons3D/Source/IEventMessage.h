@@ -14,6 +14,8 @@ namespace Dungeons3D
 		MSG_Startup,
 		MSG_Shutdown,
 		MSG_KeyPress,
+		MSG_MouseMove,
+		MSG_MouseWheel,
 		MSG_Total
 	};
 
@@ -21,9 +23,6 @@ namespace Dungeons3D
 	{
 		Events msgID;
 	};
-
-	//	Function pointer that takes a message
-	//typedef void (IEventMessageModule::*Callback)(IEventMessage * pMessage);
 
 	typedef std::function<void(IEventMessage*)> Callback;
 

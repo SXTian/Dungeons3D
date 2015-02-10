@@ -18,6 +18,11 @@ namespace Dungeons3D
 		GenerateLookupTable();
 	}
 
+	void BaseView::Display(float delta)
+	{
+		Display();
+	}
+
 	void BaseView::Resize(float fovDeg, float zNear, float zFar)
 	{
 		m_fovDeg = fovDeg;

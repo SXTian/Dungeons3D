@@ -29,10 +29,10 @@ namespace Dungeons3D
 		void Unregister(Events msgID, IEventMessageModule* pObj, Callback pFunc);
 		void PostMsg(IEventMessage * pMsg);
 
-	private: //	Methods
+	private:
 		MessagingSystem();
 		~MessagingSystem();
-	private: //	Members
+	private:
 		static MessagingSystem* m_instance;
 		std::vector<CallbackObj> m_registry[MSG_Total];
 	};

@@ -6,6 +6,8 @@ Contributors :
 #include "PantheonView.h"
 #include "OpenGL.h"
 #include "MatrixStack.h"
+#include "MessageKeyboard.h"
+#include "MessageMouse.h"
 
 namespace Dungeons3D
 {
@@ -124,8 +126,37 @@ namespace Dungeons3D
 
 	const float columnBaseHeight = 0.25f;
 
-	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager), Camera(Vec4(67.5f, -46.0f, 100.0f), Vec4(0.0f, 0.4f, 0.0f), Vec4(0.0f, 1.0f, 0.0f))
+	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager), Camera(1.0f, 100.0f)
 	{
+		m_mouseDelta[0] = 0;
+		m_mouseDelta[1] = 0;
+		m_oldMouseDelta[0] = 0;
+		m_oldMouseDelta[1] = 0;
+
+		Register(MSG_MouseMove, this, [&](IEventMessage * pMsg)
+		{
+			POINT mousePos;
+			GetCursorPos(&mousePos);
+			m_mouseDelta[0] = mousePos.x - m_oldMouseDelta[0];
+			m_mouseDelta[1] = mousePos.y - m_oldMouseDelta[1];
+			m_oldMouseDelta[0] = mousePos.x;
+			m_oldMouseDelta[1] = mousePos.y;
+		});
+
+		Register(MSG_MouseWheel, this, [&](IEventMessage * pMsg)
+		{
+			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10);
+		});
+
+		
+		Register(MSG_KeyPress, this, [&](IEventMessage * pMsg)
+		{
+			switch (((MessageKeyboard*)pMsg)->key)
+			{
+			case 'W': ZoomCam(10.0f); break;
+			case 'S': ZoomCam(-10.0f); break;
+			}
+		});
 	}
 
 	PantheonView::~PantheonView()
@@ -147,6 +178,22 @@ namespace Dungeons3D
 
 	void PantheonView::Display()
 	{
+		//	Transpose to column-wise
+		SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
+
+		drawGround();
+		drawForest();
+		drawParthenon();
+	}
+
+	void PantheonView::Display(float delta)
+	{
+		RotateCamY(Clamp(-(float)m_mouseDelta[0], -5.0f, 5.0f));
+		RotateCamX(Clamp((float)m_mouseDelta[1], -5.0f, 5.0f));
+
+		m_mouseDelta[0] = 0;
+		m_mouseDelta[1] = 0;
+
 		//	Transpose to column-wise
 		SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
 

@@ -12,6 +12,8 @@ Contributors :
 #include "Mesh.h"
 #include "Loader.h"
 #include "Loader3DS.h"
+#include "Orientation.h"
+
 
 namespace Dungeons3D
 {
@@ -23,8 +25,6 @@ namespace Dungeons3D
 		ORI_TOTAL
 	};
 
-
-
 	class ShaderManager;
 
 	class GimbalView : public BaseView, public Camera, public IShaderManager, public IEventMessageModule
@@ -35,6 +35,7 @@ namespace Dungeons3D
 
 		void LoadMeshes();
 		void Display();
+		void Display(float delta);
 
 		void ChangeAngle(float x, float y, float z, float deg);
 
@@ -52,6 +53,8 @@ namespace Dungeons3D
 
 		Vec4 m_quat;
 		OrientationType m_currOrientation;
+
+		Orientation m_orientation;
 	};
 
 }

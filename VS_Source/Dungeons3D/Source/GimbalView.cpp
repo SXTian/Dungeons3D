@@ -7,13 +7,13 @@ Contributors :
 #include "GimbalView.h"
 #include "ShaderManager.h"
 #include "MatrixStack.h"
-#include "Math.h"
+
 
 namespace Dungeons3D
 {
 	using namespace std;
 
-	GimbalView::GimbalView(shared_ptr<ShaderManager> pShaderManager) : IShaderManager(pShaderManager), m_quat(1.0f, 0.0, 0.0, 0.0), Camera(Vec4(90.0f, 0.0f, 66.0f), Vec4(0.0f, 20.0f, 0.0f), Vec4(0.0f, 1.0f, 0.0f))
+	GimbalView::GimbalView(shared_ptr<ShaderManager> pShaderManager) : IShaderManager(pShaderManager), m_quat(1.0f, 0.0, 0.0, 0.0), Camera(1.0f, 1000.0f)
 	{
 		m_quat.QuaternizeThis();
 		m_currOrientation = ORI_MODEL;
@@ -22,20 +22,16 @@ namespace Dungeons3D
 		{
 			switch (((MessageKeyboard*)pMsg)->key)
 			{
-			case 'W': ChangeAngle(1.0f, 0.0f, 0.0f, 9.0f); break;
-			case 'S': ChangeAngle(-1.0f, 0.0f, 0.0f, 9.0f); break;
-			case 'D': ChangeAngle(0.0f, 1.0f, 0.0f, 9.0f); break;
-			case 'A': ChangeAngle(0.0f, -1.0f, 0.0f, 9.0f); break;
-			case 'E': ChangeAngle(0.0f, 0.0f, 1.0f, 9.0f); break;
-			case 'Q': ChangeAngle(0.0f, 0.0f, -1.0f, 9.0f); break;
+			case 'Q': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(0);} break;
+			case 'W': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(1);} break;
+			case 'E': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(2);} break;
+			case 'R': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(3);} break;
+			case 'T': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(4);} break;
+			case 'Y': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(5);} break;
+			case 'U': if (!m_orientation.IsAnimating()) {m_orientation.AnimateToOrient(6);} break;
 
 			case 0x20 : //	Space Key
-				switch (m_currOrientation)
-				{
-				case ORI_MODEL: m_currOrientation = ORI_WORLD; break;
-				case ORI_WORLD: m_currOrientation = ORI_CAMERA; break;
-				case ORI_CAMERA: m_currOrientation = ORI_MODEL; break;
-				}
+				m_orientation.ToggleSlerp();
 				break;
 			}
 		});
@@ -88,6 +84,25 @@ namespace Dungeons3D
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
 		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m);
 		m_katana.Render();
+	}
+
+	void GimbalView::Display(float delta)
+	{
+		m_orientation.UpdateTime(delta);
+
+		MatrixStack mStack;
+		mStack.matrix.TranslateThis(0.0f, 0.0f, -200.0f);
+		mStack.matrix.MultQuatThis(m_orientation.GetOrient());
+
+		mStack.matrix.RotateThis(1.0f, 0.0f, 0.0f, 90.0f);
+		mStack.matrix.RotateThis(0.0f, 1.0f, 0.0f, 90.0f);
+		mStack.matrix.TranslateThis(0.0f, -50.0f, -15.0f);
+
+
+		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m);
+		m_katana.Render();
+
 	}
 
 	void GimbalView::ChangeAngle(float x, float y, float z, float deg)

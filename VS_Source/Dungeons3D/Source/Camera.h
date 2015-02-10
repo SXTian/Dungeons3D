@@ -12,26 +12,31 @@ namespace Dungeons3D
 	class Camera
 	{
 	public:
-		Camera();
-		Camera(Vec4 position, Vec4 target, Vec4 up);
+		Camera(float distMin, float distMax);
 
 		Mtx44 CamMatrix();
 
-		void MoveCamTarget(float x, float y, float z);
-		void MoveCamPosition(float x, float y, float z);
+		void ZoomCam(float dist);
+		void RotateCamX(float deg);
+		void RotateCamY(float deg);
 
 	private:
-		void calculate();
-
-		//	Position in spherical: Vec3(phi, theta, r)
-		Vec4 m_pos;
-		//	Camera target
-		Vec4 m_target;
-		//	Up vector
-		Vec4 m_up;
+		void updatePosition();
+		void constructMatrix();
 
 		//	World to camera transformation
 		Mtx44 m_wcMatrix;
+
+		Vec4 m_position;
+		Vec4 m_target;
+		Vec4 m_up;
+
+		float m_distance;
+		float m_min;
+		float m_max;
+
+		float m_rotateX;
+		float m_rotateY;
 
 		//	true = must call calculate()
 		bool m_update;

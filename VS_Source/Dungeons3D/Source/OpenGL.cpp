@@ -40,6 +40,18 @@ namespace Dungeons3D
 
 	}
 
+	void OpenGL::Display(BaseView * view, float delta)
+	{
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		glClearDepth(1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		view->Display(delta);
+
+		glUseProgram(0);
+
+	}
+
 	//////////////////////////////////PRIVATE HELPERS///////////////////////////////////////
 
 	void OpenGL::initGL()

@@ -31,6 +31,9 @@ static inline void GenerateLookupTable(void)
 template <typename T>
 inline T SinLookup(T degree)
 {
+	while (degree < 0.0)
+		degree += 360.0;
+
 	int index = (int)(degree * 10.0);
 	return sin_table[index];
 }
@@ -40,6 +43,9 @@ inline T SinLookup(T degree)
 template <typename T>
 inline T CosLookup(T degree)
 {
+	while (degree < 0.0)
+		degree += 360.0;
+
 	int index = (int)(degree * 10.0);
 	return cos_table[index];
 }
@@ -127,7 +133,7 @@ inline T0 Lerp(const T0 xMin, const T0 xMax, const T1 t)
 template <typename T0, typename T1>
 inline T0 Mix(const T0 x, const T0 y, const T1 t)
 {
-	return x * (1.0 - t) + y * t;
+	return x * (1.0f - t) + y * t;
 }
 
 // ----------------------------------------------------------------------------------------

@@ -5,6 +5,7 @@ Contributors :
 ******************************************************************************************/
 #include "WinSystem.h"
 #include "MessageKeyboard.h"
+#include "MessageMouse.h"
 #include "GLHeaders.h"
 #include <tchar.h>
 
@@ -24,6 +25,17 @@ namespace Dungeons3D
 				pWinSystem->PostMsg(&msg);
 			}
 			break;
+		case WM_MOUSEMOVE:
+			{
+				MessageMouse msg(MSG_MouseMove);
+				pWinSystem->PostMsg(&msg);
+			}
+		case WM_MOUSEWHEEL:
+			{
+				MessageMouse msg(MSG_MouseWheel);
+				msg.wheel = GET_WHEEL_DELTA_WPARAM(wParam);
+				pWinSystem->PostMsg(&msg);
+			}
 		}
 		return DefWindowProc(hWnd, msg, wParam, lParam);
 	}
@@ -34,10 +46,10 @@ namespace Dungeons3D
 		//	TO DO: Read from config.txt
 
 		//	1680 x 1050
-		_windowWidth = GetSystemMetrics(SM_CXSCREEN);
-		_windowHeight = GetSystemMetrics(SM_CYSCREEN);
+		m_windowWidth = GetSystemMetrics(SM_CXSCREEN);
+		m_windowHeight = GetSystemMetrics(SM_CYSCREEN);
 
-		RECT windowRect = {0, 0, _windowWidth, _windowHeight};
+		RECT windowRect = {0, 0, m_windowWidth, m_windowHeight};
 		AdjustWindowRect(&windowRect, WS_OVERLAPPEDWINDOW, FALSE);
 
 		//	Make window class
@@ -62,8 +74,8 @@ namespace Dungeons3D
 		DEVMODE dmScreenSettings;								// Device Mode
 		memset(&dmScreenSettings,0,sizeof(dmScreenSettings));	// Makes Sure Memory's Cleared
 		dmScreenSettings.dmSize=sizeof(dmScreenSettings);		// Size Of The Devmode Structure
-		dmScreenSettings.dmPelsWidth = _windowWidth;			// Selected Screen Width
-		dmScreenSettings.dmPelsHeight = _windowHeight;			// Selected Screen Height
+		dmScreenSettings.dmPelsWidth = m_windowWidth;			// Selected Screen Width
+		dmScreenSettings.dmPelsHeight = m_windowHeight;			// Selected Screen Height
 		dmScreenSettings.dmBitsPerPel= 24;						// Selected Bits Per Pixel
 		dmScreenSettings.dmFields = DM_BITSPERPEL|DM_PELSWIDTH|DM_PELSHEIGHT;
 		ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN);
@@ -74,9 +86,9 @@ namespace Dungeons3D
 			FALSE, 
 			WS_EX_APPWINDOW);	
 
-		_hInstance = winClass.hInstance;
+		m_hInstance = winClass.hInstance;
 
-		_hWnd = CreateWindow(
+		m_hWnd = CreateWindow(
 			winName,	
 			_T("Engine Title"),						
 			WS_POPUP | WS_CLIPSIBLINGS | WS_CLIPCHILDREN,				
@@ -85,10 +97,10 @@ namespace Dungeons3D
 			windowRect.bottom - windowRect.top,	
 			GetDesktopWindow(),					
 			NULL,								
-			_hInstance,							
+			m_hInstance,							
 			NULL);		
 
-		if (!_hWnd)
+		if (!m_hWnd)
 		{
 			MessageBox(NULL,
 				_T("Call to CreateWindow failed!"),
@@ -98,49 +110,49 @@ namespace Dungeons3D
 			return;
 		}
 
-		DragAcceptFiles( _hWnd, true );
+		DragAcceptFiles( m_hWnd, true );
 
-		_hDC = GetDC(_hWnd);
+		m_hDC = GetDC(m_hWnd);
 
 		//	Set up the pixel format descriptor
-		ZeroMemory(&_pfd, sizeof(_pfd));
-		_pfd.nSize = sizeof(_pfd);
+		ZeroMemory(&m_pfd, sizeof(m_pfd));
+		m_pfd.nSize = sizeof(m_pfd);
 
-		_pfd.nVersion = 1;
-		_pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-		_pfd.iPixelType = PFD_TYPE_RGBA;
-		_pfd.cColorBits = 32;
-		_pfd.cDepthBits = 24;
-		_pfd.cStencilBits = 8;
-		_pfd.iLayerType = PFD_MAIN_PLANE;
-		_iFormat = ChoosePixelFormat(_hDC, &_pfd);
-		SetPixelFormat(_hDC, _iFormat, &_pfd);
+		m_pfd.nVersion = 1;
+		m_pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
+		m_pfd.iPixelType = PFD_TYPE_RGBA;
+		m_pfd.cColorBits = 32;
+		m_pfd.cDepthBits = 24;
+		m_pfd.cStencilBits = 8;
+		m_pfd.iLayerType = PFD_MAIN_PLANE;
+		m_iFormat = ChoosePixelFormat(m_hDC, &m_pfd);
+		SetPixelFormat(m_hDC, m_iFormat, &m_pfd);
 
-		_hGLRC = wglCreateContext(_hDC);
-		wglMakeCurrent(_hDC, _hGLRC);
+		m_hGLRC = wglCreateContext(m_hDC);
+		wglMakeCurrent(m_hDC, m_hGLRC);
 
 		ClipCursor(&windowRect);
 		ShowCursor(false);
 		SetCursorPos(1024/2, 786/2);
 
-		ShowWindow(_hWnd, SW_SHOWDEFAULT);
-		UpdateWindow(_hWnd);
+		ShowWindow(m_hWnd, SW_SHOWDEFAULT);
+		UpdateWindow(m_hWnd);
 	}
 
 	WinSystem::~WinSystem()
 	{
 		wglMakeCurrent(NULL, NULL);
-		wglDeleteContext(_hGLRC);
+		wglDeleteContext(m_hGLRC);
 
-		ReleaseDC(_hWnd, _hDC);
-		UnregisterClass(winName, _hInstance);
+		ReleaseDC(m_hWnd, m_hDC);
+		UnregisterClass(winName, m_hInstance);
 	}
 
 	void WinSystem::Update(float delta)
 	{
 		MSG msg;
 		RECT r;
-		GetWindowRect(_hWnd, &r);
+		GetWindowRect(m_hWnd, &r);
 		ClipCursor(&r);
 
 		while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) 
@@ -148,7 +160,6 @@ namespace Dungeons3D
 			TranslateMessage(&msg);	
 			DispatchMessage(&msg);	
 		}
-		SwapBuffers(_hDC);
+		SwapBuffers(m_hDC);
 	}
-
 }

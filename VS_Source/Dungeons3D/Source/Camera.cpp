@@ -10,47 +10,64 @@ Contributors :
 
 namespace Dungeons3D
 {
-	Camera::Camera() : m_update(true)
+	Camera::Camera(float distMin, float distMax) : m_position(0.0f, 0.0f, 50.0f), m_target(0.0f), m_up(0.0f, 1.0f, 0.0f, 0.0f), 
+		m_rotateX(0.5f), m_rotateY(0.0f),
+		m_min(distMin), m_max(distMax), m_update(true)
 	{
-		//	For maths
+		//	Need to look into this...
 		GenerateLookupTable();
-	}
 
-	Camera::Camera(Vec4 position, Vec4 target, Vec4 up) : m_pos(position), m_target(target), m_up(up), m_update(true)
-	{
-		GenerateLookupTable();
+		m_distance = (m_min + m_max) * 0.5f;
 	}
 
 	Mtx44 Camera::CamMatrix()
 	{
 		if (m_update)
-			calculate();
+		{
+			updatePosition();
+			constructMatrix();
+		}
 
 		return m_wcMatrix;
 	}
 
-	void Camera::MoveCamTarget(float x, float y, float z)
+	void Camera::ZoomCam(float dist)
 	{
-		m_target = m_target + Vec4(x, y, z);
+		m_distance = Clamp(m_distance + dist, m_min, m_max);
 		m_update = true;
 	}
 
-	void Camera::MoveCamPosition(float x, float y, float z)
+	void Camera::RotateCamX(float deg)
 	{
-		m_pos = m_pos + Vec4(x, y, z);
+		m_rotateX = Clamp(m_rotateX + deg, -90.0f, 90.0f);
 		m_update = true;
 	}
 
-	void Camera::calculate()
+	void Camera::RotateCamY(float deg)
 	{
-		//	Get camera position in world coordinates
-		float phi = m_pos.x;
-		float theta = m_pos.y + 90.0f;
-		Vec4 dirToCamera(SinLookup(theta) * CosLookup(phi), CosLookup(theta), SinLookup(theta) * SinLookup(phi));
-		Vec4 cameraPos = (dirToCamera * m_pos.z) + m_target;
+		m_rotateY = Wrap(m_rotateY + deg, -180.0f, 180.0f);
+		m_update = true;
+	}
 
-		//	Construct matrix
-		Vec4 lookDir = (m_target - cameraPos).Normalize();
+	void Camera::updatePosition()
+	{
+		float sinX = SinLookup(m_rotateX);
+		float sinY = SinLookup(m_rotateY);
+		float cosX = CosLookup(m_rotateX);
+		float cosY = CosLookup(m_rotateY);
+
+		m_up.x = sinX * -sinY;
+		m_up.y = cosX;
+		m_up.z = sinX * -cosY;
+
+		Vec4 direction(-cosX * sinY, -sinX, -cosX * cosY, 0.0f);
+
+		m_position = m_target - direction * m_distance;
+	}
+
+	void Camera::constructMatrix()
+	{
+		Vec4 lookDir = (m_target - m_position).Normalize();
 		Vec4 upDir = m_up.Normalize();
 
 		Vec4 rightDir = lookDir.Cross(upDir);
@@ -70,7 +87,7 @@ namespace Dungeons3D
 		m_wcMatrix.RowCol(2, 1) = -lookDir.y;
 		m_wcMatrix.RowCol(2, 2) = -lookDir.z;
 
-		m_wcMatrix.TranslateThis(-cameraPos.x, -cameraPos.y, - cameraPos.z);
+		m_wcMatrix.TranslateThis(-m_position.x, -m_position.y, - m_position.z);
 
 		m_update = false;
 	}

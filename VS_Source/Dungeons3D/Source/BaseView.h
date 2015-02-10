@@ -20,6 +20,7 @@ namespace Dungeons3D
 
 		virtual void LoadMeshes() = 0;
 		virtual void Display() = 0;
+		virtual void Display(float delta);
 
 		Mtx44 ViewMatrix();
 
