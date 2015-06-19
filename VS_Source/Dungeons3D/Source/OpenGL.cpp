@@ -91,7 +91,7 @@ namespace Dungeons3D
 		glDepthMask(GL_TRUE);
 		glDepthFunc(GL_LEQUAL);
 		glDepthRange(0.0f, 1.0f);
-		//glEnable(GL_DEPTH_CLAMP);
+		glEnable(GL_DEPTH_CLAMP);
 
 		glViewport(0, 0, 1680, 1050);
 	}

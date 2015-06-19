@@ -31,7 +31,7 @@ namespace Dungeons3D
 		//	Counters for passing offsets into openGL buffers
 		GLuint vertexOffset = 0;
 		GLuint primitiveOffset = 0;
-		GLuint indexCount;
+		GLuint indexCount = 0;
 
 		//	File reading starts here
 		std::ifstream file(filename.c_str(), std::ifstream::in);

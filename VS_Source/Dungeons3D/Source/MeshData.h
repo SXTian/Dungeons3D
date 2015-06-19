@@ -20,7 +20,7 @@ namespace Dungeons3D
 		void Render()
 		{
 			//	Indexed drawing
-			glDrawElements(type, count, GL_UNSIGNED_SHORT, (void*)start);
+			glDrawElements(type, count, GL_UNSIGNED_SHORT, (void*)(start * sizeof(GLushort)));
 		}
 	};
 

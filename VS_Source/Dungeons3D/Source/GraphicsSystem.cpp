@@ -32,6 +32,6 @@ namespace Dungeons3D
 
 	void GraphicsSystem::Update(float delta)
 	{
-		m_opengl->Display(m_views["Pantheon"], delta);
+		m_opengl->Display(m_views["Lights"], delta);
 	}
 }
