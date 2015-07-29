@@ -32,7 +32,7 @@ namespace Dungeons3D
 
 		Register(MSG_MouseWheel, this, [&](IEventMessage * pMsg)
 		{
-			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10);
+			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10.0f);
 		});
 
 		
@@ -80,8 +80,8 @@ namespace Dungeons3D
 
 		mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
-		SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
+		SetShaderUniform(SHA_ObjectColor, "modelToWorldMatrix", mStack.matrix.m);
+		//SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
 		m_meshPlane.Render();
 
 		mStack.Pop();
@@ -90,8 +90,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(15.0f, 15.0f, 15.0f);
 		
 
-		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
-		SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 0.3f, 0.3f, 1.0f);
+		SetShaderUniform(SHA_ObjectColor, "modelToWorldMatrix", mStack.matrix.m);
+		//SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 0.3f, 0.3f, 1.0f);
 		m_meshCylinder.Render();
 
 	}

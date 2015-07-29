@@ -145,7 +145,7 @@ namespace Dungeons3D
 
 		Register(MSG_MouseWheel, this, [&](IEventMessage * pMsg)
 		{
-			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10);
+			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10.0f);
 		});
 
 		

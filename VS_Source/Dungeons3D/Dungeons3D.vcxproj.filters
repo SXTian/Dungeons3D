@@ -81,6 +81,9 @@
     <Filter Include="Source Files\Systems\Graphics\Views\Lights">
       <UniqueIdentifier>{e85aefb6-593d-4de4-8e9d-2fbc0b09394d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Meshes\Scripts">
+      <UniqueIdentifier>{9b46ab7d-4609-4ff8-8bb6-81bed94261f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
@@ -288,6 +291,9 @@
     </None>
     <None Include="Resources\Shaders\PosColorLocalTransform.vert">
       <Filter>Resource Files\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resources\Meshes\MeshScripts\GenCylinder.py">
+      <Filter>Resource Files\Meshes\Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>
