@@ -5,7 +5,7 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "Shaders.h"
+#include "ShaderTypes.h"
 
 #include <vector>
 #include <map>
@@ -13,6 +13,7 @@ Contributors :
 
 namespace Dungeons3D
 {
+
 	struct Program
 	{
 		Program(unsigned id);

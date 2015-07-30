@@ -138,8 +138,8 @@
     <ClInclude Include="Source\IShaderManager.h" />
     <ClInclude Include="Source\Parser3DS.h" />
     <ClInclude Include="Source\ShaderManager.h" />
-    <ClInclude Include="Source\Shaders.h" />
     <ClInclude Include="Source\BaseSystem.h" />
+    <ClInclude Include="Source\ShaderTypes.h" />
     <ClInclude Include="Source\Vector.h" />
     <ClInclude Include="Source\BaseView.h" />
     <ClInclude Include="Source\WinSystem.h" />
@@ -149,13 +149,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Meshes\LargeGimbal.mesh" />
-    <None Include="Resources\Meshes\MeshScripts\GenCylinder.py" />
+    <None Include="Resources\Meshes\Scripts\GenCylinder.py" />
     <None Include="Resources\Meshes\SmallGimbal.mesh" />
     <None Include="Resources\Meshes\UnitCone.mesh" />
     <None Include="Resources\Meshes\UnitCube.mesh" />
     <None Include="Resources\Meshes\UnitCubeColor.mesh" />
     <None Include="Resources\Meshes\UnitCylinder.mesh" />
     <None Include="Resources\Meshes\UnitPlane.mesh" />
+    <None Include="Resources\Shaders\BasicLighting.vert" />
     <None Include="Resources\Shaders\ColorMultUniform.frag" />
     <None Include="Resources\Shaders\ColorPassthrough.frag" />
     <None Include="Resources\Shaders\ColorUniform.frag" />

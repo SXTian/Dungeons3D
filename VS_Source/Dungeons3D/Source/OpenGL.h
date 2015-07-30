@@ -17,8 +17,8 @@ namespace Dungeons3D
 	public:
 		OpenGL();
 		~OpenGL();
-		void Display(BaseView * view);
-		void Display(BaseView * view, float delta);
+		void Display(BaseView& view);
+		void Display(BaseView& view, float delta);
 
 	private:
 		void initGL();

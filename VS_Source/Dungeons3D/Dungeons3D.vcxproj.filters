@@ -204,9 +204,6 @@
     <ClInclude Include="Source\IEventMessage.h">
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Shaders.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Source\PantheonView.h">
       <Filter>Source Files\Systems\Graphics\Views\Pantheon</Filter>
     </ClInclude>
@@ -252,6 +249,9 @@
     <ClInclude Include="Source\MessageMouse.h">
       <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
     </ClInclude>
+    <ClInclude Include="Source\ShaderTypes.h">
+      <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungeons3D.rc">
@@ -292,8 +292,11 @@
     <None Include="Resources\Shaders\PosColorLocalTransform.vert">
       <Filter>Resource Files\Shaders\Vertex</Filter>
     </None>
-    <None Include="Resources\Meshes\MeshScripts\GenCylinder.py">
+    <None Include="Resources\Meshes\Scripts\GenCylinder.py">
       <Filter>Resource Files\Meshes\Scripts</Filter>
+    </None>
+    <None Include="Resources\Shaders\BasicLighting.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
     </None>
   </ItemGroup>
 </Project>

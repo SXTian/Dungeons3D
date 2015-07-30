@@ -26,6 +26,6 @@ namespace Dungeons3D
 
 	private:
 		std::shared_ptr<OpenGL> m_opengl;
-		std::map<std::string, BaseView*> m_views;
+		std::map<std::string, std::unique_ptr<BaseView>> m_views;
 	};
 }

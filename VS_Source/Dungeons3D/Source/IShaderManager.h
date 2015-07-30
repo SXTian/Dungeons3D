@@ -5,7 +5,8 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "Shaders.h"
+#include "ShaderTypes.h"
+
 #include <string>
 #include <vector>
 #include <map>

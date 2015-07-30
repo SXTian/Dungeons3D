@@ -28,25 +28,25 @@ namespace Dungeons3D
 	{
 	}
 
-	void OpenGL::Display(BaseView * view)
+	void OpenGL::Display(BaseView& view)
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearDepth(1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		view->Display();
+		view.Display();
 
 		glUseProgram(0);
 
 	}
 
-	void OpenGL::Display(BaseView * view, float delta)
+	void OpenGL::Display(BaseView& view, float delta)
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClearDepth(1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		view->Display(delta);
+		view.Display(delta);
 
 		glUseProgram(0);
 
@@ -98,6 +98,11 @@ namespace Dungeons3D
 
 	void OpenGL::initShaders()
 	{
+    CreateProgram(SHA_BasicLighting);
+    LoadVertexShader(SHA_BasicLighting, "Resources/Shaders/BasicLighting.vert");
+    LoadFragmentShader(SHA_BasicLighting, "Resources/Shaders/ColorPassthrough.frag");
+    LinkProgram(SHA_BasicLighting);
+
 		CreateProgram(SHA_UniformColor);
 		LoadVertexShader(SHA_UniformColor, "Resources/Shaders/PosOnlyWorldTransform.vert");
 		LoadFragmentShader(SHA_UniformColor, "Resources/Shaders/ColorUniform.frag");

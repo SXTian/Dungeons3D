@@ -88,21 +88,27 @@ with open("../UnitCylinder.mesh", "w") as text_file:
 	print ("color", file=text_file)
 	for i in colors:
 		print(i[0], i[1], i[2], i[3], file=text_file)
-		
+
+	print("", file=text_file)
+
+	print("normal", file=text_file)
+	for i in normals:
+		print(i[0], i[1], i[2], file=text_file)
+
 	print("", file=text_file)
 	
-	print ("primitive\ntrifan", file=text_file)
+	print("primitive\ntrifan", file=text_file)
 	for i in topFan:
 		print(i, end=" ", file=text_file)
 		
 	print("\n", file=text_file)
 	
-	print ("primitive\ntrifan", file=text_file)
+	print("primitive\ntrifan", file=text_file)
 	for i in botFan:
 		print(i, end=" ", file=text_file)
 		
 	print("\n", file=text_file)
 	
-	print ("primitive\ntristrip", file=text_file)
+	print("primitive\ntristrip", file=text_file)
 	for i in cylStrip:
 		print(i, end=" ", file=text_file)
