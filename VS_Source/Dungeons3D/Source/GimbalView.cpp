@@ -41,7 +41,7 @@ namespace Dungeons3D
 	{
 	}
 
-	void GimbalView::LoadMeshes()
+	void GimbalView::Initialize()
 	{
 		m_smallGimbal.Load("Resources/Meshes/SmallGimbal.mesh");
 		m_mediumGimbal.Load("Resources/Meshes/MediumGimbal.mesh");
@@ -50,7 +50,7 @@ namespace Dungeons3D
 		m_plane.Load("Resources/Meshes/UnitPlane.mesh");
 
 		Resize(20.0f, 1.0f, 600.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "cameraToClipMatrix", ViewMatrix().m);
+		SetShaderUniform(SHA_UniformColorLocal, "cameraToClipMatrix", ViewMatrix().m, 16);
 	}
 
 	void GimbalView::Display()
@@ -65,7 +65,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 0.2f, 0.5f, 0.2f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m, 16);
 
 		m_plane.Render();
 		mStack.Pop();
@@ -82,7 +82,7 @@ namespace Dungeons3D
 
 
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m, 16);
 		m_katana.Render();
 	}
 
@@ -100,7 +100,7 @@ namespace Dungeons3D
 
 
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", mStack.matrix.m, 16);
 		m_katana.Render();
 
 	}
@@ -132,7 +132,7 @@ namespace Dungeons3D
 		matrix.RotateThis(0.0f, 1.0f, 0.0f, 90.0f);
 		matrix.RotateThis(1.0f, 0.0f, 0.0f, 90.0f);
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 1.0f, 0.3f, 0.3f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m, 16);
 		m_mediumGimbal.Render();
 	}
 
@@ -141,14 +141,14 @@ namespace Dungeons3D
 		matrix.RotateThis(0.0f, 0.0f, 1.0f, 90.0f);
 		matrix.RotateThis(1.0f, 0.0f, 0.0f, 90.0f);
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 0.0f, 1.0f, 0.0f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m, 16);
 		m_mediumGimbal.Render();
 	}
 
 	void GimbalView::drawLargeGimbal(Mtx44 matrix)
 	{
 		SetShaderUniform(SHA_UniformColorLocal, "baseColor", 0.4f, 0.4f, 1.0f, 1.0f);
-		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m);
+		SetShaderUniform(SHA_UniformColorLocal, "modelToCameraMatrix", matrix.m, 16);
 		m_largeGimbal.Render();
 	}
 }

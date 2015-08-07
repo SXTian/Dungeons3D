@@ -23,6 +23,6 @@ namespace Dungeons3D
 	private:
 		void initGL();
 		void configGL();
-		void initShaders();
+		void configShaders();
 	};
 }

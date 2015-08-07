@@ -59,10 +59,13 @@ namespace Dungeons3D
 	}
 
 	//	4x4 Matrix
-	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, float * value)
+	void IShaderManager::SetShaderUniform(ShaderID id, const std::string uniform, const float * value, int size)
 	{
 		glUseProgram(m_pManager->GetProgram(id));
-		glUniformMatrix4fv(m_pManager->GetUniform(id, uniform), 1, GL_TRUE, value);
+    if (size == 16)
+		  glUniformMatrix4fv(m_pManager->GetUniform(id, uniform), 1, GL_TRUE, value);
+    else if (size == 9)
+      glUniformMatrix3fv(m_pManager->GetUniform(id, uniform), 1, GL_TRUE, value);
 	}
 
 	//	4x4 Matrix Block

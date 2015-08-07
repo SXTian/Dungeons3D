@@ -9,7 +9,7 @@ cylStrip = []
 
 
 segCount = 30	#The higher this is, the smoother the circle
-colorRepeatCount = 3  #How many times the colour patterns get repeated
+colorRepeatCount = 1  #How many times the colour patterns get repeated
 
 angleDelta = 3.14159 * 2.0 / segCount
 colorAngleDelta = 3.14159 * 2.0 / colorRepeatCount

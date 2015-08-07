@@ -23,7 +23,7 @@ namespace Dungeons3D
 		LightsView(std::shared_ptr<ShaderManager> pManager);
 		~LightsView();
 
-		void LoadMeshes();
+		void Initialize();
 	private:
 
 		int m_mouseDelta[2];

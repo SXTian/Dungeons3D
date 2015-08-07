@@ -18,7 +18,7 @@ namespace Dungeons3D
 		BaseView();
 		virtual ~BaseView(){}
 
-		virtual void LoadMeshes() = 0;
+		virtual void Initialize() = 0;
 		virtual void Display() = 0;
 		virtual void Display(float delta);
 

@@ -30,6 +30,7 @@ namespace Dungeons3D
 
 		//	Counters for passing offsets into openGL buffers
 		GLuint vertexOffset = 0;
+    GLuint colorOffset = 0;
 		GLuint primitiveOffset = 0;
 		GLuint indexCount = 0;
 
@@ -54,9 +55,17 @@ namespace Dungeons3D
 			}
 			else if (keyword.compare("color") == 0)
 			{
-				while (file >> nextValue)
-					vertexData.push_back(nextValue);
+        while (file >> nextValue)
+        {
+          vertexData.push_back(nextValue);
+          ++colorOffset;
+        }
 			}
+      else if (keyword.compare("normal") == 0)
+      {
+        while (file >> nextValue)
+          vertexData.push_back(nextValue);
+      }
 			else if (keyword.compare("primitive") == 0)
 			{
 				Renderer primitive;
@@ -100,8 +109,10 @@ namespace Dungeons3D
 		glBindBuffer(GL_ARRAY_BUFFER, m_data->vertexBuffer);
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * vertexOffset));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * (vertexOffset + colorOffset)));
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_data->indexBuffer);
 
 		glBindVertexArray(0);

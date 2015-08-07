@@ -23,7 +23,7 @@ namespace Dungeons3D
 		m_views["Lights"] = std::make_unique<LightsView>(m_opengl);
 
 		for (auto &i : m_views)
-			i.second->LoadMeshes();
+			i.second->Initialize();
 	}
 	GraphicsSystem::~GraphicsSystem()
 	{

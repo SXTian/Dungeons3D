@@ -163,7 +163,7 @@ namespace Dungeons3D
 	{
 	}
 
-	void PantheonView::LoadMeshes()
+	void PantheonView::Initialize()
 	{
 		m_meshCube.Load("Resources/Meshes/UnitCube.mesh");
 		m_meshCubeColor.Load("Resources/Meshes/UnitCubeColor.mesh");
@@ -208,7 +208,7 @@ namespace Dungeons3D
 
 		mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColor, "baseColor", 0.302f, 0.416f, 0.0589f, 1.0f);
 		m_meshPlane.Render();
 
@@ -227,7 +227,7 @@ namespace Dungeons3D
 			mStack.matrix.ScaleThis(1.0f, i.heightTrunk, 1.0f);
 			mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 			SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.694f, 0.4f, 0.106f, 1.0f);
 			m_meshCylinder.Render();
 
@@ -239,7 +239,7 @@ namespace Dungeons3D
 			mStack.matrix.TranslateThis(0.0f, i.heightTrunk, 0.0f);
 			mStack.matrix.ScaleThis(3.0f, i.heightCone, 3.0f);
 
-			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+			SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 			SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.0f, 1.0f, 0.0f, 1.0f);
 			m_meshCone.Render();
 
@@ -260,7 +260,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonBaseHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
@@ -273,7 +273,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonTopHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
@@ -349,7 +349,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
@@ -362,7 +362,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCube.Render();
 
@@ -375,7 +375,7 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(0.8f, height - (columnBaseHeight * 2.0f), 0.8f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColorTint, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColorTint, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_meshCylinder.Render();
 	}
@@ -386,7 +386,7 @@ namespace Dungeons3D
 
 		mStack.matrix.TranslateThis(20.0f, 0.0f, -10.0f);	
 		mStack.matrix.RotateThis(1.0f, 0.0f, 0.f, 20);
-		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m);
+		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m, 16);
 		SetShaderUniform(SHA_UniformColor, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
 		m_wizard.Render();
 	}

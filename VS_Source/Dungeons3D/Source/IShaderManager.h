@@ -40,7 +40,7 @@ namespace Dungeons3D
 		//	4 floats
 		void SetShaderUniform(ShaderID id, const std::string uniform, float value1, float value2, float value3, float value4);
 		//	4x4 Matrix
-		void SetShaderUniform(ShaderID id, const std::string uniform, float * value);
+		void SetShaderUniform(ShaderID id, const std::string uniform, const float * value, int size);
 		//	Uniform Block
 		void SetShaderUniformBlock(float * value, unsigned index);
 

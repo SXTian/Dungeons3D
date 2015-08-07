@@ -33,7 +33,7 @@ namespace Dungeons3D
 		GimbalView(std::shared_ptr<ShaderManager> pManager);
 		~GimbalView();
 
-		void LoadMeshes();
+		void Initialize();
 		void Display();
 		void Display(float delta);
 

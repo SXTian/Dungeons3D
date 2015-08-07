@@ -65,6 +65,7 @@ struct Mtx44
 	const Mtx44& TransposeThis();
 
 	Mtx44 Inverse() const;
+  Mtx44 Slice() const; // Chops the last row and column off, producing a 3x3 matrix. REALLY need to refactor this library to support NxN matrices.
 
 	// the following functions will be applied to 'this' matrix
 	const Mtx44& ZeroThis();

@@ -21,7 +21,7 @@ namespace Dungeons3D
 
 		initGL();
 		configGL();
-		initShaders();
+		configShaders();
 	}
 
 	OpenGL::~OpenGL()
@@ -96,7 +96,7 @@ namespace Dungeons3D
 		glViewport(0, 0, 1680, 1050);
 	}
 
-	void OpenGL::initShaders()
+	void OpenGL::configShaders()
 	{
     CreateProgram(SHA_BasicLighting);
     LoadVertexShader(SHA_BasicLighting, "Resources/Shaders/BasicLighting.vert");

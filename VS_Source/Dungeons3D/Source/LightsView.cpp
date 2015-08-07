@@ -50,13 +50,14 @@ namespace Dungeons3D
 	{
 	}
 
-	void LightsView::LoadMeshes()
+	void LightsView::Initialize()
 	{
 		m_meshPlane.Load("Resources/Meshes/UnitPlane.mesh");
 		m_meshCylinder.Load("Resources/Meshes/UnitCylinder.mesh");
+    SetShaderUniform(SHA_BasicLighting, "cameraToClipMatrix", ViewMatrix().m, 16);
 
-		//	Transpose to column-wise, 0 is for the index in the uniform block
-		SetShaderUniformBlock(ViewMatrix().Transpose().m, 0);
+    SetShaderUniform(SHA_BasicLighting, "lightDirection", 20.0f, 100.0f, 20.0f);
+    SetShaderUniform(SHA_BasicLighting, "lightIntensity", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	void LightsView::Display()
@@ -71,28 +72,32 @@ namespace Dungeons3D
 		m_mouseDelta[0] = 0;
 		m_mouseDelta[1] = 0;
 
-		//	Transpose to column-wise
-		SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
-
 		MatrixStack mStack;
+    Mtx44 mcMatrix;
+
+    SetShaderUniform(SHA_BasicLighting, "worldToCameraMatrix", CamMatrix().m, 16);
 
 		mStack.Push();
+    mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-		mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
+    mcMatrix = CamMatrix().MultThis(mStack.matrix);
 
-		SetShaderUniform(SHA_ObjectColor, "modelToWorldMatrix", mStack.matrix.m);
-		//SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 1.0f, 1.0f, 1.0f);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+
 		m_meshPlane.Render();
 
 		mStack.Pop();
 
+    mStack.Push();
 		mStack.matrix.TranslateThis(0.0f, 10.0f, 0.0f);
 		mStack.matrix.ScaleThis(15.0f, 15.0f, 15.0f);
 		
+    mcMatrix = CamMatrix().MultThis(mStack.matrix);
 
-		SetShaderUniform(SHA_ObjectColor, "modelToWorldMatrix", mStack.matrix.m);
-		//SetShaderUniform(SHA_UniformColor, "baseColor", 1.0f, 0.3f, 0.3f, 1.0f);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+
 		m_meshCylinder.Render();
-
 	}
 }

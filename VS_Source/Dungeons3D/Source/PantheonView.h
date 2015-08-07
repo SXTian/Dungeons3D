@@ -22,7 +22,7 @@ namespace Dungeons3D
 		PantheonView(std::shared_ptr<ShaderManager> pManager);
 		~PantheonView();
 
-		void LoadMeshes();
+		void Initialize();
 	private:
 		void Display();
 		void Display(float delta);
