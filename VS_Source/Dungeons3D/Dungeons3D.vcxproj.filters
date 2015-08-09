@@ -84,6 +84,9 @@
     <Filter Include="Resource Files\Meshes\Scripts">
       <UniqueIdentifier>{9b46ab7d-4609-4ff8-8bb6-81bed94261f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\Auxiliary">
+      <UniqueIdentifier>{03bcffce-07b7-4914-92b8-b98dc88d1619}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\config.txt">
@@ -246,11 +249,26 @@
     <ClInclude Include="Source\LightsView.h">
       <Filter>Source Files\Systems\Graphics\Views\Lights</Filter>
     </ClInclude>
-    <ClInclude Include="Source\MessageMouse.h">
-      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ShaderTypes.h">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageMouseMove.h">
+      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageMouseWheel.h">
+      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MessageMouseClick.h">
+      <Filter>Source Files\Systems\Messaging\Event Messages</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventMessages.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MousePosition.h">
+      <Filter>Source Files\Systems\Auxiliary</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\WindowSize.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +315,9 @@
     </None>
     <None Include="Resources\Shaders\BasicLighting.vert">
       <Filter>Resource Files\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resources\Meshes\Scripts\GenCone.py">
+      <Filter>Resource Files\Meshes\Scripts</Filter>
     </None>
   </ItemGroup>
 </Project>

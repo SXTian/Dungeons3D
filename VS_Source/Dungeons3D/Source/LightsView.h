@@ -12,25 +12,27 @@ Contributors :
 #include "Mesh.h"
 #include "Loader.h"
 #include "Loader3DS.h"
+#include "MousePosition.h"
 
 namespace Dungeons3D
 {
 	class ShaderManager;
 
-	class LightsView : public BaseView, public Camera, public IShaderManager, public IEventMessageModule
+	class LightsView : public BaseView, private Camera, private IShaderManager, private IEventMessageModule
 	{
 	public: 
 		LightsView(std::shared_ptr<ShaderManager> pManager);
 		~LightsView();
 
 		void Initialize();
+
+    void Display();
+    void Display(float delta);
 	private:
 
-		int m_mouseDelta[2];
-		int m_oldMouseDelta[2];
+    MousePosition m_mousePosition;
 
-		void Display();
-		void Display(float delta);
+    void checkMousePos();
 
 		Mesh<Loader> m_meshPlane;
 		Mesh<Loader> m_meshCylinder;

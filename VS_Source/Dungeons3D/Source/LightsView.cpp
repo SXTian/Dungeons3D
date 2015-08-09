@@ -5,9 +5,9 @@ Contributors :
 ******************************************************************************************/
 #include "LightsView.h"
 #include "MatrixStack.h"
-#include "MessageKeyboard.h"
-#include "MessageMouse.h"
+#include "EventMessages.h"
 #include "OpenGL.h"
+#include "WindowSize.h"
 #include <memory>
 
 namespace Dungeons3D
@@ -15,24 +15,22 @@ namespace Dungeons3D
 	using namespace std;
 	LightsView::LightsView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager), Camera(1.0f, 100.0f)
 	{
-		m_mouseDelta[0] = 0;
-		m_mouseDelta[1] = 0;
-		m_oldMouseDelta[0] = 0;
-		m_oldMouseDelta[1] = 0;
+    m_mousePosition.x = 0;
+    m_mousePosition.y = 0;
 
 		Register(MSG_MouseMove, this, [&](IEventMessage * pMsg)
 		{
-			POINT mousePos;
-			GetCursorPos(&mousePos);
-			m_mouseDelta[0] = mousePos.x - m_oldMouseDelta[0];
-			m_mouseDelta[1] = mousePos.y - m_oldMouseDelta[1];
-			m_oldMouseDelta[0] = mousePos.x;
-			m_oldMouseDelta[1] = mousePos.y;
+      int x = ((MessageMouseMove*)pMsg)->x;
+      int y = ((MessageMouseMove*)pMsg)->y;
+      RotateCamY(Clamp(-(float)(x - m_mousePosition.x), -5.0f, 5.0f));
+      RotateCamX(Clamp((float)(y - m_mousePosition.y), -5.0f, 5.0f));
+      m_mousePosition.x = x;
+      m_mousePosition.y = y;
 		});
 
 		Register(MSG_MouseWheel, this, [&](IEventMessage * pMsg)
 		{
-			ZoomCam(-((MessageMouse*)pMsg)->wheel / 10.0f);
+			ZoomCam(-((MessageMouseWheel*)pMsg)->wheel / 10.0f);
 		});
 
 		
@@ -55,9 +53,6 @@ namespace Dungeons3D
 		m_meshPlane.Load("Resources/Meshes/UnitPlane.mesh");
 		m_meshCylinder.Load("Resources/Meshes/UnitCylinder.mesh");
     SetShaderUniform(SHA_BasicLighting, "cameraToClipMatrix", ViewMatrix().m, 16);
-
-    SetShaderUniform(SHA_BasicLighting, "lightDirection", 20.0f, 100.0f, 20.0f);
-    SetShaderUniform(SHA_BasicLighting, "lightIntensity", 1.0f, 1.0f, 1.0f, 1.0f);
 	}
 
 	void LightsView::Display()
@@ -66,28 +61,25 @@ namespace Dungeons3D
 
 	void LightsView::Display(float delta)
 	{
-		RotateCamY(Clamp(-(float)m_mouseDelta[0], -5.0f, 5.0f));
-		RotateCamX(Clamp((float)m_mouseDelta[1], -5.0f, 5.0f));
-
-		m_mouseDelta[0] = 0;
-		m_mouseDelta[1] = 0;
+    SetShaderUniform(SHA_BasicLighting, "lightDirection", 1.0f, 1.0f, 0.0f);
+    SetShaderUniform(SHA_BasicLighting, "lightIntensity", 1.0f, 1.0f, 1.0f, 1.0f);
 
 		MatrixStack mStack;
     Mtx44 mcMatrix;
 
     SetShaderUniform(SHA_BasicLighting, "worldToCameraMatrix", CamMatrix().m, 16);
 
-		mStack.Push();
-    mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
+		//mStack.Push();
+    //mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
+    //mcMatrix = CamMatrix().MultThis(mStack.matrix);
 
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    //SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
+    //SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
 
-		m_meshPlane.Render();
+		//m_meshPlane.Render();
 
-		mStack.Pop();
+		//mStack.Pop();
 
     mStack.Push();
 		mStack.matrix.TranslateThis(0.0f, 10.0f, 0.0f);
@@ -99,5 +91,19 @@ namespace Dungeons3D
     SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
 
 		m_meshCylinder.Render();
+
+    checkMousePos();
 	}
+
+  void LightsView::checkMousePos()
+  {
+    if (m_mousePosition.x <= 0 || m_mousePosition.x >= WINDOW_MAX_X - 1 || m_mousePosition.y <= 0 || m_mousePosition.y >= WINDOW_MAX_Y - 1)
+    {
+      int centerX = WINDOW_MAX_X / 2;
+      int centerY = WINDOW_MAX_Y / 2;
+      m_mousePosition.x = centerX;
+      m_mousePosition.y = centerY;
+      SetCursorPos(centerX, centerY);
+    }
+  }
 }

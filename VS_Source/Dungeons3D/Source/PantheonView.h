@@ -12,6 +12,7 @@ Contributors :
 #include "Mesh.h"
 #include "Loader.h"
 #include "Loader3DS.h"
+#include "MousePosition.h"
 
 namespace Dungeons3D
 {
@@ -23,10 +24,11 @@ namespace Dungeons3D
 		~PantheonView();
 
 		void Initialize();
-	private:
+
 		void Display();
 		void Display(float delta);
 
+  private:
 		void drawGround();
 		void drawForest();
 		void drawParthenon();
@@ -34,16 +36,22 @@ namespace Dungeons3D
 
 		void drawWizard();
 
+    void checkMousePos();
+
 		Mesh<Loader> m_meshCube;
 		Mesh<Loader> m_meshCubeColor;
 		Mesh<Loader> m_meshPlane;
-		Mesh<Loader> m_meshCone;
 		Mesh<Loader> m_meshCylinder;
+
+    Mesh<Loader> m_meshTreetop;
+    Mesh<Loader> m_meshTreetrunk;
 
 		Mesh<Loader3DS> m_wizard;
 
-		int m_mouseDelta[2];
-		int m_oldMouseDelta[2];
+    MousePosition m_mousePosition;
+
+    float lightAngleX;
+    float lightAngleZ;
 	};
 
 	struct TreeData

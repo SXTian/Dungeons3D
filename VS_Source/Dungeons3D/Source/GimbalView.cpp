@@ -8,7 +8,6 @@ Contributors :
 #include "ShaderManager.h"
 #include "MatrixStack.h"
 
-
 namespace Dungeons3D
 {
 	using namespace std;

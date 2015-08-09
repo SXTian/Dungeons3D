@@ -4,10 +4,10 @@ Author       : Sam Tian
 Contributors :
 ******************************************************************************************/
 #include "WinSystem.h"
-#include "MessageKeyboard.h"
-#include "MessageMouse.h"
+#include "EventMessages.h"
 #include "GLHeaders.h"
 #include <tchar.h>
+#include <windowsx.h>
 
 namespace Dungeons3D
 {
@@ -27,12 +27,14 @@ namespace Dungeons3D
 			break;
 		case WM_MOUSEMOVE:
 			{
-				MessageMouse msg(MSG_MouseMove);
+				MessageMouseMove msg(MSG_MouseMove);
+        msg.x = GET_X_LPARAM(lParam);
+        msg.y = GET_Y_LPARAM(lParam);
 				pWinSystem->PostMsg(&msg);
 			}
 		case WM_MOUSEWHEEL:
 			{
-				MessageMouse msg(MSG_MouseWheel);
+				MessageMouseWheel msg(MSG_MouseWheel);
 				msg.wheel = GET_WHEEL_DELTA_WPARAM(wParam);
 				pWinSystem->PostMsg(&msg);
 			}

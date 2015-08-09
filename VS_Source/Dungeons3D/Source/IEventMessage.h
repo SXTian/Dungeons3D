@@ -16,6 +16,7 @@ namespace Dungeons3D
 		MSG_KeyPress,
 		MSG_MouseMove,
 		MSG_MouseWheel,
+    MSG_MouseClick,
 		MSG_Total
 	};
 

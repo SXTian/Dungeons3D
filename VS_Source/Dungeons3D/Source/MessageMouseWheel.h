@@ -9,10 +9,9 @@ Contributors :
 
 namespace Dungeons3D
 {
-	struct MessageMouse : IEventMessage
+	struct MessageMouseWheel : IEventMessage
 	{
-		MessageMouse(Events id) { msgID = id; }
+		MessageMouseWheel(Events id) { msgID = id; }
 		int wheel;
-		unsigned key;
 	};
 }

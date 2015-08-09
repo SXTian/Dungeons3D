@@ -1,36 +1,32 @@
 ﻿import math
 
-output = "Treetrunk.mesh"
+output = "Treetop.mesh"
 
 positions = []
 colors = []
 normals = []
-topFan = []
 botFan = []
-cylStrip = []
+triStrip = []
 
 segCount = 100	#The higher this is, the smoother the circle
 colorRepeatCount = 1  #How many times the colour patterns get repeated
 
 angleDelta = 3.14159 * 2.0 / segCount
 colorAngleDelta = 3.14159 * 2.0 / colorRepeatCount
-highColor = (0.694, 0.4, 0.106, 1.0)
-lowColor = (0.694, 0.4, 0.106, 1.0)
+highColor = (0.0, 0.8, 0.0, 1.0)
+lowColor = (0.0, 0.5, 0.0, 1.0)
 
-#Compute Caps
-positions.append((0.0, 0.5, 0.0))
-colors.append(highColor)
-normals.append((0.0, 1.0, 0.0))
-topFan.append(0)
-botFan.append((segCount * 2) + 1)
+#Compute Bottom Cap
+positions.append((0.0, -0.5, 0.0))
+colors.append(lowColor)
+normals.append((0.0, -1.0, 0.0))
+botFan.append(0)
 
 for iSeg in range(segCount):
 	iAngle = iSeg * angleDelta
 	
-	positions.append(((0.5 * math.cos(iAngle)), 0.5, 0.5 * math.sin(iAngle)))
-	positions.append(((0.5 * math.cos(iAngle)), -0.5, 0.5 * math.sin(iAngle)))
+	positions.append(((0.5 * math.cos(iAngle)), -0.5, -0.5 * math.sin(iAngle)))
 	
-	normals.append((0.0, 1.0, 0.0))
 	normals.append((0.0, -1.0, 0.0))
 	
 	dist = math.fmod(iAngle, colorAngleDelta) / colorAngleDelta
@@ -41,27 +37,24 @@ for iSeg in range(segCount):
 		interp = dist * 2.0
 		colors.append(tuple(interp * x + (1.0 - interp) * y for x, y in zip(lowColor, highColor)))
 		
-	colors.append(colors[-1])
-	
-	topFan.append(1 + (iSeg * 2))
-	botFan.append(1 + (((segCount - iSeg) * 2) - 1))
-	
-topFan.append(topFan[1])
+	botFan.append(1 + iSeg)
+
 botFan.append(botFan[1])
 
-positions.append((0.0, -0.5, 0.0))
-colors.append(lowColor)
-normals.append((0.0, -1.0, 0.0))
-
 #Compute Sides
+positions.append((0.0, 0.5, 0.0))
+positionIndex = len(positions) - 1
+colors.append(highColor)
+normals.append((0.0, 1.0, 0.0))
+
 for iSeg in range(segCount):
 	iAngle = iSeg * angleDelta
-	
-	positions.append(((0.5 * math.cos(iAngle)), 0.5, 0.5 * math.sin(iAngle)))
+
+	triStrip.append(positionIndex)
+
 	positions.append(((0.5 * math.cos(iAngle)), -0.5, 0.5 * math.sin(iAngle)))
 	
 	normals.append((math.cos(iAngle), 0, math.sin(iAngle)))
-	normals.append(normals[-1])
 	
 	dist = math.fmod(iAngle, colorAngleDelta) / colorAngleDelta
 	if (dist > 0.5):
@@ -70,14 +63,11 @@ for iSeg in range(segCount):
 	else:
 		interp = dist * 2.0
 		colors.append(tuple(interp * x + (1.0 - interp) * y for x, y in zip(lowColor, highColor)))
+
+	triStrip.append(len(positions) - 1)
 	
-	colors.append(colors[-1])
-	
-	cylStrip.append(len(positions) - 2)
-	cylStrip.append(len(positions) - 1)
-	
-cylStrip.append(cylStrip[0])
-cylStrip.append(cylStrip[1])
+triStrip.append(triStrip[0])
+triStrip.append(triStrip[1])
 
 with open("../" + output, "w") as text_file:
 	print("position", file=text_file)
@@ -99,17 +89,11 @@ with open("../" + output, "w") as text_file:
 	print("", file=text_file)
 	
 	print("primitive\ntrifan", file=text_file)
-	for i in topFan:
-		print(i, end=" ", file=text_file)
-		
-	print("\n", file=text_file)
-	
-	print("primitive\ntrifan", file=text_file)
 	for i in botFan:
 		print(i, end=" ", file=text_file)
 		
 	print("\n", file=text_file)
 	
 	print("primitive\ntristrip", file=text_file)
-	for i in cylStrip:
+	for i in triStrip:
 		print(i, end=" ", file=text_file)

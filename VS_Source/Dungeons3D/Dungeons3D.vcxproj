@@ -115,7 +115,9 @@
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\ChunkNames3DS.h" />
+    <ClInclude Include="Source\EventMessages.h" />
     <ClInclude Include="Source\GameEngine.h" />
+    <ClInclude Include="Source\MousePosition.h" />
     <ClInclude Include="Source\LightsView.h" />
     <ClInclude Include="Source\Loader3DS.h" />
     <ClInclude Include="Source\Camera.h" />
@@ -129,7 +131,9 @@
     <ClInclude Include="Source\Mesh.h" />
     <ClInclude Include="Source\MeshData.h" />
     <ClInclude Include="Source\MessageKeyboard.h" />
-    <ClInclude Include="Source\MessageMouse.h" />
+    <ClInclude Include="Source\MessageMouseClick.h" />
+    <ClInclude Include="Source\MessageMouseWheel.h" />
+    <ClInclude Include="Source\MessageMouseMove.h" />
     <ClInclude Include="Source\MessagingSystem.h" />
     <ClInclude Include="Source\GLHeaders.h" />
     <ClInclude Include="Source\OpenGL.h" />
@@ -142,6 +146,7 @@
     <ClInclude Include="Source\ShaderTypes.h" />
     <ClInclude Include="Source\Vector.h" />
     <ClInclude Include="Source\BaseView.h" />
+    <ClInclude Include="Source\WindowSize.h" />
     <ClInclude Include="Source\WinSystem.h" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Meshes\LargeGimbal.mesh" />
+    <None Include="Resources\Meshes\Scripts\GenCone.py" />
     <None Include="Resources\Meshes\Scripts\GenCylinder.py" />
     <None Include="Resources\Meshes\SmallGimbal.mesh" />
     <None Include="Resources\Meshes\UnitCone.mesh" />

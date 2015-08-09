@@ -9,9 +9,9 @@ Contributors :
 
 namespace Dungeons3D
 {
-	struct MessageKeyboard : IEventMessage
-	{
-		MessageKeyboard(Events id) { msgID = id; }
-		int key;
-	};
+  struct MessageMouseClick : IEventMessage
+  {
+    MessageMouseClick(Events id) { msgID = id; }
+    int key;
+  };
 }
