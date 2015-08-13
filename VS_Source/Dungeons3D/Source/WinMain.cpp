@@ -9,8 +9,8 @@ using namespace Dungeons3D;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	GameEngine game;
-	game.AddSystem(SYS_WINDOWS);
-	game.AddSystem(SYS_GRAPHICS);
-	game.GameLoop();
+	GameEngine dungeons3D;
+  dungeons3D.AddSystem(SYS_WINDOWS);
+  dungeons3D.AddSystem(SYS_GRAPHICS);
+  dungeons3D.GameLoop();
 }

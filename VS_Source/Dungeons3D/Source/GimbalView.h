@@ -5,8 +5,7 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "BaseView.h"
-#include "Camera.h"
+#include "CameraView.h"
 #include "IShaderManager.h"
 #include "MessageKeyboard.h"
 #include "Mesh.h"
@@ -27,10 +26,10 @@ namespace Dungeons3D
 
 	class ShaderManager;
 
-	class GimbalView : public BaseView, public Camera, public IShaderManager, public IEventMessageModule
+	class GimbalView : public CameraView, private IShaderManager, private IEventMessageModule
 	{
 	public: 
-		GimbalView(std::shared_ptr<ShaderManager> pManager);
+		GimbalView(std::shared_ptr<Camera> pCamera, std::shared_ptr<ShaderManager> pManager);
 		~GimbalView();
 
 		void Initialize();

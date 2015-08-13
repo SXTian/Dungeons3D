@@ -5,13 +5,10 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "IShaderManager.h"
 #include "Matrix.h"
 
 namespace Dungeons3D
 {
-	class OpenGL;
-
 	class BaseView
 	{
 	public:
@@ -32,8 +29,8 @@ namespace Dungeons3D
 		float m_zNear;
 		float m_zFar;
 
-		//	Camera to clipspace transformation
-		Mtx44 m_ccMtx;
+		//	Camera to view transformation
+		Mtx44 m_cvMtx;
 
 		//	true = must call calculate()
 		bool m_update;

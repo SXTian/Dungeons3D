@@ -4,10 +4,12 @@ Author       : Sam Tian
 Contributors :
 ******************************************************************************************/
 #include "PantheonView.h"
-#include "OpenGL.h"
+#include "Camera.h"
 #include "MatrixStack.h"
 #include "EventMessages.h"
 #include "WindowSize.h"
+#include "OpenGL.h"
+
 
 namespace Dungeons3D
 {
@@ -126,7 +128,7 @@ namespace Dungeons3D
 
 	const float columnBaseHeight = 0.25f;
 
-	PantheonView::PantheonView(shared_ptr<ShaderManager> pManager) : IShaderManager(pManager), Camera(1.0f, 100.0f)
+	PantheonView::PantheonView(shared_ptr<Camera> pCamera, shared_ptr<ShaderManager> pManager) : CameraView(pCamera), IShaderManager(pManager)
 	{
     m_mousePosition.x = 0;
     m_mousePosition.y = 0;
@@ -138,8 +140,8 @@ namespace Dungeons3D
 		{
       int x = ((MessageMouseMove*)pMsg)->x;
       int y = ((MessageMouseMove*)pMsg)->y;
-      RotateCamY(Clamp(-(float)(x - m_mousePosition.x), -7.5f, 7.5f));
-      RotateCamX(Clamp((float)(y - m_mousePosition.y), -7.5f, 7.5f));
+      GetCamera().RotateCamY(Clamp(-(float)(x - m_mousePosition.x), -7.5f, 7.5f));
+      GetCamera().RotateCamX(Clamp((float)(y - m_mousePosition.y), -7.5f, 7.5f));
       m_mousePosition.x = x;
       m_mousePosition.y = y;
       
@@ -147,7 +149,7 @@ namespace Dungeons3D
 
 		Register(MSG_MouseWheel, this, [&](IEventMessage * pMsg)
 		{
-			ZoomCam(-((MessageMouseWheel*)pMsg)->wheel / 10.0f);
+			GetCamera().ZoomCam(-((MessageMouseWheel*)pMsg)->wheel / 10.0f);
 		});
 
 		
@@ -183,7 +185,7 @@ namespace Dungeons3D
 	void PantheonView::Display()
 	{
 		//	Transpose to column-wise
-		SetShaderUniformBlock(CamMatrix().Transpose().m, 1);
+		SetShaderUniformBlock(WCMatrix().Transpose().m, 1);
 
 		drawGround();
 		drawForest();
@@ -193,11 +195,9 @@ namespace Dungeons3D
 	void PantheonView::Display(float delta)
 	{
     SetShaderUniform(SHA_BasicLighting, "lightDirection", CosLookup(lightAngleX), Min(SinLookup(lightAngleX), SinLookup(lightAngleZ)), CosLookup(lightAngleZ));
-
-
     SetShaderUniform(SHA_BasicLighting, "lightIntensity", 1.0f, 1.0f, 1.0f, 1.0f);
 
-    SetShaderUniform(SHA_BasicLighting, "worldToCameraMatrix", CamMatrix().m, 16);
+    SetShaderUniform(SHA_BasicLighting, "worldToCameraMatrix", WCMatrix().m, 16);
 
 		drawGround();
 		drawForest();
@@ -213,10 +213,8 @@ namespace Dungeons3D
 
     mStack.matrix.ScaleThis(100.0f, 1.0f, 100.0f);
 
-		Mtx44 mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshPlane.Render();
 
 	}
@@ -236,10 +234,8 @@ namespace Dungeons3D
 			mStack.matrix.ScaleThis(1.0f, i.heightTrunk, 1.0f);
 			mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-      mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-      SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-      SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+      SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+      SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 			m_meshTreetrunk.Render();
 
 			mStack.Pop();
@@ -250,10 +246,8 @@ namespace Dungeons3D
 			mStack.matrix.TranslateThis(0.0f, i.heightTrunk * 1.5f , 0.0f);
 			mStack.matrix.ScaleThis(3.0f, i.heightCone, 3.0f);
 
-      mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-      SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-      SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+      SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+      SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 			m_meshTreetop.Render();
 
 			mStack.Pop();
@@ -274,10 +268,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonBaseHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -289,10 +281,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(parthenonWidth, parthenonTopHeight, parthenonLength);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -369,10 +359,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -384,10 +372,8 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(1.0f, columnBaseHeight, 1.0f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshCube.Render();
 
 		mStack.Pop();
@@ -399,22 +385,9 @@ namespace Dungeons3D
 		mStack.matrix.ScaleThis(0.8f, height - (columnBaseHeight * 2.0f), 0.8f);
 		mStack.matrix.TranslateThis(0.0f, 0.5f, 0.0f);
 
-    mcMatrix = CamMatrix().MultThis(mStack.matrix);
-
-    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", mcMatrix.m, 16);
-    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", mcMatrix.Slice().m, 9);
+    SetShaderUniform(SHA_BasicLighting, "modelToCameraMatrix", MCMatrix(mStack.matrix).m, 16);
+    SetShaderUniform(SHA_BasicLighting, "normalModelToCameraMatrix", MCMatrix().Slice().m, 9);
 		m_meshCylinder.Render();
-	}
-
-	void PantheonView::drawWizard()
-	{
-		MatrixStack mStack;
-
-		mStack.matrix.TranslateThis(20.0f, 0.0f, -10.0f);	
-		mStack.matrix.RotateThis(1.0f, 0.0f, 0.f, 20);
-		SetShaderUniform(SHA_UniformColor, "modelToWorldMatrix", mStack.matrix.m, 16);
-		SetShaderUniform(SHA_UniformColor, "baseColor", 0.9f, 0.9f, 0.9f, 0.9f);
-		m_wizard.Render();
 	}
 
   void PantheonView::checkMousePos()

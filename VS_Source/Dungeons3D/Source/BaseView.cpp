@@ -37,7 +37,7 @@ namespace Dungeons3D
 		if (m_update)
 			calculate();
 
-		return m_ccMtx;
+		return m_cvMtx;
 	}
 
 	void BaseView::calculate()
@@ -47,16 +47,16 @@ namespace Dungeons3D
 		float xMax = yMax * ((float)1680 / (float)1050);
 		float xMin = -xMax;
 
-		m_ccMtx.IdentityThis();
+    m_cvMtx.IdentityThis();
 
-		m_ccMtx.RowCol(0, 0) = (2.0f * m_zNear) / (xMax - xMin);
-		m_ccMtx.RowCol(1, 1) = (2.0f * m_zNear) / (yMax - yMin);
-		m_ccMtx.RowCol(0, 2) = (xMax + xMin)  / (xMax - xMin);
-		m_ccMtx.RowCol(1, 2) = (yMax + yMin)  / (yMax - yMin);
-		m_ccMtx.RowCol(2, 2) = (-m_zFar - m_zNear) / (m_zFar - m_zNear);
-		m_ccMtx.RowCol(3, 2) = -1.0f;
-		m_ccMtx.RowCol(2, 3) = (-2.0f * m_zNear * m_zFar) / (m_zFar - m_zNear);
-		m_ccMtx.RowCol(3, 3) = 0.0f;
+    m_cvMtx.RowCol(0, 0) = (2.0f * m_zNear) / (xMax - xMin);
+    m_cvMtx.RowCol(1, 1) = (2.0f * m_zNear) / (yMax - yMin);
+    m_cvMtx.RowCol(0, 2) = (xMax + xMin)  / (xMax - xMin);
+    m_cvMtx.RowCol(1, 2) = (yMax + yMin)  / (yMax - yMin);
+    m_cvMtx.RowCol(2, 2) = (-m_zFar - m_zNear) / (m_zFar - m_zNear);
+    m_cvMtx.RowCol(3, 2) = -1.0f;
+    m_cvMtx.RowCol(2, 3) = (-2.0f * m_zNear * m_zFar) / (m_zFar - m_zNear);
+    m_cvMtx.RowCol(3, 3) = 0.0f;
 
 		m_update = false;
 	}

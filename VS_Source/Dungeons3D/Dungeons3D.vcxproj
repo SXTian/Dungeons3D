@@ -91,6 +91,7 @@
     <Text Include="Resources\Shaders\PosOnlyWorldTransform.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CameraView.cpp" />
     <ClCompile Include="Source\GameEngine.cpp" />
     <ClCompile Include="Source\LightsView.cpp" />
     <ClCompile Include="Source\Loader3DS.cpp" />
@@ -114,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\CameraView.h" />
     <ClInclude Include="Source\ChunkNames3DS.h" />
     <ClInclude Include="Source\EventMessages.h" />
     <ClInclude Include="Source\GameEngine.h" />

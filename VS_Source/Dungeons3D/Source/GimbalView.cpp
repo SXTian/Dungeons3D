@@ -5,14 +5,13 @@ Contributors :
 ******************************************************************************************/
 
 #include "GimbalView.h"
-#include "ShaderManager.h"
 #include "MatrixStack.h"
 
 namespace Dungeons3D
 {
 	using namespace std;
 
-	GimbalView::GimbalView(shared_ptr<ShaderManager> pShaderManager) : IShaderManager(pShaderManager), m_quat(1.0f, 0.0, 0.0, 0.0), Camera(1.0f, 1000.0f)
+	GimbalView::GimbalView(shared_ptr<Camera> pCamera, shared_ptr<ShaderManager> pManager) : CameraView(pCamera), IShaderManager(pManager)
 	{
 		m_quat.QuaternizeThis();
 		m_currOrientation = ORI_MODEL;
@@ -56,7 +55,7 @@ namespace Dungeons3D
 	{
 		MatrixStack mStack;
 
-		mStack.matrix = CamMatrix();
+    mStack.matrix = WCMatrix();
 
 		//	Draw Plane
 		mStack.Push();
@@ -118,7 +117,7 @@ namespace Dungeons3D
 			m_quat = quat.Quaternize().MultQuat(m_quat); 
 			break;
 		case ORI_CAMERA:
-			auto viewQuat = Vec4(CamMatrix().Quaternize());
+			auto viewQuat = Vec4(WCMatrix().Quaternize());
 			auto worldQuat = Vec4(viewQuat.Conjugate().MultQuat(quat.Quaternize()).MultQuat(viewQuat));
 			m_quat = worldQuat.MultQuat(m_quat);
 		}

@@ -5,8 +5,7 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "BaseView.h"
-#include "Camera.h"
+#include "CameraView.h"
 #include "IShaderManager.h"
 #include "IEventMessage.h"
 #include "Mesh.h"
@@ -16,12 +15,10 @@ Contributors :
 
 namespace Dungeons3D
 {
-	class ShaderManager;
-
-	class LightsView : public BaseView, private Camera, private IShaderManager, private IEventMessageModule
+	class LightsView : public CameraView, private IShaderManager, private IEventMessageModule
 	{
 	public: 
-		LightsView(std::shared_ptr<ShaderManager> pManager);
+		LightsView(std::shared_ptr<Camera> pCamera, std::shared_ptr<ShaderManager> pManager);
 		~LightsView();
 
 		void Initialize();

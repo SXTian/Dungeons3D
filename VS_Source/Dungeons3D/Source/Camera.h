@@ -38,7 +38,7 @@ namespace Dungeons3D
 		float m_rotateX;
 		float m_rotateY;
 
-		//	true = must call calculate()
+		//	true = must call constructMatrix()
 		bool m_update;
 	};
 }

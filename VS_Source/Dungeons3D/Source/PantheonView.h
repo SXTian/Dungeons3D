@@ -5,8 +5,7 @@ Contributors :
 ******************************************************************************************/
 #pragma once
 
-#include "BaseView.h"
-#include "Camera.h"
+#include "CameraView.h"
 #include "IShaderManager.h"
 #include "IEventMessage.h"
 #include "Mesh.h"
@@ -16,11 +15,10 @@ Contributors :
 
 namespace Dungeons3D
 {
-	class ShaderManager;
-	class PantheonView : public BaseView, public Camera, public IShaderManager, public IEventMessageModule
+	class PantheonView : public CameraView, private IShaderManager, private IEventMessageModule
 	{
 	public: 
-		PantheonView(std::shared_ptr<ShaderManager> pManager);
+    PantheonView(std::shared_ptr<Camera> pCamera, std::shared_ptr<ShaderManager> pManager);
 		~PantheonView();
 
 		void Initialize();
@@ -33,8 +31,6 @@ namespace Dungeons3D
 		void drawForest();
 		void drawParthenon();
 		void drawColumn(Mtx44 matrix, float height = 5.0f);
-
-		void drawWizard();
 
     void checkMousePos();
 

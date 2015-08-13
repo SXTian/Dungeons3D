@@ -7,7 +7,6 @@
 
 #include "BaseSystem.h"
 #include "IEventMessage.h"
-
 #include <string>
 #include <map>
 #include <memory>

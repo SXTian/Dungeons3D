@@ -69,23 +69,26 @@
     <Filter Include="Source Files\Systems\Graphics\Views">
       <UniqueIdentifier>{83fd7a34-6743-448f-9dd9-565098d04429}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Views\Pantheon">
-      <UniqueIdentifier>{65044b68-c102-40ca-91b4-5d3cc8bc6103}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Graphics\Camera">
       <UniqueIdentifier>{95404021-ec83-47a9-a68b-45e2141b6129}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Views\Grimbal">
-      <UniqueIdentifier>{29457c46-c89c-4fa6-aff5-9d0f6ccfdc25}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Systems\Graphics\Views\Lights">
-      <UniqueIdentifier>{e85aefb6-593d-4de4-8e9d-2fbc0b09394d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files\Meshes\Scripts">
       <UniqueIdentifier>{9b46ab7d-4609-4ff8-8bb6-81bed94261f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Systems\Auxiliary">
       <UniqueIdentifier>{03bcffce-07b7-4914-92b8-b98dc88d1619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Camera Views">
+      <UniqueIdentifier>{a6faffb7-919d-4afa-a181-65c3fb7e38cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Camera Views\Lights">
+      <UniqueIdentifier>{e85aefb6-593d-4de4-8e9d-2fbc0b09394d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Camera Views\Pantheon">
+      <UniqueIdentifier>{65044b68-c102-40ca-91b4-5d3cc8bc6103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphics\Views\Camera Views\Grimbal">
+      <UniqueIdentifier>{29457c46-c89c-4fa6-aff5-9d0f6ccfdc25}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +134,7 @@
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClCompile>
     <ClCompile Include="Source\PantheonView.cpp">
-      <Filter>Source Files\Systems\Graphics\Views\Pantheon</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Pantheon</Filter>
     </ClCompile>
     <ClCompile Include="Source\IShaderManager.cpp">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
@@ -155,13 +158,16 @@
       <Filter>Source Files\Main</Filter>
     </ClCompile>
     <ClCompile Include="Source\GimbalView.cpp">
-      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Grimbal</Filter>
     </ClCompile>
     <ClCompile Include="Source\Orientation.cpp">
-      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Grimbal</Filter>
     </ClCompile>
     <ClCompile Include="Source\LightsView.cpp">
-      <Filter>Source Files\Systems\Graphics\Views\Lights</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraView.cpp">
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,7 +214,7 @@
       <Filter>Source Files\Systems\Messaging</Filter>
     </ClInclude>
     <ClInclude Include="Source\PantheonView.h">
-      <Filter>Source Files\Systems\Graphics\Views\Pantheon</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Pantheon</Filter>
     </ClInclude>
     <ClInclude Include="Source\IShaderManager.h">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
@@ -241,13 +247,13 @@
       <Filter>Source Files\Main</Filter>
     </ClInclude>
     <ClInclude Include="Source\GimbalView.h">
-      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Grimbal</Filter>
     </ClInclude>
     <ClInclude Include="Source\Orientation.h">
-      <Filter>Source Files\Systems\Graphics\Views\Grimbal</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Grimbal</Filter>
     </ClInclude>
     <ClInclude Include="Source\LightsView.h">
-      <Filter>Source Files\Systems\Graphics\Views\Lights</Filter>
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views\Lights</Filter>
     </ClInclude>
     <ClInclude Include="Source\ShaderTypes.h">
       <Filter>Source Files\Systems\Graphics\Shaders</Filter>
@@ -269,6 +275,9 @@
     </ClInclude>
     <ClInclude Include="Source\WindowSize.h">
       <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraView.h">
+      <Filter>Source Files\Systems\Graphics\Views\Camera Views</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
