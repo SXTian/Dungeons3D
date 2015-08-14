@@ -103,6 +103,11 @@ namespace Dungeons3D
     LoadFragmentShader(SHA_BasicLighting, "Resources/Shaders/ColorPassthrough.frag");
     LinkProgram(SHA_BasicLighting);
 
+    CreateProgram(SHA_AmbientLighting);
+    LoadVertexShader(SHA_AmbientLighting, "Resources/Shaders/AmbientLighting.vert");
+    LoadFragmentShader(SHA_AmbientLighting, "Resources/Shaders/ColorPassthrough.frag");
+    LinkProgram(SHA_AmbientLighting);
+
 		CreateProgram(SHA_UniformColor);
 		LoadVertexShader(SHA_UniformColor, "Resources/Shaders/PosOnlyWorldTransform.vert");
 		LoadFragmentShader(SHA_UniformColor, "Resources/Shaders/ColorUniform.frag");

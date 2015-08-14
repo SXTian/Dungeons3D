@@ -28,8 +28,9 @@ namespace Dungeons3D
 	private:
 
     MousePosition m_mousePosition;
-
     void checkMousePos();
+
+    bool ambient;
 
 		Mesh<Loader> m_meshPlane;
 		Mesh<Loader> m_meshCylinder;

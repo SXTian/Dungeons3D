@@ -328,5 +328,17 @@
     <None Include="Resources\Meshes\Scripts\GenCone.py">
       <Filter>Resource Files\Meshes\Scripts</Filter>
     </None>
+    <None Include="Resources\Shaders\AmbientLighting.vert">
+      <Filter>Resource Files\Shaders\Vertex</Filter>
+    </None>
+    <None Include="Resources\Meshes\Treetop.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\Treetrunk.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
+    <None Include="Resources\Meshes\RedCylinder.mesh">
+      <Filter>Resource Files\Meshes</Filter>
+    </None>
   </ItemGroup>
 </Project>
