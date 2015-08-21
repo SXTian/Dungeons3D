@@ -169,13 +169,13 @@ namespace Dungeons3D
 
 	void PantheonView::Initialize()
 	{
-		m_meshCube.Load("Resources/Meshes/UnitCube.mesh");
-		m_meshCubeColor.Load("Resources/Meshes/UnitCubeColor.mesh");
-		m_meshPlane.Load("Resources/Meshes/UnitPlane.mesh");
-    m_meshTreetrunk.Load("Resources/Meshes/Treetrunk.mesh");
-		m_meshTreetop.Load("Resources/Meshes/Treetop.mesh");
-		m_meshCylinder.Load("Resources/Meshes/UnitCylinder.mesh");
-		m_wizard.Load("Resources/Meshes/wizard.3DS");
+		m_meshCube.Load("Meshes/UnitCube.mesh");
+		m_meshCubeColor.Load("Meshes/UnitCubeColor.mesh");
+		m_meshPlane.Load("Meshes/UnitPlane.mesh");
+    m_meshTreetrunk.Load("Meshes/Treetrunk.mesh");
+		m_meshTreetop.Load("Meshes/Treetop.mesh");
+		m_meshCylinder.Load("Meshes/UnitCylinder.mesh");
+		m_wizard.Load("Meshes/wizard.3DS");
 
     SetShaderUniform(SHA_AmbientLighting, "cameraToClipMatrix", ViewMatrix().m, 16);
 	}

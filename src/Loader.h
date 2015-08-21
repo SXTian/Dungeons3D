@@ -3,12 +3,23 @@
   Author       : Sam Tian
   Contributors :
 ******************************************************************************************/
-#include "GLMesh.h"
-#include "GLHeaders.h"
+#pragma once
+
+#include <string>
+#include <memory>
 
 namespace Dungeons3D
 {
-	GLMesh::GLMesh()
+	struct MeshData;
+
+	class Loader
 	{
-	}
+	protected:
+		Loader();
+		~Loader();
+		void load(std::string filename);
+		void render();
+
+		std::unique_ptr<MeshData> m_data;
+	};
 }

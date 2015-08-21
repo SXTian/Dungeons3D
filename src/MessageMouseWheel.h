@@ -1,15 +1,17 @@
 /*****************************************************************************************
-  Project      : 3D Game Engine
-  Author       : Sam Tian
-  Contributors :
+Project      : 3D Game Engine
+Author       : Sam Tian
+Contributors :
 ******************************************************************************************/
 #pragma once
 
+#include "IEventMessage.h"
+
 namespace Dungeons3D
 {
-	class GLMesh
+	struct MessageMouseWheel : IEventMessage
 	{
-	private:
-		void render();
+		MessageMouseWheel(Events id) { msgID = id; }
+		int wheel;
 	};
 }

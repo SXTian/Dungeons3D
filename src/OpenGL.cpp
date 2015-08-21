@@ -96,28 +96,28 @@ namespace Dungeons3D
 	void OpenGL::configShaders()
 	{
     CreateProgram(SHA_BasicLighting);
-    LoadVertexShader(SHA_BasicLighting, "Resources/Shaders/BasicLighting.vert");
-    LoadFragmentShader(SHA_BasicLighting, "Resources/Shaders/ColorPassthrough.frag");
+    LoadVertexShader(SHA_BasicLighting, "Shaders/BasicLighting.vert");
+    LoadFragmentShader(SHA_BasicLighting, "Shaders/ColorPassthrough.frag");
     LinkProgram(SHA_BasicLighting);
 
     CreateProgram(SHA_AmbientLighting);
-    LoadVertexShader(SHA_AmbientLighting, "Resources/Shaders/AmbientLighting.vert");
-    LoadFragmentShader(SHA_AmbientLighting, "Resources/Shaders/ColorPassthrough.frag");
+    LoadVertexShader(SHA_AmbientLighting, "Shaders/AmbientLighting.vert");
+    LoadFragmentShader(SHA_AmbientLighting, "Shaders/ColorPassthrough.frag");
     LinkProgram(SHA_AmbientLighting);
 
 		CreateProgram(SHA_UniformColor);
-		LoadVertexShader(SHA_UniformColor, "Resources/Shaders/PosOnlyWorldTransform.vert");
-		LoadFragmentShader(SHA_UniformColor, "Resources/Shaders/ColorUniform.frag");
+		LoadVertexShader(SHA_UniformColor, "Shaders/PosOnlyWorldTransform.vert");
+		LoadFragmentShader(SHA_UniformColor, "Shaders/ColorUniform.frag");
 		LinkProgram(SHA_UniformColor);
 
 		CreateProgram(SHA_ObjectColor);
-		LoadVertexShader(SHA_ObjectColor, "Resources/Shaders/PosColorWorldTransform.vert");
-		LoadFragmentShader(SHA_ObjectColor, "Resources/Shaders/ColorPassthrough.frag");
+		LoadVertexShader(SHA_ObjectColor, "Shaders/PosColorWorldTransform.vert");
+		LoadFragmentShader(SHA_ObjectColor, "Shaders/ColorPassthrough.frag");
 		LinkProgram(SHA_ObjectColor);
 
 		CreateProgram(SHA_UniformColorTint);
-		LoadVertexShader(SHA_UniformColorTint, "Resources/Shaders/PosColorWorldTransform.vert");
-		LoadFragmentShader(SHA_UniformColorTint, "Resources/Shaders/ColorMultUniform.frag");
+		LoadVertexShader(SHA_UniformColorTint, "Shaders/PosColorWorldTransform.vert");
+		LoadFragmentShader(SHA_UniformColorTint, "Shaders/ColorMultUniform.frag");
 		LinkProgram(SHA_UniformColorTint);
 
 		BindUniformBlock(SHA_UniformColor, "GlobalMatrices");
@@ -125,8 +125,8 @@ namespace Dungeons3D
 		BindUniformBlock(SHA_UniformColorTint, "GlobalMatrices");
 
 		CreateProgram(SHA_UniformColorLocal);
-		LoadVertexShader(SHA_UniformColorLocal, "Resources/Shaders/PosColorLocalTransform.vert");
-		LoadFragmentShader(SHA_UniformColorLocal, "Resources/Shaders/ColorMultUniform.frag");
+		LoadVertexShader(SHA_UniformColorLocal, "Shaders/PosColorLocalTransform.vert");
+		LoadFragmentShader(SHA_UniformColorLocal, "Shaders/ColorMultUniform.frag");
 		LinkProgram(SHA_UniformColorLocal);
 
 		InitUBO();
